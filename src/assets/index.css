@@ -7,6 +7,14 @@ html {
   box-sizing: inherit;
 }
 
+body {
+  font-size: 1.6rem;
+}
+
+p {
+  line-height: 1.6;
+}
+
 h1, h2, h3 {
   text-transform: uppercase;
   font-weight: bold;
