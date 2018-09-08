@@ -3,6 +3,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Overview from './components/Overview';
 import NotFound from './components/404';
 
+import 'normalize.css';
+import './assets/index.css';
+
 const App = () => (
   <BrowserRouter>
     <Switch>
