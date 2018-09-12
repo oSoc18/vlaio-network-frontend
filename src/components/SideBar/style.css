@@ -6,10 +6,15 @@
   left: 0;
   float: left;
   overflow-x: hidden;
-  background-color: #009B48;
+  background-color: #FFFFFF;
+  padding-top: 50px;
+  padding-left: 50px;
 }
 
 .sidenav h1{
   font-family: flanders-serif, serif;
+  color: #002776;
+  font-weight: 300;
+  font-size: 4.8rem;
 }
 
