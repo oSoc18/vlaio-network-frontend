@@ -1,10 +1,12 @@
 .sidenav {
 
     width: 300px;
-    height: 100vh;
+    height: calc(100vh - 44px);
     z-index: 1;
     top: 0;
     left: 0;
+    float: left;
     overflow-x: hidden;
     background-color: #009B48;
 }
+
