@@ -106,3 +106,12 @@ h3 {
   font-size: 1.8rem;
 }
 
+.main-layout{
+  height: 100%;
+  font: flanders-sans;
+}
+
+.main-content {
+  background-color: #FFFFFF;
+  height: calc(100vh - 44px);
+}

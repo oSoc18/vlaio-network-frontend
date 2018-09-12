@@ -1,4 +1,4 @@
-.sidenav {
+.side-nav {
   width: 300px;
   height: calc(100vh - 44px);
   z-index: 1;
@@ -9,7 +9,6 @@
   background-color: #009B48;
 }
 
-.sidenav h1{
+.side-nav h1{
   font-family: flanders-serif, serif;
 }
-
