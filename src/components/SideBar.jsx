@@ -1,4 +1,5 @@
 import React from 'react';
+import CheckBox from './UI/Checkbox';
 import '../assets/styles/sidebar.css';
 
 /**
@@ -7,7 +8,19 @@ import '../assets/styles/sidebar.css';
  */
 const Sidebar = () => (
   <div className="side-nav">
-    <h1>Filter</h1>
+    <div>
+      <fieldset>
+        <h1>Type interactie</h1>
+        <CheckBox name="Begeleiden" />
+        <CheckBox name="Community" />
+        <CheckBox name="Informeren" />
+        <CheckBox name="Netwerken" />
+        <CheckBox name="Sensibilisering" />
+        <CheckBox name="Subsidie" />
+        <CheckBox name="Tools" />
+      </fieldset>
+
+    </div>
   </div>
 );
 
