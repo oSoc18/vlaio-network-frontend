@@ -1,7 +1,11 @@
 import React from 'react';
+import SideBar from '../SideBar'
 
 const Overview = () => (
-  <p>Vlaio Network</p>
+  <div>
+    <SideBar />
+  
+  </div>
 );
 
 export default Overview;
