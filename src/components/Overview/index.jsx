@@ -1,11 +1,10 @@
 import React from 'react';
-import SideBar from '../SideBar';
-import MainContent from '../MainContent';
+
+import '../../assets/styles/overview.css';
 
 const Overview = () => (
-  <div className="overview">
-    <SideBar />
-    <MainContent />
+  <div className="main-content overview">
+    Overview
   </div>
 );
 

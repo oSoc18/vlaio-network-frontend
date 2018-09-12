@@ -1,6 +1,6 @@
-.sidenav {
-  width: 300px;
-  height: calc(100vh - 44px);
+.side-nav {
+  width: 30rem;
+  height: calc(100vh - 4.4rem - 13.6rem);
   z-index: 1;
   top: 0;
   left: 0;
@@ -9,7 +9,6 @@
   background-color: #009B48;
 }
 
-.sidenav h1{
+.side-nav h1{
   font-family: flanders-serif, serif;
 }
-
