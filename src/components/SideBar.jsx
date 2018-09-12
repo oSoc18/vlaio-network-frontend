@@ -6,7 +6,7 @@ import '../assets/styles/sidebar.css';
  *    (overview, network of interactions,recommendations)
  */
 const Sidebar = () => (
-  <div className="sidenav">
+  <div className="side-nav">
     <h1>Filter</h1>
   </div>
 );

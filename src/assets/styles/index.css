@@ -108,7 +108,7 @@ h3 {
 
 .main-layout{
   height: 100%;
-  font: flanders-sans;
+  font-family: flanders-sans;
 }
 
 .main-content {

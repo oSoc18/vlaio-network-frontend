@@ -12,7 +12,7 @@ const MainLayout = ({ component: Component, ...rest }) => (
       <div className="main-layout">
         <Header />
         <SideBar />
-        <Component className="main-content" {...routeProps} />
+        <Component {...routeProps} />
         <Footer />
       </div>
     )}

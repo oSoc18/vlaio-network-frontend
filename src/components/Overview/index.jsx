@@ -3,7 +3,7 @@ import React from 'react';
 import '../../assets/styles/overview.css';
 
 const Overview = () => (
-  <div className="overview">
+  <div className="main-content overview">
     Overview
   </div>
 );
