@@ -1,5 +1,4 @@
 .sidenav {
-
     width: 300px;
     height: calc(100vh - 44px);
     z-index: 1;
@@ -8,5 +7,10 @@
     float: left;
     overflow-x: hidden;
     background-color: #009B48;
+}
+
+.sidenav h1{
+
+    font-family: flanders-serif, serif;
 }
 
