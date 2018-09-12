@@ -1,12 +1,12 @@
 import React from 'react';
-import './style.css';
+import '../assets/styles/sidebar.css';
 
 /**
  *    TODO: get sidenav based on the type of shown visualisation
  *    (overview, network of interactions,recommendations)
  */
 const Sidebar = () => (
-  <div className="sidenav">
+  <div className="side-nav">
     <h1>Filter</h1>
   </div>
 );
