@@ -3,8 +3,7 @@ import './style.css';
 
 const MainContent = () => (
   <div className="mainContent">
-    
-  
+    Main Content
   </div>
 );
 
