@@ -5,10 +5,9 @@ import VlaioFooter from '../VlaioFooter';
 
 const MainLayout = () => (
   <div className="mainLayout">
-      <VlaioHeader />
-      <Overview />
-      <VlaioFooter />
-      
+    <VlaioHeader />
+    <Overview />
+    <VlaioFooter />
   </div>
 );
 
