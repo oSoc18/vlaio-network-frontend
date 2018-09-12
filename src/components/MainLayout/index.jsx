@@ -1,12 +1,12 @@
 import React from 'react';
-import Overview from '../Overview'
-import VlaioHeader from '../VlaioHeader'
-import VlaioFooter from '../VlaioFooter'
+import Overview from '../Overview';
+import VlaioHeader from '../VlaioHeader';
+import VlaioFooter from '../VlaioFooter';
 
 const MainLayout = () => (
   <div className="mainLayout">
       <VlaioHeader />
-      <Overview />  
+      <Overview />
       <VlaioFooter />
       
   </div>
