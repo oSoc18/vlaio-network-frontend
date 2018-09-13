@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 import CompaniesByPartner from './CompaniesByPartner';
 import PartnerOverlap from './PartnerOverlap';
 import PartnerOverlapConnections from './PartnerOverlapConnections';
+import Overlap from '../../../models/Overlap';
 
 
 class UpSetPlot extends Component {
@@ -66,6 +67,7 @@ class UpSetPlot extends Component {
           xPos={0}
           yPos={dimensions.height - dimensions.companiesByPartnerHeight + 120}
           scaleY={overlapHeightScale}
+          overlaps={overlaps}
         />
         <PartnerOverlap />
         <PartnerOverlapConnections />
@@ -75,10 +77,7 @@ class UpSetPlot extends Component {
 }
 
 UpSetPlot.propTypes = {
-  overlaps: PropTypes.arrayOf(PropTypes.shape({
-    partners: PropTypes.arrayOf(PropTypes.string),
-    amount: PropTypes.number
-  })).isRequired
+  overlaps: PropTypes.arrayOf(PropTypes.instanceOf(Overlap)).isRequired
 };
 
 export default UpSetPlot;

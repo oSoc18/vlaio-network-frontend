@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { api } from '../../constants';
 import dummydata from './dummy';
 import UpSetPlot from './UpSet';
+import Overlap from '../../models/Overlap';
 
 import '../../assets/styles/overview.css';
 
 class Overview extends Component {
   state = {
-    overlaps: dummydata
+    overlaps: dummydata.map(data => new Overlap(data))
   };
 
   componentDidMount() {
