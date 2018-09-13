@@ -6,10 +6,12 @@ import PartnerOverlap from './PartnerOverlap';
 import PartnerOverlapConnections from './PartnerOverlapConnections';
 import Overlap from '../../../models/Overlap';
 
+import '../../../assets/styles/upset-plot.css';
 
 class UpSetPlot extends Component {
   state = {
     overlaps: [],
+    companiesPerPartner: [],
     overlapWidthScale: d3
       .scaleBand()
       .paddingInner(0.5),
@@ -32,13 +34,16 @@ class UpSetPlot extends Component {
     dimensions.height = nextProps.height;
     dimensions.width = nextProps.width;
 
-    const allPartners = overlaps.reduce((partners, overlap) => {
+    const allPartners = [];
+    const companiesPerPartner = overlaps.reduce((acc, overlap) => {
       overlap.partners.forEach((partner) => {
-        const isKnown = partners.indexOf(partner) !== -1;
-        if (!isKnown) partners.push(partner);
+        acc[partner] = acc[partner] + overlap.amount || overlap.amount;
+
+        const isKnown = allPartners.indexOf(partner) !== -1;
+        if (!isKnown) allPartners.push(partner);
       });
-      return partners;
-    }, []);
+      return acc;
+    }, {});
 
     overlaps.sort((o1, o2) => o2.amount - o1.amount);
 
@@ -50,13 +55,13 @@ class UpSetPlot extends Component {
       .range([0, dimensions.companiesByPartnerHeight]);
 
     return {
-      ...prevState, dimensions, overlaps, overlapWidthScale, overlapHeightScale
+      ...prevState, dimensions, overlaps, overlapWidthScale, overlapHeightScale, companiesPerPartner
     };
   }
 
   render() {
     const {
-      overlaps, overlapHeightScale, overlapWidthScale, dimensions
+      overlaps, overlapHeightScale, overlapWidthScale, dimensions, companiesPerPartner
     } = this.state;
 
     return (
@@ -65,9 +70,9 @@ class UpSetPlot extends Component {
           height={dimensions.companiesByPartnerHeight}
           width={300}
           xPos={0}
-          yPos={dimensions.height - dimensions.companiesByPartnerHeight + 120}
-          scaleY={overlapHeightScale}
-          overlaps={overlaps}
+          yPos={dimensions.height - dimensions.companiesByPartnerHeight - 50}
+          yScale={overlapHeightScale}
+          companiesPerPartner={companiesPerPartner}
         />
         <PartnerOverlap />
         <PartnerOverlapConnections />
