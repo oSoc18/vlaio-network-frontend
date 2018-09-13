@@ -23,13 +23,15 @@ class UpSetPlot extends Component {
       width: 0,
       companiesByPartnerHeight: 250,
       overlapHeight: 500,
-      overlapWidth: 650
+      overlapWidth: 600
     }
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { overlapWidthScale, overlapHeightScale, dimensions } = prevState;
-    const { overlaps } = nextProps;
+
+    const limit = 20;
+    const overlaps = nextProps.overlaps.slice(0, limit);
 
     dimensions.height = nextProps.height;
     dimensions.width = nextProps.width;
@@ -74,7 +76,14 @@ class UpSetPlot extends Component {
           yScale={overlapHeightScale}
           companiesPerPartner={companiesPerPartner}
         />
-        <PartnerOverlap />
+        <PartnerOverlap
+          height={dimensions.overlapHeight}
+          width={dimensions.overlapWidth}
+          xPos={400}
+          yPos={40}
+          xScale={overlapWidthScale}
+          overlaps={overlaps}
+        />
         <PartnerOverlapConnections />
       </g>
     );

@@ -11,3 +11,7 @@
   stroke: #000;
   fill: #000;
 }
+
+.overlap-amount-label {
+  text-anchor: middle;
+}
