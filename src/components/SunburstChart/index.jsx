@@ -65,7 +65,8 @@ function updateChart(selected, data, keyPath) {
 
 class SunburstChart extends Component {
   state = {
-    data: jsonData
+    data: jsonData,
+    selected: false
   };
 
   componentWillMount() {
@@ -73,7 +74,7 @@ class SunburstChart extends Component {
   }
 
   render() {
-    const { data } = this.state;
+    const { data, selected } = this.state;
     return (
       <div>
         <Sunburst
@@ -81,13 +82,20 @@ class SunburstChart extends Component {
           data={data}
           height={500}
           width={550}
+          onValueClick={() => this.setState({selected: !selected })}
           onValueMouseOver={(node) => {
+            if (selected) {
+              return;
+            }
             document.getElementById('path').innerText = getKeyPath(node).reverse().join(' > ');
             this.setState({
               data: updateChart(true, jsonData, getKeyPath(node))
             });
           }}
           onValueMouseOut={() => {
+            if (selected) {
+              return;
+            }
             document.getElementById('path').innerText = ' ';
             this.setState({
               data: refreshStyle(false, jsonData)
