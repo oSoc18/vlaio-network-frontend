@@ -42,7 +42,7 @@ class PartnerOverlap extends Component {
       <g width={width} height={height}>
         <g
           ref={(el) => { this.yAxis = el; }}
-          transform={`translate(${xPos - 20}, ${yPos + 40})`}
+          transform={`translate(${xPos - 20}, ${yPos + 50})`}
         />
         <g transform={`translate(${xPos}, ${yPos})`}>
           {overlaps.map(overlap => (

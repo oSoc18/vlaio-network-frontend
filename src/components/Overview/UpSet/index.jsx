@@ -11,6 +11,7 @@ import '../../../assets/styles/upset-plot.css';
 class UpSetPlot extends Component {
   state = {
     overlaps: [],
+    allPartners: [],
     companiesPerPartner: [],
     overlapWidthScale: d3
       .scaleBand()
@@ -23,7 +24,7 @@ class UpSetPlot extends Component {
       width: 0,
       companiesByPartnerHeight: 250,
       overlapHeight: 500,
-      overlapWidth: 600
+      overlapWidth: 590
     }
   };
 
@@ -57,13 +58,19 @@ class UpSetPlot extends Component {
       .range([0, dimensions.companiesByPartnerHeight]);
 
     return {
-      ...prevState, dimensions, overlaps, overlapWidthScale, overlapHeightScale, companiesPerPartner
+      ...prevState,
+      dimensions,
+      overlaps,
+      overlapWidthScale,
+      overlapHeightScale,
+      companiesPerPartner,
+      allPartners
     };
   }
 
   render() {
     const {
-      overlaps, overlapHeightScale, overlapWidthScale, dimensions, companiesPerPartner
+      overlaps, overlapHeightScale, overlapWidthScale, dimensions, companiesPerPartner, allPartners
     } = this.state;
 
     return (
@@ -80,11 +87,20 @@ class UpSetPlot extends Component {
           height={dimensions.overlapHeight}
           width={dimensions.overlapWidth}
           xPos={400}
-          yPos={40}
+          yPos={50}
           xScale={overlapWidthScale}
           overlaps={overlaps}
         />
-        <PartnerOverlapConnections />
+        <PartnerOverlapConnections
+          height={dimensions.companiesByPartnerHeight}
+          width={dimensions.overlapWidth}
+          xPos={400}
+          yPos={dimensions.height - dimensions.companiesByPartnerHeight - 50}
+          xScale={overlapWidthScale}
+          yScale={overlapHeightScale}
+          overlaps={overlaps}
+          allPartners={allPartners}
+        />
       </g>
     );
   }
