@@ -23,7 +23,7 @@ class Checkbox extends Component {
 
   communicateChange() {
     if (this.props.checkBoxChanged) {
-      this.props.checkBoxChanged(this.state.checked);
+      this.props.checkBoxChanged(this.props.name);
     }
   }
 

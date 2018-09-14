@@ -15,21 +15,26 @@ class CheckBoxGroup extends Component {
   }
 
   handleChangedCheckbox(checkbox) {
-    let [selects] = this.state.selected;
-    if (checkbox in selects) {
-      selects = selects.remove(checkbox);
+    if (checkbox in this.state.selected) {
+      this.setState(prevState => ({
+        selected: prevState.selected.filter(check => check !== checkbox)
+      }));
     } else {
-      selects = selects.push(checkbox);
+      this.setState(prevState => ({
+        selected: [...prevState.selected, checkbox]
+      }));
     }
-    this.setState({
-      selected: selects
-    });
   }
 
   render() {
     return (
       <div>
-        {this.props.options.map(option => <Checkbox name={option} />) }
+        {this.props.options.map(option => (
+          <Checkbox
+            checkBoxChanged={this.handleChangedCheckbox}
+            name={option}
+          />
+        ))}
       </div>
     );
   }
