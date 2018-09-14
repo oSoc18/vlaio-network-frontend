@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { api } from '../../constants';
-import dummydata from './dummy';
 import UpSetPlot from './UpSet';
 import Overlap from '../../models/Overlap';
 
@@ -8,11 +7,14 @@ import '../../assets/styles/overview.css';
 
 class Overview extends Component {
   state = {
-    overlaps: dummydata.map(data => new Overlap(data))
+    overlaps: []
   };
 
   componentDidMount() {
-    // api.overlap.get().then(overlap => console.log(overlap));
+    api.overlap.get().then((response) => {
+      const overlaps = response.map(o => new Overlap(o)) || [];
+      this.setState({ overlaps });
+    });
   }
 
   render() {
