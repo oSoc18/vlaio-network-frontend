@@ -16,6 +16,15 @@ class Checkbox extends Component {
     this.setState(prevState => ({
       checked: !prevState.checked
     }));
+
+    // communicate the change to parent
+    this.communicateChange();
+  }
+
+  communicateChange() {
+    if (this.props.checkBoxChanged) {
+      this.props.checkBoxChanged(this.state.checked);
+    }
   }
 
   render() {
@@ -36,7 +45,8 @@ class Checkbox extends Component {
 }
 
 Checkbox.propTypes = {
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  checkBoxChanged: PropTypes.func.isRequired
 };
 
 export default Checkbox;
