@@ -10,17 +10,8 @@ class CheckBoxGroup extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { selected: [] };
-    this.setCheckBoxes();
+    this.state = { selected: this.props.selected };
     this.handleChangedCheckbox = this.handleChangedCheckbox.bind(this);
-  }
-
-  setCheckBoxes() {
-    const [options] = this.props.options;
-
-    for (let option = 0; option < options.length; option += 1) {
-      this.options.push(<Checkbox name={option} />);
-    }
   }
 
   handleChangedCheckbox(checkbox) {
@@ -34,10 +25,19 @@ class CheckBoxGroup extends Component {
       selected: selects
     });
   }
+
+  render() {
+    return (
+      <div>
+        {this.props.options.map(option => <Checkbox name={option} />) }
+      </div>
+    );
+  }
 }
 
 CheckBoxGroup.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string).isRequired
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selected: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default CheckBoxGroup;
