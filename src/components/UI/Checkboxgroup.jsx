@@ -23,7 +23,6 @@ class CheckBoxGroup extends Component {
       this.setState(prevState => ({ // option selected -> add to list
         selected: [...prevState.selected, checkbox]
       }), this.communicateChanges);
-
     }
   }
 
