@@ -9,11 +9,29 @@
   background-color: #FFFFFF;
   padding-top: 50px;
   padding-left: 50px;
+  font-family: flanders-sans, sans-serif;
 }
 
 .side-nav h1{
-  font-family: flanders-serif, serif;
   color: #333333;
   font-weight: 300;
   font-size: 4.8rem;
 }
+
+fieldset {
+  border: 0;
+  margin-bottom: 1.5rem;
+}
+
+.main-legend {
+  text-transform: uppercase;
+  color: #333333;
+  font-weight: 500;
+  font-size: 2rem;
+  padding-bottom: 1rem;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  border-bottom: 1px solid #333333;
+}
+
