@@ -15,14 +15,21 @@ class CheckBoxGroup extends Component {
   }
 
   handleChangedCheckbox(checkbox) {
-    if (checkbox in this.state.selected) {
-      this.setState(prevState => ({
+    if (this.state.selected.includes(checkbox)) {
+      this.setState(prevState => ({ // option deselected -> remove from list
         selected: prevState.selected.filter(check => check !== checkbox)
-      }));
+      }), this.communicateChanges);
     } else {
-      this.setState(prevState => ({
+      this.setState(prevState => ({ // option selected -> add to list
         selected: [...prevState.selected, checkbox]
-      }));
+      }), this.communicateChanges);
+
+    }
+  }
+
+  communicateChanges() {
+    if (this.props.changeSelection) {
+      this.props.changeSelection(this.state.selected);
     }
   }
 
@@ -42,7 +49,12 @@ class CheckBoxGroup extends Component {
 
 CheckBoxGroup.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
-  selected: PropTypes.arrayOf(PropTypes.string).isRequired
+  selected: PropTypes.arrayOf(PropTypes.string).isRequired,
+  changeSelection: PropTypes.func
+};
+
+CheckBoxGroup.defaultProps = {
+  changeSelection: null
 };
 
 export default CheckBoxGroup;

@@ -12,13 +12,14 @@ class Checkbox extends Component {
     };
   }
 
-  handleChange() {
+  handleChange(e) {
     this.setState(prevState => ({
       checked: !prevState.checked
     }));
 
     // communicate the change to parent
     this.communicateChange();
+    e.preventDefault();
   }
 
   communicateChange() {
@@ -37,7 +38,6 @@ class Checkbox extends Component {
           type="checkbox"
           checked={this.state.checked}
           onClick={this.handleChange}
-          defaultChecked
         />
         <span className="checkmark-vlaio" />
       </label>);
