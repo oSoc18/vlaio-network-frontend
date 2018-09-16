@@ -18,16 +18,29 @@ class TimeBetweenDates extends Component {
 
   handleChangeStart(date) {
     // check if start < end, if not, set start === end
-    this.setState({
-      startDate: date
-    });
+    if (!date.isBefore(this.state.endDate)) {
+      this.setState({
+        startDate: date,
+        endDate: date
+      });
+    } else { // nothing is wrong (start < end)
+      this.setState({
+        startDate: date
+      });
+    }
   }
 
   handleChangeEnd(date) {
-    // check if end > start, if not, set start === end
-    this.setState({
-      endDate: date
-    });
+    if (!date.isAfter(this.state.startDate)) {
+      this.setState({
+        startDate: date,
+        endDate: date
+      });
+    } else { // nothing is wrong (start < end)
+      this.setState({
+        endDate: date
+      });
+    }
   }
 
   render() {
