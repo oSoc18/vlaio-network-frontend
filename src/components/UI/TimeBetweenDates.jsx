@@ -17,12 +17,14 @@ class TimeBetweenDates extends Component {
   }
 
   handleChangeStart(date) {
+    // check if start < end, if not, set start === end
     this.setState({
       startDate: date
     });
   }
 
   handleChangeEnd(date) {
+    // check if end > start, if not, set start === end
     this.setState({
       endDate: date
     });
