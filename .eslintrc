@@ -15,5 +15,10 @@
     "react/destructuring-assignment": 0,
     "import/named": 0,
     "react/jsx-one-expression-per-line": 0
+  },
+  "settings": {
+    "react": {
+      "version": "16.5"
+    }
   }
 }
