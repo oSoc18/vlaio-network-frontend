@@ -1,5 +1,6 @@
 import React from 'react';
 import CheckBoxGroup from './UI/Checkboxgroup';
+import TimeBetweenDates from './UI/TimeBetweenDates';
 import '../assets/styles/sidebar.css';
 
 /**
@@ -42,6 +43,7 @@ const Sidebar = () => (
         />
       </fieldset>
 
+      <TimeBetweenDates />
     </div>
   </div>
 );
