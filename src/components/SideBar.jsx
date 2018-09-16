@@ -43,7 +43,10 @@ const Sidebar = () => (
         />
       </fieldset>
 
-      <TimeBetweenDates />
+      <fieldset>
+        <legend className="main-legend">Datum van interactie</legend>
+        <TimeBetweenDates />
+      </fieldset>
     </div>
   </div>
 );

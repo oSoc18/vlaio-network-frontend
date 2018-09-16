@@ -1,6 +1,12 @@
 .react-datepicker {
   font-size: 1em;
 }
+
+.react-datepicker-wrapper, .react-datepicker__input-container input {
+  width: 9rem;
+  text-align: center;
+}
+
 .react-datepicker__header {
   padding-top: 0.8em;
 }
@@ -27,4 +33,13 @@
 .react-datepicker__navigation--next {
   border-left-color: #ccc;
   right: 1em;
+}
+
+.datepicker-container {
+  display: inline-flex;
+}
+
+.between-text {
+  margin: 0 0.5rem 0 0.5rem;
+  line-height: 1.5;
 }

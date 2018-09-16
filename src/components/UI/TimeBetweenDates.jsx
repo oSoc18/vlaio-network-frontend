@@ -9,27 +9,47 @@ class TimeBetweenDates extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: moment()
+      startDate: moment([2016]),
+      endDate: moment()
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeStart = this.handleChangeStart.bind(this);
+    this.handleChangeEnd = this.handleChangeEnd.bind(this);
   }
 
-  handleChange(date) {
+  handleChangeStart(date) {
     this.setState({
       startDate: date
     });
   }
 
+  handleChangeEnd(date) {
+    this.setState({
+      endDate: date
+    });
+  }
+
   render() {
     return (
-      <DatePicker
-        selected={this.state.startDate}
-        onChange={this.handleChange}
-        dateFormat="DD/MM/YYYY"
-        todayButton="Vandaag"
-        locale="nl-BE"
-        showYearDropdown
-      />);
+      <div className="datepicker-container">
+        <DatePicker
+          selected={this.state.startDate}
+          onChange={this.handleChangeStart}
+          dateFormat="DD/MM/YYYY"
+          todayButton="Vandaag"
+          locale="nl-BE"
+          showYearDropdown
+        />
+        <span className="between-text">t.e.m.</span>
+        <DatePicker
+          selected={this.state.endDate}
+          onChange={this.handleChangeEnd}
+          dateFormat="DD/MM/YYYY"
+          todayButton="Vandaag"
+          locale="nl-BE"
+          showYearDropdown
+        />
+      </div>
+    );
   }
 }
 
