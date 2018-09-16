@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Checkbox.css';
 import PropTypes from 'prop-types';
 import NumericInput from 'react-numeric-input';
+import './Checkbox.css';
 
 class TimeBetween extends Component {
   constructor(props) {

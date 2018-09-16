@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import 'moment/locale/nl-be';
 import 'react-datepicker/dist/react-datepicker.css';
 import './time-between-dates.css';
@@ -22,24 +23,33 @@ class TimeBetweenDates extends Component {
       this.setState({
         startDate: date,
         endDate: date
-      });
+      }, () => { this.communicateChanges(this.state.startDate, this.state.endDate); });
     } else { // nothing is wrong (start < end)
       this.setState({
         startDate: date
-      });
+      }, () => { this.communicateChanges(this.state.startDate, this.state.endDate); });
     }
   }
 
   handleChangeEnd(date) {
+    // check if end > start, if not, set start === end
     if (!date.isAfter(this.state.startDate)) {
       this.setState({
         startDate: date,
         endDate: date
-      });
+      }, () => { this.communicateChanges(this.state.startDate, this.state.endDate); });
     } else { // nothing is wrong (start < end)
       this.setState({
         endDate: date
-      });
+      }, () => { this.communicateChanges(this.state.startDate, this.state.endDate); });
+    }
+  }
+
+  communicateChanges(start, end) {
+    console.log('************');
+    console.log(end);
+    if (this.props.onValueChange) {
+      this.props.onValueChange(start, end);
     }
   }
 
@@ -67,5 +77,13 @@ class TimeBetweenDates extends Component {
     );
   }
 }
+
+TimeBetweenDates.propTypes = {
+  onValueChange: PropTypes.func
+};
+
+TimeBetweenDates.defaultProps = {
+  onValueChange: null
+};
 
 export default TimeBetweenDates;
