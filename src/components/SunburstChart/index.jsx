@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Sunburst, Hint } from 'react-vis';
+import './sunburst.css';
 
 // temporary
 const jsonData = JSON.parse('{"name":"Partners","children":[{"name":"Vlaio","children":[{"name":"NSZ","children":[{"name":"UGent","size":41},{"name":"KULeuven","size":4}]},{"name":"Voka","children":[{"name":"Vlaio","size":200},{"name":"KULeuven","size":12}]},{"name":"UGent","size":4},{"name":"Unizo","size":50}]},{"name":"KULeuven","children":[{"name":"UGent","size":120},{"name":"Unizo","size":50},{"name":"NSZ","children":[{"name":"Voka","children":[{"name":"Vlaio","children":[{"name":"NSZ","size":15}]},{"name":"KULeuven","children":[{"name":"UGent","size":20}]}]},{"name":"KULeuven","size":12}]},{"name":"Voka","children":[{"name":"NSZ","size":150}]},{"name":"Vlaio","children":[{"name":"NSZ","size":65}]}]},{"name":"UGent","children":[{"name":"NSZ","size":80}]}]}');
@@ -27,8 +28,9 @@ function refreshStyle(selectedPath, node) {
     } else {
       colorIndex = 0;
     }
-    node.label = node.name;
-    console.log(node);
+    // node.dontRotateLabel = true;
+    // node.label = node.name;
+
   }
 
   if (selectedPath === true) {
@@ -65,10 +67,15 @@ function updateChart(selected, data, keyPath) {
   return data;
 }
 
+function calculateLabels(node) {
+  console.log((node.angle-node.angle0));
+}
+
 class SunburstChart extends Component {
   state = {
     data: jsonData,
-    selected: false
+    selected: false,
+    hoveredCell: false
   };
 
   componentWillMount() {
@@ -76,7 +83,7 @@ class SunburstChart extends Component {
   }
 
   render() {
-    const { data, selected } = this.state;
+    const { data, selected, hoveredCell } = this.state;
     return (
       <div>
         <Sunburst
@@ -91,7 +98,8 @@ class SunburstChart extends Component {
             }
             document.getElementById('path').innerText = getKeyPath(node).reverse().join(' > ');
             this.setState({
-              data: updateChart(true, jsonData, getKeyPath(node))
+              data: updateChart(true, jsonData, getKeyPath(node)),
+              hoveredCell: (node.x && node.y ? node : false)
             });
           }}
           onValueMouseOut={() => {
@@ -100,11 +108,24 @@ class SunburstChart extends Component {
             }
             document.getElementById('path').innerText = ' ';
             this.setState({
-              data: refreshStyle(false, jsonData)
+              data: refreshStyle(false, jsonData),
+              hoveredCell: false
             });
           }}
-          getLabel={node => node.name}
-        />
+        >
+          {hoveredCell
+            ? (
+              <Hint value={{
+                x: 0,
+                y: 0
+              }}
+              >
+                <div id="tooltip">
+                  {hoveredCell.name}
+                </div>
+              </Hint>
+            ) : null}
+        </Sunburst>
         <p id="path" />
       </div>
     );
