@@ -18,7 +18,7 @@ const PartnerOverlapConnections = ({
               key={`circle-${overlap.id}`}
               cx={xScale(overlap.partners) + 8}
               cy={yScale(partner) + 12}
-              r={10}
+              r={xScale.bandwidth() / 1.5}
               fill="lightgray"
             />
           ))
@@ -34,7 +34,7 @@ const PartnerOverlapConnections = ({
               <circle
                 cx={xScale(partners) + 8}
                 cy={yScale(partner) + 12}
-                r={10}
+                r={xScale.bandwidth() / 1.5}
                 fill="#000"
               />
               <line
