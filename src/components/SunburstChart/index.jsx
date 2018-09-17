@@ -7,7 +7,7 @@ const jsonData = JSON.parse('{"name":"Partners","children":[{"name":"Vlaio","chi
 const colours = ['#e9fdca', '#dcebb2', '#bbc5a5', '#afb0a2', '#9c9a9d', '#6369d1', '#60e1e0', '#d8d2e1', '#b88e8d', '#34435e'];
 let colorIndex = 0;
 
-
+// gets the path to the selected node in the json
 function getKeyPath(node) {
   if (!node.parent) {
     return [node.data.name];
@@ -16,11 +16,13 @@ function getKeyPath(node) {
   return [(node.data && node.data.name) || node.name].concat(getKeyPath(node.parent));
 }
 
+// Injects style inside the data json
 function refreshStyle(selectedPath, node) {
   if (node.children) {
     node.children.map(child => refreshStyle(selectedPath, child));
   }
 
+  // inserts colours the first time the data is loaded
   if (node.color === undefined) {
     node.color = colours[colorIndex];
     if (colorIndex < colours.length) {
@@ -30,9 +32,9 @@ function refreshStyle(selectedPath, node) {
     }
     // node.dontRotateLabel = true;
     // node.label = node.name;
-
   }
 
+  // changes opacity depending on the selected node
   if (selectedPath === true) {
     node.style = {
       fillOpacity: 0.2
@@ -45,6 +47,7 @@ function refreshStyle(selectedPath, node) {
   return node;
 }
 
+// updates the path selection on the chart
 function updateChart(selected, data, keyPath) {
   refreshStyle(selected, data);
 
@@ -65,10 +68,6 @@ function updateChart(selected, data, keyPath) {
   }
 
   return data;
-}
-
-function calculateLabels(node) {
-  console.log((node.angle-node.angle0));
 }
 
 class SunburstChart extends Component {
@@ -96,7 +95,9 @@ class SunburstChart extends Component {
             if (selected) {
               return;
             }
-            document.getElementById('path').innerText = getKeyPath(node).reverse().join(' > ');
+            let breadCrumbs = ' ';
+            (node ? breadCrumbs = getKeyPath(node).reverse().join(' > ') : breadCrumbs = ' ');
+            document.getElementById('path').innerText = breadCrumbs;
             this.setState({
               data: updateChart(true, jsonData, getKeyPath(node)),
               hoveredCell: (node.x && node.y ? node : false)
