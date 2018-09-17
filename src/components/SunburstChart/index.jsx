@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { Sunburst } from 'react-vis';
+import { Sunburst, Hint } from 'react-vis';
 
 // temporary
-const jsonData = JSON.parse('{"title":"Partners","children":[{"title":"Vlaio","children":[{"title":"NSZ","children":[{"title":"UGent","size":41},{"title":"KULeuven","size":4}]},{"title":"Voka","children":[{"title":"Vlaio","size":200},{"title":"KULeuven","size":12}]},{"title":"UGent","size":4},{"title":"Unizo","size":50}]},{"title":"KULeuven","children":[{"title":"UGent","size":120},{"title":"Unizo","size":50},{"title":"NSZ","children":[{"title":"Voka","children":[{"title":"Vlaio","children":[{"title":"NSZ","size":15}]},{"title":"KULeuven","children":[{"title":"UGent","size":20}]}]},{"title":"KULeuven","size":12}]},{"title":"Voka","children":[{"title":"NSZ","size":150}]},{"title":"Vlaio","children":[{"title":"NSZ","size":65}]}]},{"title":"UGent","children":[{"title":"NSZ","size":80}]}]}');
+const jsonData = JSON.parse('{"name":"Partners","children":[{"name":"Vlaio","children":[{"name":"NSZ","children":[{"name":"UGent","size":41},{"name":"KULeuven","size":4}]},{"name":"Voka","children":[{"name":"Vlaio","size":200},{"name":"KULeuven","size":12}]},{"name":"UGent","size":4},{"name":"Unizo","size":50}]},{"name":"KULeuven","children":[{"name":"UGent","size":120},{"name":"Unizo","size":50},{"name":"NSZ","children":[{"name":"Voka","children":[{"name":"Vlaio","children":[{"name":"NSZ","size":15}]},{"name":"KULeuven","children":[{"name":"UGent","size":20}]}]},{"name":"KULeuven","size":12}]},{"name":"Voka","children":[{"name":"NSZ","size":150}]},{"name":"Vlaio","children":[{"name":"NSZ","size":65}]}]},{"name":"UGent","children":[{"name":"NSZ","size":80}]}]}');
 const colours = ['#e9fdca', '#dcebb2', '#bbc5a5', '#afb0a2', '#9c9a9d', '#6369d1', '#60e1e0', '#d8d2e1', '#b88e8d', '#34435e'];
 let colorIndex = 0;
 
 
 function getKeyPath(node) {
   if (!node.parent) {
-    return [node.data.title];
+    return [node.data.name];
   }
 
-  return [(node.data && node.data.title) || node.title].concat(getKeyPath(node.parent));
+  return [(node.data && node.data.name) || node.name].concat(getKeyPath(node.parent));
 }
 
 function refreshStyle(selectedPath, node) {
@@ -27,6 +27,8 @@ function refreshStyle(selectedPath, node) {
     } else {
       colorIndex = 0;
     }
+    node.label = node.name;
+    console.log(node);
   }
 
   if (selectedPath === true) {
@@ -51,7 +53,7 @@ function updateChart(selected, data, keyPath) {
 
   for (let i = 1; i < path.length; i += 1) {
     tempData.children.forEach((node) => {
-      if (node.title === path[i]) {
+      if (node.name === path[i]) {
         tempData = node;
         tempData.style = {
           fillOpacity: 1
@@ -82,7 +84,7 @@ class SunburstChart extends Component {
           data={data}
           height={500}
           width={550}
-          onValueClick={() => this.setState({selected: !selected })}
+          onValueClick={() => this.setState({ selected: !selected })}
           onValueMouseOver={(node) => {
             if (selected) {
               return;
@@ -101,6 +103,7 @@ class SunburstChart extends Component {
               data: refreshStyle(false, jsonData)
             });
           }}
+          getLabel={node => node.name}
         />
         <p id="path" />
       </div>
