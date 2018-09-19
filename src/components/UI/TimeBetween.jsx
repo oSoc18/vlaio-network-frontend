@@ -15,6 +15,7 @@ class TimeBetween extends Component {
     }
   }
 
+
   render() {
     return (
       <NumericInput
@@ -22,6 +23,7 @@ class TimeBetween extends Component {
         max={200}
         value={120}
         onValueChange={(value) => { this.onChangeValue(value); }}
+        format={num => `${num} weken`}
       />
     );
   }

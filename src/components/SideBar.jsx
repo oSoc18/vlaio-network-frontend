@@ -1,6 +1,6 @@
 import React from 'react';
 import CheckBoxGroup from './UI/Checkboxgroup';
-import TimeBetweenDates from './UI/TimeBetweenDates';
+import TimeBetween from './UI/TimeBetween';
 import '../assets/styles/sidebar.css';
 
 /**
@@ -33,7 +33,7 @@ const Sidebar = () => (
         />
       </fieldset>
 
-      <fieldset>
+      {/* <fieldset>
         <legend className="main-legend">Type bedrijf</legend>
         <CheckBoxGroup
           options={['Financiering', 'Financiële moeilijkheden', 'Innovatie', 'Internationalisatie',
@@ -41,11 +41,11 @@ const Sidebar = () => (
           selected={selected}
           changeSelection={printChanges}
         />
-      </fieldset>
+      </fieldset> */}
 
       <fieldset>
-        <legend className="main-legend">Datum van interactie</legend>
-        <TimeBetweenDates />
+        <legend className="main-legend">Interval tussen interacties</legend>
+        <TimeBetween />
       </fieldset>
     </div>
   </div>
