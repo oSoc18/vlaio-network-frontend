@@ -1,7 +1,11 @@
 import React from 'react';
 
+import '../../assets/styles/overview.css';
+
 const Overview = () => (
-  <p>Vlaio Network</p>
+  <div className="main-content overview">
+    Overview
+  </div>
 );
 
 export default Overview;
