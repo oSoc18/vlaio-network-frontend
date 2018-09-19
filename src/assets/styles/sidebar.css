@@ -1,6 +1,6 @@
 .side-nav {
   width: 30rem;
-  height: calc(100vh - 4.4rem);
+  height: calc(100vh - 4.4rem - 13.6rem);
   z-index: 1;
   top: 0;
   left: 0;
