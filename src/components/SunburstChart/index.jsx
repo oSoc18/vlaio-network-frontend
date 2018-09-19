@@ -4,7 +4,7 @@ import { Sunburst, Hint } from 'react-vis';
 
 // temporary
 const jsonData = JSON.parse('{"name":"Partners","children":[{"name":"Vlaio","children":[{"name":"NSZ","children":[{"name":"UGent","size":41},{"name":"KULeuven","size":4}]},{"name":"Voka","children":[{"name":"Vlaio","size":200},{"name":"KULeuven","size":12}]},{"name":"UGent","size":4},{"name":"Unizo","size":50}]},{"name":"KULeuven","children":[{"name":"UGent","size":120},{"name":"Unizo","size":50},{"name":"NSZ","children":[{"name":"Voka","children":[{"name":"Vlaio","children":[{"name":"NSZ","size":15}]},{"name":"KULeuven","children":[{"name":"UGent","size":20}]}]},{"name":"KULeuven","size":12}]},{"name":"Voka","children":[{"name":"NSZ","size":150}]},{"name":"Vlaio","children":[{"name":"NSZ","size":65}]}]},{"name":"UGent","children":[{"name":"NSZ","size":80}]}]}');
-const colours = ['#332288', '#117733', '#44AA99', '#88CCEE', '#DDCC77', '#CC6677', '#AA4499', '#882255', '#DDDDDD', '#9580FF'];
+const colours = ['#332288', '#117733', '#44AA99', '#88CCEE', '#DDCC77', '#CC6677', '#AA4499', '#882255', '#9580FF'];
 let colorIndex = 0;
 
 // gets the path to the selected node in the json
@@ -84,8 +84,10 @@ class SunburstChart extends Component {
   render() {
     const { data, selected, hoveredCell } = this.state;
     return (
-      <div>
+      <div className="main-content overview">
+        <p id="path" /> <br />
         <Sunburst
+          style={{ float: 'left' }}
           hideRootNode
           data={data}
           height={500}
@@ -127,7 +129,7 @@ class SunburstChart extends Component {
               </Hint>
             ) : null}
         </Sunburst>
-        <p id="path" />
+
       </div>
     );
   }

@@ -11,7 +11,8 @@ import './assets/styles/index.css';
 const App = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/:path(|index|home)" component={Overview} />
+      <MainLayout exact path="/:path(|index|home)" component={Overview} />
+      <MainLayout path="/sunburst" component={SunburstChart} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
