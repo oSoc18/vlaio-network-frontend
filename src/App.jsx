@@ -12,7 +12,6 @@ const App = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/:path(|index|home)" component={Overview} />
-      <Route path="/sunburst" component={SunburstChart} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
