@@ -44,7 +44,7 @@ const Sidebar = () => (
       </fieldset> */}
 
       <fieldset>
-        <legend className="main-legend">Interval tussen interacties</legend>
+        <legend className="main-legend">Maximale interval tussen interacties</legend>
         <TimeBetween />
       </fieldset>
     </div>
