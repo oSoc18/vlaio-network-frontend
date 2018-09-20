@@ -4,8 +4,13 @@ import './sunburst.css';
 
 // temporary
 const jsonData = JSON.parse('{"name":"Partners","children":[{"name":"Vlaio","children":[{"name":"NSZ","children":[{"name":"UGent","size":41},{"name":"KULeuven","size":4}]},{"name":"Voka","children":[{"name":"Vlaio","size":200},{"name":"KULeuven","size":12}]},{"name":"UGent","size":4},{"name":"Unizo","size":50}]},{"name":"KULeuven","children":[{"name":"UGent","size":120},{"name":"Unizo","size":50},{"name":"NSZ","children":[{"name":"Voka","children":[{"name":"Vlaio","children":[{"name":"NSZ","size":15}]},{"name":"KULeuven","children":[{"name":"UGent","size":20}]}]},{"name":"KULeuven","size":12}]},{"name":"Voka","children":[{"name":"NSZ","size":150}]},{"name":"Vlaio","children":[{"name":"NSZ","size":65}]}]},{"name":"UGent","children":[{"name":"NSZ","size":80}]}]}');
-const colours = ['#332288', '#117733', '#44AA99', '#88CCEE', '#DDCC77', '#CC6677', '#AA4499', '#882255', '#DDDDDD', '#9580FF'];
+const colours = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f'];
+
 let colorIndex = 0;
+
+const labelStyle = {
+  fontSize: '14px'
+};
 
 // gets the path to the selected node in the json
 function getKeyPath(node) {
@@ -24,24 +29,50 @@ function refreshStyle(selectedPath, node) {
 
   // inserts colours the first time the data is loaded
   if (node.color === undefined) {
-    node.color = colours[colorIndex];
-    if (colorIndex < colours.length) {
-      colorIndex += 1;
-    } else {
-      colorIndex = 0;
+    switch (node.name){
+      case 'Vlaio':
+        node.color = colours[0];
+        break;
+      case 'NSZ':
+        node.color = colours[1];
+        break;
+      case 'UGent':
+        node.color = colours[2];
+        break;
+      case 'KULeuven':
+        node.color = colours[3];
+        break;
+      case 'Voka':
+        node.color = colours[4];
+        break;
+      case 'Unizo':
+        node.color = colours[5];
+        break;
+      default:
+        node.color = colours[6];
     }
+
+    // node.color = colours[colorIndex];
+    // if (colorIndex < colours.length) {
+    //   colorIndex += 1;
+    // } else {
+    //   colorIndex = 0;
+    // }
     // node.dontRotateLabel = true;
-    // node.label = node.name;
+    node.label = node.name;
+    node.labelStyle = labelStyle;
   }
 
   // changes opacity depending on the selected node
   if (selectedPath === true) {
     node.style = {
-      fillOpacity: 0.2
+      fillOpacity: 0.2,
+      stroke: 'white'
     };
   } else {
     node.style = {
-      fillOpacity: 1
+      fillOpacity: 1,
+      stroke: 'white'
     };
   }
   return node;
@@ -88,8 +119,8 @@ class SunburstChart extends Component {
         <Sunburst
           hideRootNode
           data={data}
-          height={500}
-          width={550}
+          height={700}
+          width={700}
           onValueClick={() => this.setState({ selected: !selected })}
           onValueMouseOver={(node) => {
             if (selected) {
@@ -113,20 +144,7 @@ class SunburstChart extends Component {
               hoveredCell: false
             });
           }}
-        >
-          {hoveredCell
-            ? (
-              <Hint value={{
-                x: 0,
-                y: 0
-              }}
-              >
-                <div id="tooltip">
-                  {hoveredCell.name}
-                </div>
-              </Hint>
-            ) : null}
-        </Sunburst>
+        />
         <p id="path" />
       </div>
     );
