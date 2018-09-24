@@ -1,0 +1,17 @@
+.company-list {
+  font-size: 1.1rem;
+}
+
+.company-list line, .company-list .domain {
+  stroke-width: 0;
+}
+
+.overlap-connector {
+  stroke-width: 5px;
+  stroke: #000;
+  fill: #000;
+}
+
+.overlap-amount-label {
+  text-anchor: middle;
+}
