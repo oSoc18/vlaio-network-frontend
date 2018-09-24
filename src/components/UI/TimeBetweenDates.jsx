@@ -46,8 +46,6 @@ class TimeBetweenDates extends Component {
   }
 
   communicateChanges(start, end) {
-    console.log('************');
-    console.log(end);
     if (this.props.onValueChange) {
       this.props.onValueChange(start, end);
     }

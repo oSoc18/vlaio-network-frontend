@@ -1,6 +1,7 @@
 import React from 'react';
 import CheckBoxGroup from './UI/Checkboxgroup';
 import TimeBetween from './UI/TimeBetween';
+import TimeBetweenDates from './UI/TimeBetweenDates';
 import '../assets/styles/sidebar.css';
 
 /**
@@ -44,8 +45,13 @@ const Sidebar = () => (
       </fieldset> */}
 
       <fieldset>
-        <legend className="main-legend">Maximale interval tussen interacties</legend>
+        <legend className="main-legend">Interval tussen interacties</legend>
         <TimeBetween />
+      </fieldset>
+
+      <fieldset>
+        <legend className="main-legend">Datum van interactie</legend>
+        <TimeBetweenDates />
       </fieldset>
     </div>
   </div>
