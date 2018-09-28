@@ -12,7 +12,7 @@ const App = () => (
   <BrowserRouter>
     <Switch>
       <MainLayout exact path="/:path(|index|home)" component={Overview} />
-      <MainLayout exact path="/:path(sunburst)" component={SunburstChart} />
+      <MainLayout exact path="/suburst" component={SunburstChart} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
