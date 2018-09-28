@@ -114,6 +114,7 @@ h3 {
 .main-content {
   background-color: #FFFFFF;
   height: calc(100vh - 4.4rem - 13.6rem);
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
