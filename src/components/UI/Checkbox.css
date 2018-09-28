@@ -1,0 +1,74 @@
+/* The container */
+.checkboxLine {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 1.6rem;
+  height: 2.8rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #FFFFFF;
+}
+
+/* Hide the browser's default che ckbox */
+.checkboxLine input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark-vlaio {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.7rem;
+  width: 1.7rem;
+  background-color: #0A317C;
+  border: 0.1rem solid #CBD2DA;
+}
+
+/* On mouse-over, add a grey background color */
+.checkboxLine:hover input ~ .checkmark-vlaio {
+  background-color: #1863f3;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkboxLine input:checked ~ .checkmark-vlaio {
+  background-color: #0A317C;
+  border: 0.1rem solid #FFFFFF;
+}
+
+.checkboxLine:hover input:checked ~ .checkmark-vlaio {
+  background-color: #1863f3;
+  border: 0.1rem solid #FFFFFF;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark-vlaio:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkboxLine input:checked ~ .checkmark-vlaio:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkboxLine .checkmark-vlaio:after {
+  left: 0.6rem;
+  font-size: 0.8rem;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 1.5px 1.5px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
