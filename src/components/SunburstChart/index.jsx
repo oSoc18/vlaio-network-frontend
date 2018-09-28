@@ -41,7 +41,7 @@ class SunburstChart extends Component {
       node.children.map(child => this.refreshStyle(selectedPath, child));
     }
 
-    // inserts colours the first time the data is loaded
+    // inserts node information the first time the data is loaded
     if (node.color === undefined) {
       node.color = this.colorMap[node.name.toLowerCase()];
       node.label = node.name;
@@ -51,17 +51,11 @@ class SunburstChart extends Component {
     }
 
     // changes opacity depending on the selected node
-    if (selectedPath === true) {
-      node.style = {
-        fillOpacity: 0.2,
-        stroke: 'white'
-      };
-    } else {
-      node.style = {
-        fillOpacity: 1,
-        stroke: 'white'
-      };
-    }
+    node.style = { stroke: '#fff' };
+
+    if (selectedPath === true) node.style.fillOpacity = 0.2;
+    else node.style.fillOpacity = 1;
+
     return node;
   }
 
@@ -73,16 +67,15 @@ class SunburstChart extends Component {
 
     let tempData = data;
 
-    for (let i = 1; i < path.length; i += 1) {
+    path.forEach((crumb) => {
       tempData.children.forEach((node) => {
-        if (node.name === path[i]) {
-          tempData = node;
-          tempData.style = {
-            fillOpacity: 1
-          };
-        }
+        if (node.name !== crumb) return;
+        tempData = node;
+        tempData.style = {
+          fillOpacity: 1
+        };
       });
-    }
+    });
 
     return data;
   }
