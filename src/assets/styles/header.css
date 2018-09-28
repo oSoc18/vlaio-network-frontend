@@ -1,12 +1,11 @@
 .vlaio-header {
   background-color: #FFFFFF;
-  height: 4.4rem;
 }
 
 .demo-button {
   display: inline-block;
   border: 1px solid black;
-  height: 4.4rem;
+  height: 4.5rem;
   text-align: center;
   padding: 1rem;
 }
@@ -14,7 +13,7 @@
 .demo-button:hover {
   display: inline-block;
   border: 1px solid black;
-  height: 4.4rem;
+  height: 4.5rem;
   text-align: center;
 
   background-color: #009B48;
