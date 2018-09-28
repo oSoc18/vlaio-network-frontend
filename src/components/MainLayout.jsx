@@ -12,7 +12,7 @@ const MainLayout = ({ component: Component, ...rest }) => (
     render={routeProps => (
       <div className="main-layout">
         <Header />
-        <MainLayoutTabs />
+        <MainLayoutTabs {...routeProps} />
         <SideBar />
         <Component {...routeProps} />
         <Footer />
