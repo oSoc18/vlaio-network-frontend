@@ -5,10 +5,6 @@ import vlaioData from './data';
 
 const colours = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f'];
 
-const labelStyle = {
-  fontSize: '14px'
-};
-
 // gets the path to the selected node in the json
 function getKeyPath(node) {
   if (!node.parent) {
@@ -26,7 +22,7 @@ function refreshStyle(selectedPath, node) {
 
   // inserts colours the first time the data is loaded
   if (node.color === undefined) {
-    switch (node.name){
+    switch (node.name) {
       case 'Vlaio':
         node.color = colours[0];
         break;
@@ -57,7 +53,9 @@ function refreshStyle(selectedPath, node) {
     // }
     // node.dontRotateLabel = true;
     node.label = node.name;
-    node.labelStyle = labelStyle;
+    node.labelStyle = {
+      fontSize: '14px'
+    };
   }
 
   // changes opacity depending on the selected node
@@ -99,20 +97,20 @@ function updateChart(selected, data, keyPath) {
 }
 
 class SunburstChart extends Component {
-  state = {
-    data: vlaioData,
-    selected: false,
-    hoveredCell: false
-  };
-
-  componentWillMount() {
+  constructor() {
+    super();
+    this.state = {
+      data: vlaioData,
+      selected: false,
+      hoveredCell: false
+    };
     refreshStyle(false, this.state.data);
   }
 
   render() {
     const { data, selected, hoveredCell } = this.state;
     return (
-      <div>
+      <div className="main-content">
         <Sunburst
           hideRootNode
           data={data}
