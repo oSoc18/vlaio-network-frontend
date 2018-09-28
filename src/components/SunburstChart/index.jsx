@@ -3,6 +3,8 @@ import { Sunburst } from 'react-vis';
 // tmp data
 import vlaioData from './data';
 
+import '../../assets/styles/sunburst.css';
+
 class SunburstChart extends Component {
   colors = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f'];
 
@@ -11,7 +13,8 @@ class SunburstChart extends Component {
     this.state = {
       data: vlaioData,
       selected: false,
-      hoveredCell: false
+      hoveredCell: false,
+      path: ''
     };
     this.refreshStyle(false, this.state.data);
   }
@@ -107,39 +110,35 @@ class SunburstChart extends Component {
   }
 
   render() {
-    const { data, selected, hoveredCell } = this.state;
+    const { data, selected, path } = this.state;
+
     return (
-      <div className="main-content">
+      <div className="sunburst-wrapper">
+        <span className="sunburst__path">{path}</span>
         <Sunburst
+          className="sunburst"
           hideRootNode
           data={data}
           height={700}
           width={700}
           onValueClick={() => this.setState({ selected: !selected })}
           onValueMouseOver={(node) => {
-            if (selected) {
-              return;
-            }
-            let breadCrumbs = ' ';
-            (node ? breadCrumbs = this.getKeyPath(node).reverse().join(' > ') : breadCrumbs = ' ');
-            document.getElementById('path').innerText = breadCrumbs;
+            if (selected) return;
             this.setState({
               data: this.updateChart(true, vlaioData, this.getKeyPath(node)),
+              path: node ? this.getKeyPath(node).reverse().join(' > ') : '',
               hoveredCell: (node.x && node.y ? node : false)
             });
           }}
           onValueMouseOut={() => {
-            if (selected) {
-              return;
-            }
-            document.getElementById('path').innerText = ' ';
+            if (selected) return;
             this.setState({
+              path: '',
               data: this.refreshStyle(false, vlaioData),
               hoveredCell: false
             });
           }}
         />
-        <p id="path" />
       </div>
     );
   }
