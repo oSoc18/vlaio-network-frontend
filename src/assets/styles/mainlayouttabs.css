@@ -1,7 +1,8 @@
 .main-layout-tabs {
   margin-top: 1.0rem;
   background-color: #FFFFFF;
-  height: 5.0rem;
+  height: 4.5rem;
+  border-bottom: solid 0.5rem #F2F2F2;
 }
 
 .main-layout-tabs .tab {

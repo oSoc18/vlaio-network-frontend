@@ -1,0 +1,11 @@
+.tab {
+  background-color: #D2D5DC;
+  height: 4.0rem;
+  min-width: 15.0rem;
+  text-align: center;
+  line-height: 3.5rem;
+}
+
+.tab.selected {
+  background-color: #F2F2F2;
+}
