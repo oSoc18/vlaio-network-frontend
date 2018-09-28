@@ -22,3 +22,7 @@
 a .demo-button {
   color: black;
 }
+
+.top-header-bar {
+  border-bottom: 1px solid #CBD2DA;
+}

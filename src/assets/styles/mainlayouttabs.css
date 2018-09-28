@@ -1,0 +1,9 @@
+.main-layout-tabs {
+  margin-top: 1.0rem;
+  background-color: #FFFFFF;
+  height: 5.0rem;
+}
+
+.main-layout-tabs .tab {
+  display: inline-block;
+}
