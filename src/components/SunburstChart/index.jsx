@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { Sunburst, Hint } from 'react-vis';
-import './sunburst.css';
+import { Sunburst } from 'react-vis';
+// tmp data
+import vlaioData from './data';
 
-// temporary
-const jsonData = JSON.parse('{"name":"Partners","children":[{"name":"Vlaio","children":[{"name":"NSZ","children":[{"name":"UGent","size":41},{"name":"KULeuven","size":4}]},{"name":"Voka","children":[{"name":"Vlaio","size":200},{"name":"KULeuven","size":12}]},{"name":"UGent","size":4},{"name":"Unizo","size":50}]},{"name":"KULeuven","children":[{"name":"UGent","size":120},{"name":"Unizo","size":50},{"name":"NSZ","children":[{"name":"Voka","children":[{"name":"Vlaio","children":[{"name":"NSZ","size":15}]},{"name":"KULeuven","children":[{"name":"UGent","size":20}]}]},{"name":"KULeuven","size":12}]},{"name":"Voka","children":[{"name":"NSZ","size":150}]},{"name":"Vlaio","children":[{"name":"NSZ","size":65}]}]},{"name":"UGent","children":[{"name":"NSZ","size":80}]}]}');
 const colours = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f'];
-
-let colorIndex = 0;
 
 const labelStyle = {
   fontSize: '14px'
@@ -103,7 +100,7 @@ function updateChart(selected, data, keyPath) {
 
 class SunburstChart extends Component {
   state = {
-    data: jsonData,
+    data: vlaioData,
     selected: false,
     hoveredCell: false
   };
@@ -130,7 +127,7 @@ class SunburstChart extends Component {
             (node ? breadCrumbs = getKeyPath(node).reverse().join(' > ') : breadCrumbs = ' ');
             document.getElementById('path').innerText = breadCrumbs;
             this.setState({
-              data: updateChart(true, jsonData, getKeyPath(node)),
+              data: updateChart(true, vlaioData, getKeyPath(node)),
               hoveredCell: (node.x && node.y ? node : false)
             });
           }}
@@ -140,7 +137,7 @@ class SunburstChart extends Component {
             }
             document.getElementById('path').innerText = ' ';
             this.setState({
-              data: refreshStyle(false, jsonData),
+              data: refreshStyle(false, vlaioData),
               hoveredCell: false
             });
           }}
