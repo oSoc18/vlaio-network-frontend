@@ -6,7 +6,14 @@ import vlaioData from './data';
 import '../../assets/styles/sunburst.css';
 
 class SunburstChart extends Component {
-  colors = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f'];
+  colorMap = {
+    vlaio: '#a6cee3',
+    nsz: '#1f78b4',
+    ugent: '#b2df8a',
+    kuleuven: '#33a02c',
+    voka: '#e31a1c',
+    unizo: '#fdbf6f'
+  };
 
   constructor() {
     super();
@@ -36,36 +43,7 @@ class SunburstChart extends Component {
 
     // inserts colours the first time the data is loaded
     if (node.color === undefined) {
-      switch (node.name) {
-        case 'Vlaio':
-          node.color = this.colors[0];
-          break;
-        case 'NSZ':
-          node.color = this.colors[1];
-          break;
-        case 'UGent':
-          node.color = this.colors[2];
-          break;
-        case 'KULeuven':
-          node.color = this.colors[3];
-          break;
-        case 'Voka':
-          node.color = this.colors[4];
-          break;
-        case 'Unizo':
-          node.color = this.colors[5];
-          break;
-        default:
-          node.color = this.colors[6];
-      }
-
-      // node.color = colours[colorIndex];
-      // if (colorIndex < colours.length) {
-      //   colorIndex += 1;
-      // } else {
-      //   colorIndex = 0;
-      // }
-      // node.dontRotateLabel = true;
+      node.color = this.colorMap[node.name.toLowerCase()];
       node.label = node.name;
       node.labelStyle = {
         fontSize: '14px'
