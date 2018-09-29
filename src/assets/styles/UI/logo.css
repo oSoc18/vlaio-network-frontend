@@ -1,26 +1,20 @@
 .logo {
+  display: inline-block;
+}
+
+.logo img {
   max-height: 100%;
+  margin: 0.5rem 0.5rem 0.5rem 0;
 }
 
 .logo:after {
   content: '';
-  display: block;
+  left: 45px;
+  display: inline-block;
   position: absolute;
-  left: 28px;
-  top: -4px;
-  height: 54px;
+  height: 50px;
   width: 1px;
-  background-image: none !important;
   background-color: #cbd2da;
   transform: rotate(-20deg);
   transform-origin: top left;
-  display: block;
-  content: ' ';
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  width: 16px;
-  background-repeat: no-repeat;
-  background-position: top left;
 }
