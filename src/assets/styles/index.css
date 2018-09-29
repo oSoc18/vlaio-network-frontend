@@ -112,7 +112,7 @@ h3 {
 }
 
 .main-content {
-  background-color: #F2F2F2;
+  background-color: #FFFFFF;
   min-height: calc(100vh - 4.4rem - 13.6rem);
   display: flex;
   justify-content: space-between;
