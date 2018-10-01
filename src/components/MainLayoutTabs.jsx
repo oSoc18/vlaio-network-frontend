@@ -4,18 +4,21 @@ import PropTypes from 'prop-types';
 import Tab from './UI/Tab';
 import '../assets/styles/mainlayouttabs.css';
 
-const MainLayoutTabs = props => (
-  <div className="main-layout-tabs">
-    <Link to="/index">
-      <Tab
-        name="Overzicht"
-        selected={props.location.pathname === '/index' || props.location.pathname === '/'}
-      />
-    </Link>
-    <Link to="/sunburst"><Tab name="Interacties" selected={props.location.pathname === '/sunburst'} /></Link>
-    <Link to="/bedrijven"><Tab name="Bedrijven" selected={props.location.pathname === '/bedrijven'} /></Link>
-  </div>
-);
+const MainLayoutTabs = ({ location }) => {
+  const section = location.pathname;
+  return (
+    <div className="main-layout-tabs">
+      <Link to="/">
+        <Tab
+          name="Overzicht"
+          selected={section === '/index' || section === '/'}
+        />
+      </Link>
+      <Link to="/interacties"><Tab name="Interacties" selected={section === '/interacties'} /></Link>
+      <Link to="/bedrijven"><Tab name="Bedrijven" selected={section === '/bedrijven'} /></Link>
+    </div>
+  );
+};
 
 MainLayoutTabs.propTypes = {
   location: PropTypes.shape({
