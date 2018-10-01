@@ -1,5 +1,70 @@
 .vlaio-header {
   background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.vlaio-header__top, .vlaio-header__bottom {
+  height: 6rem;
+  width: 100%;
+}
+
+.vlaio-header__top {
+  border-bottom: 1px solid #CBD2DA;
+  display: flex;
+  position: relative;
+}
+
+.vlaio-header__top__logo {
+  height: 100%;
+}
+
+.vlaio-header__top__logo:after {
+  content: '';
+  left: 45px;
+  display: inline-block;
+  position: absolute;
+  height: 5rem;
+  width: 2px;
+  background-color: #CBD2DA;
+  transform: rotate(-20deg);
+  transform-origin: top left;
+}
+
+.vlaio-header__top__logo img {
+  max-height: 100%;
+}
+
+.vlaio-header__top__contact {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.vlaio-header__top__contact div {
+  line-height: 6rem;
+  color: #fff;
+  padding: 0 2rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  position: relative;
+  background-color: #009B48;
+  z-index: 1;
+}
+
+.vlaio-header__top__contact div:before {
+  content: " ";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  background-color: #009B48;
+  transform-origin: bottom left;
+  transform: skew(20deg, 0deg);
 }
 
 .demo-button {
@@ -19,9 +84,4 @@
 }
 a .demo-button {
   color: black;
-}
-
-.top-header-bar {
-  border-bottom: 1px solid #CBD2DA;
-  height: 4.5rem;
 }
