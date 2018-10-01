@@ -19,7 +19,8 @@ const Header = () => (
       </div>
     </div>
     <div className="vlaio-header__bottom">
-      ONDERSTEUND DOOR AGENTSCHAP INNOVEREN &amp; ONDERENEMEN  \  WELKOM, VOORNAAM NAAM
+      <div>Ondersteund door Agentschap Innoveren &amp; Ondernemen</div>
+      <div>Welkom, VOORNAAM NAAM</div>
     </div>
     {/* <Link to="/index"><div className="demo-button">Algemeen overzicht</div></Link>
     <Link to="/sunburst"><div className="demo-button">Netwerk interacties</div></Link>

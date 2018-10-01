@@ -125,7 +125,7 @@ h3 {
   background-color: #FFFFFF;
   /* - header height - tab height - footer height */
   min-height: calc(100vh - 10rem - 5.6rem - 8rem);
-  padding-top: 2rem;
+  padding-top: 1.5rem;
   display: flex;
   justify-content: space-between;
 }
