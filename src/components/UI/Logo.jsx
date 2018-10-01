@@ -1,4 +1,5 @@
 import React from 'react';
+
 import '../../assets/styles/UI/logo.css';
 
 const img = require('./../../assets/img/logo-vlaanderen.png');

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Tab.css';
+
+import '../../assets/styles/UI/tab.css';
 
 const Tab = props => (
   <div className={props.selected === true ? 'tab selected' : 'tab'}>

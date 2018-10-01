@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './Checkbox.css';
+
+import '../../assets/styles/UI/checkbox.css';
 
 class Checkbox extends Component {
   constructor(props) {

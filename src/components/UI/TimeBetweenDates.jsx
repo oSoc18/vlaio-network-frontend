@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+
 import 'moment/locale/nl-be';
 import 'react-datepicker/dist/react-datepicker.css';
-import './time-between-dates.css';
+
+import '../../assets/styles/UI/time-between-dates.css';
 
 class TimeBetweenDates extends Component {
   constructor(props) {
