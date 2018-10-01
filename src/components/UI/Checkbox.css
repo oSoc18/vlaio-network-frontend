@@ -13,7 +13,7 @@
   color: #FFFFFF;
 }
 
-/* Hide the browser's default che ckbox */
+/* Hide the browser's default checkbox */
 .checkboxLine input {
   position: absolute;
   opacity: 0;

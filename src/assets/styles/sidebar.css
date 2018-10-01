@@ -3,9 +3,39 @@
   height: 100%;
   z-index: 1;
   overflow-x: hidden;
-  background-color: #009B48;
+  background-color: #0A317C;
+  padding-top: 50px;
+  padding-left: 50px;
+  font-family: flanders-sans, sans-serif;
+  margin-right: 0.5rem;
 }
 
-.side-nav h1 {
-  font-family: flanders-serif, serif;
+.between-text {
+  color: #FFFFFF;
 }
+
+.side-nav h1{
+  color: #FFFFFF;
+  font-weight: 300;
+  font-size: 4.8rem;
+}
+
+.side-nav fieldset {
+  border: 0;
+  margin-bottom: 1.5rem;
+  padding: 0; /* TODO! */
+  margin-bottom: 2rem;
+}
+
+.main-legend {
+  text-transform: uppercase;
+  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 1.7rem;
+  /*padding-bottom: 1rem;*/
+  width: 100%;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  /*border-bottom: 1px solid #FFFFFF;*/
+}
+
