@@ -11,8 +11,10 @@ const MainLayout = ({ component: Component, ...rest }) => (
     render={routeProps => (
       <div className="main-layout">
         <Header />
-        <SideBar />
-        <Component {...routeProps} />
+        <div className="main-content">
+          <SideBar />
+          <Component {...routeProps} />
+        </div>
         <Footer />
       </div>
     )}

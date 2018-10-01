@@ -1,11 +1,7 @@
 .side-nav {
-  width: 30rem;
-  min-height: calc(100vh - 4.4rem - 13.6rem);
+  width: 20rem;
   height: 100%;
   z-index: 1;
-  top: 0;
-  left: 0;
-  float: left;
   overflow-x: hidden;
   background-color: #0A317C;
   padding-top: 50px;
