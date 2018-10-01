@@ -6,15 +6,16 @@
 }
 
 .vlaio-header__top, .vlaio-header__bottom {
-  height: 6rem;
   width: 100%;
 }
 
+/* TOP HEADER */
 .vlaio-header__top {
   border-bottom: 1px solid #CBD2DA;
   display: flex;
   align-items: center;
   position: relative;
+  height: 6rem;
 }
 
 .vlaio-header__top__logo {
@@ -99,4 +100,10 @@
   background-color: #009B48;
   transform-origin: bottom left;
   transform: skew(20deg, 0deg);
+}
+
+
+/* BOTTOM HEADER */
+.vlaio-header__bottom {
+  height: 4rem;
 }
