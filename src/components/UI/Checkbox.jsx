@@ -9,20 +9,13 @@ class Checkbox extends Component {
     this.state = { checked: true };
   }
 
-  handleChange = (e) => {
+  handleChange = () => {
     this.setState(prevState => ({
       checked: !prevState.checked
     }));
 
     // communicate the change to parent
-    this.communicateChange();
-    e.preventDefault();
-  }
-
-  communicateChange() {
-    if (this.props.checkBoxChanged) {
-      this.props.checkBoxChanged(this.props.name);
-    }
+    this.props.checkBoxChanged(this.props.name);
   }
 
   render() {
@@ -33,8 +26,8 @@ class Checkbox extends Component {
         <input
           id={escapedName}
           type="checkbox"
-          checked={this.state.checked}
-          onClick={this.handleChange}
+          defaultChecked={this.state.checked}
+          onChange={this.handleChange}
         />
         <span className="checkmark-vlaio" />
       </label>);

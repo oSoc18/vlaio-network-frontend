@@ -13,7 +13,7 @@ class TimeBetween extends Component {
         min={0}
         max={200}
         value={120}
-        onValueChange={(value) => { this.onChangeValue(value); }}
+        onChange={(value) => { this.onChangeValue(value); }}
         format={num => (num === 1 ? `${num} week` : `${num} weken`)}
       />
     );

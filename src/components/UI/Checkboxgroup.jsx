@@ -31,6 +31,7 @@ class CheckBoxGroup extends Component {
       <div>
         {this.props.options.map(option => (
           <Checkbox
+            key={option}
             checkBoxChanged={this.handleChangedCheckbox}
             name={option}
           />
