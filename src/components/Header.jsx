@@ -10,8 +10,9 @@ const Header = () => (
       <div className="vlaio-header__top__logo">
         <img src={img} alt="Logo Vlaanderen" />
       </div>
-      <div>
-        VLAANDEREN \ AGENTSCHAP INNOVEREN &amp; ONDERNEMEN \ VLAIO-NETWERK
+      <div className="vlaio-header__top__titles">
+        <h1>Vlaanderen</h1>
+        <h2>Agentschap innoveren &amp; ondernemen</h2>
       </div>
       <div className="vlaio-header__top__contact">
         <div>Contacteer ons</div>
