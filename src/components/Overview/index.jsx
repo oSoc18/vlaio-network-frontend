@@ -20,7 +20,7 @@ class Overview extends Component {
   render() {
     const { overlaps } = this.state;
     return (
-      <div className="main-content overview">
+      <div className="overview">
         <svg className="overview__plot" width="1000" height="940">
           <UpSetPlot
             overlaps={overlaps}

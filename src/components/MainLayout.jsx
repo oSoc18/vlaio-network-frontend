@@ -13,8 +13,10 @@ const MainLayout = ({ component: Component, ...rest }) => (
       <div className="main-layout">
         <Header />
         <MainLayoutTabs {...routeProps} />
-        <SideBar />
-        <Component {...routeProps} />
+        <div className="main-content">
+          <SideBar />
+          <Component {...routeProps} />
+        </div>
         <Footer />
       </div>
     )}
