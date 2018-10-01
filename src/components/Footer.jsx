@@ -1,17 +1,19 @@
 import React from 'react';
+
 import '../assets/styles/footer.css';
+
+const img = require('./../assets/img/logo-full.png');
 
 const Footer = () => (
   <footer className="vlaio-footer">
-
-    (LOGO)
-    Vlaanderen
-    verbeelding werkt
-    Vlaio.be is een officiële website van de Vlaamse overheid
-    uitgegeven door Agentschap Innoveren & Ondernemen
-    PRIVACYBELEID
-    TOEGANKELIJKHEID
-
+    <div className="vlaio-footer__left">
+      <img src={img} alt="Logo Vlaanderen" />
+      <a>over ons</a>
+      <a>contact</a>
+    </div>
+    <div className="vlaio-footer__privacy">
+      <a>privacybeleid</a>
+    </div>
   </footer>
 );
 
