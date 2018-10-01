@@ -5,12 +5,10 @@ import Checkbox from './Checkbox';
 class CheckBoxGroup extends Component {
   constructor(props) {
     super(props);
-
     this.state = { selected: this.props.selected };
-    this.handleChangedCheckbox = this.handleChangedCheckbox.bind(this);
   }
 
-  handleChangedCheckbox(checkbox) {
+  handleChangedCheckbox = (checkbox) => {
     if (this.state.selected.includes(checkbox)) {
       this.setState(prevState => ({ // option deselected -> remove from list
         selected: prevState.selected.filter(check => check !== checkbox)

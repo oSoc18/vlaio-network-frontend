@@ -15,11 +15,9 @@ class TimeBetweenDates extends Component {
       startDate: moment([2016]),
       endDate: moment()
     };
-    this.handleChangeStart = this.handleChangeStart.bind(this);
-    this.handleChangeEnd = this.handleChangeEnd.bind(this);
   }
 
-  handleChangeStart(date) {
+  handleChangeStart = (date) => {
     // check if start < end, if not, set start === end
     if (!date.isBefore(this.state.endDate)) {
       this.setState({
@@ -33,7 +31,7 @@ class TimeBetweenDates extends Component {
     }
   }
 
-  handleChangeEnd(date) {
+  handleChangeEnd = (date) => {
     // check if end > start, if not, set start === end
     if (!date.isAfter(this.state.startDate)) {
       this.setState({

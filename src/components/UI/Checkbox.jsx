@@ -6,14 +6,10 @@ import '../../assets/styles/UI/checkbox.css';
 class Checkbox extends Component {
   constructor(props) {
     super(props);
-
-    this.handleChange = this.handleChange.bind(this);
-    this.state = {
-      checked: true
-    };
+    this.state = { checked: true };
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.setState(prevState => ({
       checked: !prevState.checked
     }));

@@ -3,17 +3,9 @@ import PropTypes from 'prop-types';
 import NumericInput from 'react-numeric-input';
 
 class TimeBetween extends Component {
-  constructor(props) {
-    super(props);
-    this.onChangeValue = this.onChangeValue.bind(this);
+  onChangeValue = (value) => {
+    if (this.props.onValueChange) this.props.onValueChange(value);
   }
-
-  onChangeValue(value) {
-    if (this.props.onValueChange) {
-      this.props.onValueChange(value);
-    }
-  }
-
 
   render() {
     return (
