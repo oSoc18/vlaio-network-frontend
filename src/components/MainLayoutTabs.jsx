@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Tab from './UI/Tab';
-import '../assets/styles/mainlayouttabs.css';
 
 const MainLayoutTabs = ({ location }) => {
   const section = location.pathname;
