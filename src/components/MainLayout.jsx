@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
 import SideBar from './SideBar';
 import Header from './Header';
 import Footer from './Footer';
 import MainLayoutTabs from './MainLayoutTabs';
 
 const MainLayout = ({ component: Component, ...rest }) => (
-  <Route
+  <PrivateRoute
     {...rest}
-    render={routeProps => (
+    component={routeProps => (
       <div className="main-layout">
         <Header />
         <MainLayoutTabs {...routeProps} />
