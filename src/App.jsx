@@ -5,6 +5,7 @@ import Overview from './components/Overview';
 import SunburstChart from './components/SunburstChart';
 import Companies from './components/Companies';
 import NotFound from './components/404';
+import Login from './components/Auth/Login';
 
 import 'normalize.css';
 import './assets/styles/index.css';
@@ -15,6 +16,7 @@ const App = () => (
       <MainLayout exact path="/:path(|index|home|overlap)" component={Overview} />
       <MainLayout path="/interacties" component={SunburstChart} />
       <MainLayout path="/bedrijven" component={Companies} />
+      <Route path="/login" component={Login} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
