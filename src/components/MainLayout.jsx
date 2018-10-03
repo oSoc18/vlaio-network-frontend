@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import SideBar from './SideBar';
 import Header from './Header';
 import Footer from './Footer';
+import MainLayoutTabs from './MainLayoutTabs';
 
 const MainLayout = ({ component: Component, ...rest }) => (
   <Route
@@ -11,6 +12,7 @@ const MainLayout = ({ component: Component, ...rest }) => (
     render={routeProps => (
       <div className="main-layout">
         <Header />
+        <MainLayoutTabs {...routeProps} />
         <div className="main-content">
           <SideBar />
           <Component {...routeProps} />

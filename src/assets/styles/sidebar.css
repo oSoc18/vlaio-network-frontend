@@ -1,13 +1,11 @@
 .side-nav {
-  width: 20rem;
-  height: 100%;
+  width: 35rem;
   z-index: 1;
   overflow-x: hidden;
   background-color: #0A317C;
-  padding-top: 50px;
-  padding-left: 50px;
+  padding-top: 5rem;
+  padding-left: 2rem;
   font-family: flanders-sans, sans-serif;
-  margin-right: 0.5rem;
 }
 
 .between-text {

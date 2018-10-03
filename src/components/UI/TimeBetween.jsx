@@ -1,20 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import NumericInput from 'react-numeric-input';
-import './Checkbox.css';
 
 class TimeBetween extends Component {
-  constructor(props) {
-    super(props);
-    this.onChangeValue = this.onChangeValue.bind(this);
+  onChangeValue = (value) => {
+    if (this.props.onValueChange) this.props.onValueChange(value);
   }
-
-  onChangeValue(value) {
-    if (this.props.onValueChange) {
-      this.props.onValueChange(value);
-    }
-  }
-
 
   render() {
     return (
@@ -22,8 +13,8 @@ class TimeBetween extends Component {
         min={0}
         max={200}
         value={120}
-        onValueChange={(value) => { this.onChangeValue(value); }}
-        format={num => `${num} weken`}
+        onChange={(value) => { this.onChangeValue(value); }}
+        format={num => (num === 1 ? `${num} week` : `${num} weken`)}
       />
     );
   }
