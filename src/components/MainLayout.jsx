@@ -15,7 +15,7 @@ const MainLayout = ({ component: Component, user, ...rest }) => {
       isAuthenticated={isAuthenticated}
       component={routeProps => (
         <div className="main-layout">
-          <Header />
+          <Header user={user} />
           <MainLayoutTabs {...routeProps} />
           <div className="main-content">
             <SideBar />

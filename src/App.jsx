@@ -17,13 +17,13 @@ class App extends Component {
     super();
     const user = cookies.get('user');
     this.state = {
-      user: new User(user) || null
+      user: user ? new User(user) : null
     };
     cookies.addChangeListener(this.authStateChanged);
   }
 
   authStateChanged = (cookie) => {
-    if (cookie.name === 'user') this.setState({ user: new User(cookie.value) });
+    if (cookie.name === 'user') this.setState({ user: cookie.value ? new User(cookie.value) : null });
   }
 
   logout = () => {
