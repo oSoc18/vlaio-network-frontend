@@ -1,3 +1,4 @@
+import Cookies from 'universal-cookie';
 import OverlapAPI from './api/Overlap';
 import AuthAPI from './api/Auth';
 
@@ -8,3 +9,5 @@ export const api = {
   overlap: new OverlapAPI(API_URL),
   auth: new AuthAPI(API_URL)
 };
+
+export const cookies = new Cookies();
