@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
-const PrivateRoute = ({ component: Component }, ...rest) => (
+const PrivateRoute = ({ component: Component }, isAuthenticated, ...rest) => (
   <Route
     {...rest}
     render={props => (
-      // TODO check auth status
-      true
+      isAuthenticated
         ? <Component {...props} />
         : <Redirect to="/login" />
     )}
@@ -15,6 +14,7 @@ const PrivateRoute = ({ component: Component }, ...rest) => (
 );
 
 PrivateRoute.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
   component: PropTypes.func.isRequired
 };
 

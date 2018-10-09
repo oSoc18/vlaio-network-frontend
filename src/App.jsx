@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { cookies } from './constants';
+import User from './models/User';
 import MainLayout from './components/MainLayout';
 import Overview from './components/Overview';
 import SunburstChart from './components/SunburstChart';
@@ -15,14 +16,14 @@ class App extends Component {
   constructor() {
     super();
     const user = cookies.get('user');
-    cookies.addChangeListener(this.authStateChanged);
     this.state = {
-      user
+      user: new User(user) || null
     };
+    cookies.addChangeListener(this.authStateChanged);
   }
 
   authStateChanged = (cookie) => {
-    if (cookie.name === 'user') this.setState({ user: cookie.value });
+    if (cookie.name === 'user') this.setState({ user: new User(cookie.value) });
   }
 
   logout = () => {
@@ -31,13 +32,13 @@ class App extends Component {
   }
 
   render() {
-    const { user, token } = this.state;
+    const { user } = this.state;
     return (
       <BrowserRouter>
         <Switch>
-          <MainLayout exact path="/:path(|index|home|overlap)" component={Overview} />
-          <MainLayout path="/interacties" component={SunburstChart} />
-          <MainLayout path="/bedrijven" component={Companies} />
+          <MainLayout exact path="/:path(|index|home|overlap)" component={Overview} user={user} />
+          <MainLayout path="/interacties" component={SunburstChart} user={user} />
+          <MainLayout path="/bedrijven" component={Companies} user={user} />
           <Route path="/login" component={Login} />
           <Route component={NotFound} />
         </Switch>

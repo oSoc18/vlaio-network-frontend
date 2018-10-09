@@ -15,17 +15,16 @@ class Login extends Component {
     e.preventDefault();
 
     const { username, password } = this.state;
-    api.auth.login(username, password)
-      .then((res) => {
-        cookies.set('auth', res.token);
-        cookies.set('user', {
-          firstName: res.first_name,
-          lastName: res.last_name
-        });
-      })
-      .catch(() => {
-
+    api.auth.login(username, password).then((res) => {
+      cookies.set('auth', res.token);
+      cookies.set('user', {
+        firstName: res.first_name,
+        lastName: res.last_name
       });
+      window.location.href = '/';
+    }).catch(() => {
+
+    });
   };
 
   handleChange = (e) => {
