@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { api } from '../../constants';
+import { api, cookies } from '../../constants';
 import Header from '../Header';
 import Footer from '../Footer';
 
@@ -13,10 +13,19 @@ class Login extends Component {
 
   login = (e) => {
     e.preventDefault();
+
     const { username, password } = this.state;
-    api.auth.login(username, password).then((res) => {
-      console.log(res);
-    });
+    api.auth.login(username, password)
+      .then((res) => {
+        cookies.set('auth', res.token);
+        cookies.set('user', {
+          firstName: res.first_name,
+          lastName: res.last_name
+        });
+      })
+      .catch(() => {
+
+      });
   };
 
   handleChange = (e) => {

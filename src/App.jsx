@@ -14,26 +14,15 @@ import './assets/styles/index.css';
 class App extends Component {
   constructor() {
     super();
-    const token = cookies.get('auth');
     const user = cookies.get('user');
     cookies.addChangeListener(this.authStateChanged);
     this.state = {
-      token,
       user
     };
   }
 
-  componentDidMount() {
-
-  }
-
-  authStateChanged = (cookieName, cookieValue) => {
-    if (cookieName === 'auth') {
-      this.setState({ token: cookieValue });
-    }
-    if (cookieName === 'user') {
-      this.setState({ user: cookieValue });
-    }
+  authStateChanged = (cookie) => {
+    if (cookie.name === 'user') this.setState({ user: cookie.value });
   }
 
   logout = () => {
@@ -42,7 +31,7 @@ class App extends Component {
   }
 
   render() {
-    const { user } = this.state;
+    const { user, token } = this.state;
     return (
       <BrowserRouter>
         <Switch>
