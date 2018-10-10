@@ -13,6 +13,7 @@ const IconButton = ({ icon, tabIndex, onClick }) => {
       tabIndex={tabIndex}
       onKeyDown={e => onKeyDown(e)}
       onClick={onClick}
+      className="icon-button"
     >
       <FontAwesomeIcon icon={icon} />
     </i>

@@ -13,8 +13,7 @@ import Manage from './components/Admin/Manage';
 
 import 'normalize.css';
 import './assets/styles/index.css';
-import './assets/styles/UI/button.css';
-import './assets/styles/UI/input.css';
+import './assets/styles/UI/base.css';
 
 class App extends Component {
   constructor() {
