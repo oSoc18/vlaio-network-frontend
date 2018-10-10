@@ -8,6 +8,7 @@ import SunburstChart from './components/SunburstChart';
 import Companies from './components/Companies';
 import NotFound from './components/404';
 import Login from './components/Auth/Login';
+import Manage from './components/Admin/Manage';
 
 import 'normalize.css';
 import './assets/styles/index.css';
@@ -42,6 +43,9 @@ class App extends Component {
           <MainLayout path="/interacties" component={SunburstChart} user={user} />
           <MainLayout path="/bedrijven" component={Companies} user={user} />
           <Route path="/login" component={Login} />
+          { user.isAdmin
+            && <Route path="/admin" component={Manage} user={user} />
+          }
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
