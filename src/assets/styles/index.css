@@ -131,6 +131,10 @@ h3 {
 }
 
 .page-alternative {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-color: #FFFFFF;
   min-height: calc(100vh - 10rem - 8rem);
   width: 100%;
@@ -138,7 +142,4 @@ h3 {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
