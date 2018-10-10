@@ -4,6 +4,7 @@ class User {
   constructor(user) {
     this.firstName = user.first_name;
     this.lastName = user.last_name;
+    this.email = user.email;
     // TODO remove when role is included in response
     this.id = user.id || uuid();
     this.role = user.role || 'user';

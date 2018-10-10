@@ -2,13 +2,14 @@
   width: 40%;
   background-color: #f2f2f2;
   min-height: 40rem;
-  padding: 2rem 4rem;
+  padding: 4rem;
 }
 
 .login__title {
   font-weight: normal;
   font-size: 3.2rem;
   color: #007AC9;
+  margin: 0 0 3rem;
 }
 
 .login__form label {

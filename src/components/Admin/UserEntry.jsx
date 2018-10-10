@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import User from '../../models/User';
 
 const UserEntry = ({ user }) => (
-  <p>{user.firstName}</p>
+  <tr>
+    <td>{user.firstName}</td>
+    <td>{user.lastName}</td>
+    <td>{user.email}</td>
+    <td>{user.role}</td>
+    <td>acties</td>
+  </tr>
 );
 
 UserEntry.propTypes = {

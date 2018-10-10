@@ -20,7 +20,27 @@ class Manage extends Component {
   }
 
   render() {
-    const { users } = this.state;
+    // TODO remove user fixtures
+    // const { users } = this.state;
+    const users = [
+      new User({
+        id: 1, first_name: 'John', last_name: 'Doe', role: 'user', email: 'john@doe.com'
+      }),
+      new User({
+        id: 2, first_name: 'John', last_name: 'Smith', role: 'admin', email: 'john@smith.com'
+      }),
+      new User({
+        id: 3, first_name: 'Jane', last_name: 'Doe', role: 'pending', email: 'jane@doe.com'
+      }),
+      new User({
+        id: 4, first_name: 'Jane', last_name: 'Smith', role: 'user', email: 'john@smith.com'
+      })
+    ];
+    const roleWeighing = {
+      pending: 1,
+      admin: 2,
+      user: 3
+    };
     const { currentUser } = this.props;
     return (
       <div className="main-layout">
@@ -28,12 +48,23 @@ class Manage extends Component {
         <div className="page-alternative">
           <main className="user-management">
             <h2 className="user-management__title">Gebruikersbeheer</h2>
-            <div className="user-management__users">
+            <input type="search" className="input user-management__user-search" placeholder="zoek naar gebruikers..." />
+            <table className="user-management__users">
+              <tr>
+                <th>Voornaam</th>
+                <th>Naam</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>&nbsp;</th>
+              </tr>
               { users
                 .filter(user => user.id !== currentUser.id)
+                .sort((u1, u2) => (
+                  roleWeighing[u1.role] - roleWeighing[u2.role] || u1.lastName > u2.lastName
+                ))
                 .map(user => <UserEntry key={user.id} user={user} />)
               }
-            </div>
+            </table>
           </main>
         </div>
         <Footer />
