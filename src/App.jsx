@@ -11,6 +11,8 @@ import Login from './components/Auth/Login';
 
 import 'normalize.css';
 import './assets/styles/index.css';
+import './assets/styles/UI/button.css';
+import './assets/styles/UI/input.css';
 
 class App extends Component {
   constructor() {

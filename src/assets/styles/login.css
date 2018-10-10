@@ -19,9 +19,10 @@
 .login__form input {
   display: block;
   width: 100%;
+  margin-top: 0.5rem;
 }
 
-.login__form input[type="submit"] {
+.login__form input.button {
   width: 45%;
   min-width: 8rem;
 }
