@@ -10,7 +10,10 @@ import '../../assets/styles/user-management.css';
 
 
 class Manage extends Component {
-  state = { users: [] };
+  state = {
+    users: [],
+    searchQuery: ''
+  };
 
   componentDidMount() {
     api.user.get().then((allUsers) => {
@@ -19,9 +22,14 @@ class Manage extends Component {
     });
   }
 
+  searchUser = (e) => {
+    this.setState({ searchQuery: e.currentTarget.value });
+  }
+
   render() {
     // TODO remove user fixtures
     // const { users } = this.state;
+    const { searchQuery } = this.state;
     const users = [
       new User({
         id: 1, first_name: 'John', last_name: 'Doe', role: 'user', email: 'john@doe.com'
@@ -48,7 +56,12 @@ class Manage extends Component {
         <div className="page-alternative">
           <main className="user-management">
             <h2 className="user-management__title">Gebruikersbeheer</h2>
-            <input type="search" className="input user-management__user-search" placeholder="zoek naar gebruikers..." />
+            <input
+              type="search"
+              className="input user-management__user-search"
+              placeholder="zoek naar gebruikers..."
+              onChange={this.searchUser}
+            />
             <table className="user-management__users">
               <tr>
                 <th>Voornaam</th>
@@ -59,6 +72,12 @@ class Manage extends Component {
               </tr>
               { users
                 .filter(user => user.id !== currentUser.id)
+                .filter(user => (
+                  user.firstName.toLowerCase().includes(searchQuery)
+                  || user.email.toLowerCase().includes(searchQuery)
+                  || user.lastName.toLowerCase().includes(searchQuery)
+                  || user.role.toLowerCase().includes(searchQuery)
+                ))
                 .sort((u1, u2) => (
                   roleWeighing[u1.role] - roleWeighing[u2.role] || u1.lastName > u2.lastName
                 ))
