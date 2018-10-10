@@ -133,4 +133,9 @@ h3 {
 .page {
   background-color: #FFFFFF;
   min-height: calc(100vh - 10rem - 8rem);
+  width: 100%;
+  background-image: url(../img/page-background.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
