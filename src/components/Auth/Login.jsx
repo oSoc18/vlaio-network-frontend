@@ -32,16 +32,26 @@ class Login extends Component {
   }
 
   render() {
+    const { password, username } = this.state;
     return (
       <div className="main-layout">
         <Header />
-        <main className="page login">
-          <form onSubmit={this.login}>
-            <input type="email" name="username" placeholder="email" value={this.state.username} onChange={this.handleChange} />
-            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-            <input type="submit" />
-          </form>
-        </main>
+        <div className="page-alternative">
+          <main className="login">
+            <h2 className="login__title">Inloggen</h2>
+            <form className="login__form" onSubmit={this.login}>
+              <label htmlFor="username">
+                Email
+                <input type="email" id="username" name="username" value={username} onChange={this.handleChange} />
+              </label>
+              <label htmlFor="password">
+                Wachtwoord
+                <input type="password" id="password" name="password" value={password} onChange={this.handleChange} />
+              </label>
+              <input type="submit" value="Inloggen" />
+            </form>
+          </main>
+        </div>
         <Footer />
       </div>
     );

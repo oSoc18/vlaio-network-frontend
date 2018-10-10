@@ -1,0 +1,27 @@
+.login {
+  width: 40%;
+  background-color: #f2f2f2;
+  min-height: 40rem;
+  padding: 2rem 4rem;
+}
+
+.login__title {
+  font-weight: normal;
+  font-size: 3.2rem;
+  color: #007AC9;
+}
+
+.login__form label {
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.login__form input {
+  display: block;
+  width: 100%;
+}
+
+.login__form input[type="submit"] {
+  width: 45%;
+  min-width: 8rem;
+}
