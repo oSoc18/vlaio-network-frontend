@@ -1,6 +1,6 @@
 import API from './API';
 
-class AuthAPI extends API {
+class UserAPI extends API {
   constructor(url) {
     super(url);
     this.endpoint = `${this.BASE_URL}/user`;
@@ -18,4 +18,4 @@ class AuthAPI extends API {
   }
 }
 
-export default AuthAPI;
+export default UserAPI;
