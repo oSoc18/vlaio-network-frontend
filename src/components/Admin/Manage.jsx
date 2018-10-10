@@ -24,7 +24,7 @@ class Manage extends Component {
     const { currentUser } = this.props;
     return (
       <div className="main-layout">
-        <Header />
+        <Header user={currentUser} />
         <div className="page-alternative">
           <main className="user-management">
             <h2 className="user-management__title">Gebruikersbeheer</h2>

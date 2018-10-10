@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { cookies } from './constants';
 import User from './models/User';
+import PrivateRoute from './components/PrivateRoute';
 import MainLayout from './components/MainLayout';
 import Overview from './components/Overview';
 import SunburstChart from './components/SunburstChart';
@@ -26,7 +27,10 @@ class App extends Component {
   }
 
   authStateChanged = (cookie) => {
-    if (cookie.name === 'user') this.setState({ user: cookie.value ? new User(cookie.value) : null });
+    if (cookie.name === 'user') {
+      const user = JSON.parse(cookie.value);
+      this.setState({ user: user ? new User(user) : null });
+    }
   }
 
   logout = () => {
@@ -39,12 +43,12 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <MainLayout exact path="/:path(|index|home|overlap)" component={Overview} user={user} />
-          <MainLayout path="/interacties" component={SunburstChart} user={user} />
-          <MainLayout path="/bedrijven" component={Companies} user={user} />
+          <PrivateRoute exact path="/:path(|index|home|overlap)" component={Overview} layout={MainLayout} currentUser={user} />
+          <PrivateRoute path="/interacties" component={SunburstChart} layout={MainLayout} currentUser={user} />
+          <PrivateRoute path="/bedrijven" component={Companies} layout={MainLayout} currentUser={user} />
           <Route path="/login" component={Login} />
-          { user.isAdmin
-            && <Route path="/admin" component={Manage} user={user} />
+          { user && user.isAdmin
+            && <PrivateRoute path="/admin" component={Manage} currentUser={user} />
           }
           <Route component={NotFound} />
         </Switch>

@@ -1,9 +1,12 @@
+import uuid from 'uuid/v1';
+
 class User {
-  constructor({ firstName, lastName, role }) {
-    this.firstName = firstName;
-    this.lastName = lastName;
+  constructor(user) {
+    this.firstName = user.first_name;
+    this.lastName = user.last_name;
     // TODO remove when role is included in response
-    this.role = role || 'user';
+    this.id = user.id || uuid();
+    this.role = user.role || 'user';
   }
 
   get isAdmin() {
