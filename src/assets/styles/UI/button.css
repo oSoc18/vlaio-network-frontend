@@ -3,8 +3,10 @@
   background-color: #009B48;
   border: 0;
   height: 4rem;
+  outline: 0;
 }
 
-.button:hover {
+.button:hover, .button:active {
   cursor: pointer;
+  background-color: #69A473;
 }

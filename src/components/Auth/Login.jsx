@@ -16,6 +16,7 @@ class Login extends Component {
 
     const { username, password } = this.state;
     api.auth.login(username, password).then((res) => {
+      if (!res.token) throw new Error('Email of wachtwoord incorrect');
       cookies.set('auth', res.token);
       cookies.set('user', {
         firstName: res.first_name,
