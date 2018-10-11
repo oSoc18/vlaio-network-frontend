@@ -18,13 +18,14 @@ class SunburstChart extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props.data)
     this.state = {
       data: props.data,
       selected: false,
       hoveredCell: false,
-      path: ''
+      path: '',
+      hoveredValue: null
     };
+    this.refreshStyle(false, props.data);
   }
 
   static get defaultProps() {
@@ -98,10 +99,10 @@ class SunburstChart extends Component {
   };
 
   render() {
-    const { selected, path, data } = this.state;
+    const { selected, path, data, hoveredCell, hoveredValue } = this.state;
     return (
       <div className="sunburst-wrapper">
-        <span className="sunburst__path">{path}</span>
+        <span className="sunburst__path">{path} {hoveredValue !== null ? `aantal: ${hoveredValue}` : ''}</span>
         <Sunburst
           className="sunburst"
           hideRootNode
@@ -114,7 +115,8 @@ class SunburstChart extends Component {
             this.setState({
               data: this.updateChart(true, data, this.getKeyPath(node)),
               path: node ? this.getKeyPath(node).reverse().join(' > ') : '',
-              hoveredCell: (node.x && node.y ? node : false)
+              hoveredCell: (node.x && node.y ? node : false),
+              hoveredValue: node.size
             });
           }}
           onValueMouseOut={() => {
@@ -122,7 +124,8 @@ class SunburstChart extends Component {
             this.setState({
               path: '',
               data: this.refreshStyle(false, data),
-              hoveredCell: false
+              hoveredCell: false,
+              hoveredValue: null
             });
           }}
         />

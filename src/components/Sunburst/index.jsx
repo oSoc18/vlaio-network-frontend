@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { api } from '../../constants';
+import {api} from '../../constants';
 import SunburstChart from './SunburstChart';
 
 class Sunburst extends Component {
@@ -9,21 +9,22 @@ class Sunburst extends Component {
 
   componentDidMount() {
     api.sunburst.get().then((response) => {
-      this.setState({ sunburstData: response });
+      this.setState({sunburstData: response});
     }).catch(e => console.error(e));
   }
 
   render() {
     const { sunburstData } = this.state;
-    if (!sunburstData.length) {
-      return null;
-    }
     return (
-      <SunburstChart
-        data={sunburstData}
-        height={700}
-        width={700}
-      />
+      (sunburstData.length === 0) ? (
+        <p>Er is geen data om weer te geven</p>
+      ) : (
+        <SunburstChart
+          data={sunburstData}
+          height={700}
+          width={700}
+        />
+      )
     );
   }
 }
