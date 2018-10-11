@@ -15,6 +15,10 @@ class User {
     return true;
     // return this.role === 'admin';
   }
+
+  get isPending() {
+    return this.role === 'pending';
+  }
 }
 
 export default User;

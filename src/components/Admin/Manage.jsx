@@ -22,6 +22,10 @@ class Manage extends Component {
     });
   }
 
+  changeUserRole = (e, user) => {
+
+  }
+
   deleteUser = (id) => {
     api.user.delete(id).then(() => {
       this.setState((prevState) => {
@@ -70,24 +74,29 @@ class Manage extends Component {
                       <th>Voornaam</th>
                       <th>Naam</th>
                       <th>Email</th>
-                      <th>Rol</th>
+                      <th className="user-management__users__role">Rol</th>
                       <th>&nbsp;</th>
                     </tr>
                   </thead>
                   <tbody>
                     { users
-                      .filter(user => user.id !== currentUser.id)
                       .filter(user => (
-                        user.firstName.toLowerCase().includes(searchQuery)
+                        user.id !== currentUser.id
+                        && (user.firstName.toLowerCase().includes(searchQuery)
                         || user.email.toLowerCase().includes(searchQuery)
                         || user.lastName.toLowerCase().includes(searchQuery)
-                        || user.role.toLowerCase().includes(searchQuery)
+                        || user.role.toLowerCase().includes(searchQuery))
                       ))
                       .sort((u1, u2) => (
                         roleWeighing[u1.role] - roleWeighing[u2.role] || u1.lastName > u2.lastName
                       ))
                       .map(user => (
-                        <UserEntry key={user.id} deleteUser={this.deleteUser} user={user} />
+                        <UserEntry
+                          key={user.id}
+                          changeUserRole={this.changeUserRole}
+                          deleteUser={this.deleteUser}
+                          user={user}
+                        />
                       ))
                     }
                   </tbody>

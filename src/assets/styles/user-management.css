@@ -28,6 +28,15 @@
   padding: 0.5rem;
 }
 
+.user-management__users .user-management__users__role {
+  min-width: 2rem;
+  padding-right: 1.5rem;
+}
+
+.user-management__users select {
+  width: 100%;
+}
+
 .user-management__users__actions {
 
 }
