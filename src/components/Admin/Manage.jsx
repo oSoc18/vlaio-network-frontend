@@ -23,7 +23,8 @@ class Manage extends Component {
   }
 
   changeUserRole = (e, user) => {
-
+    const role = e.currentTarget.value;
+    api.user.setRole(user.id, role).then(() => {});
   }
 
   deleteUser = (id) => {

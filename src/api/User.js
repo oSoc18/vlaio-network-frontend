@@ -21,7 +21,13 @@ class UserAPI extends API {
     return fetch(`${this.tmpurl}/`, this.getOptions('POST', true, user)).then(r => r.json());
   }
 
-  setRole(userId, role) {}
+  update(userId, toUpdate) {
+    return fetch(`${this.tmpurl}/${userId}`, this.getOptions('PATCH', true, toUpdate)).then(r => r.json());
+  }
+
+  setRole(userId, role) {
+    return this.update(userId, { role });
+  }
 
   delete(id) {
     return fetch(`${this.tmpurl}/${id}`, this.getOptions('DELETE', true));
