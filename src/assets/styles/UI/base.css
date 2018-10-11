@@ -1,7 +1,7 @@
 .button {
   color: #fff;
   background-color: #009B48;
-  border: 0;
+  border: 1px solid #009B48;
   height: 4rem;
   outline: 0;
 }

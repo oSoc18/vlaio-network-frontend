@@ -16,6 +16,16 @@ class UserAPI extends API {
     return fetch(`${this.tmpurl}/`, this.getOptions('GET', true))
       .then(r => r.json());
   }
+
+  create(user) {
+    return fetch(`${this.tmpurl}/`, this.getOptions('POST', true, user)).then(r => r.json());
+  }
+
+  setRole(userId, role) {}
+
+  delete(id) {
+    return fetch(`${this.tmpurl}/${id}`, this.getOptions('DELETE', true));
+  }
 }
 
 export default UserAPI;

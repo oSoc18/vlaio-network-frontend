@@ -49,16 +49,19 @@ class Manage extends Component {
         <div className="page-alternative">
           <main className="user-management">
             <h2 className="user-management__title">Gebruikersbeheer</h2>
-            { users.length > 0
-              && (
-              <input
-                type="search"
-                className="input user-management__user-search"
-                placeholder="zoek naar gebruikers..."
-                onChange={this.searchUser}
-              />
-              )
-            }
+            <div className="user-management__actions">
+              { users.length > 0
+                && (
+                <input
+                  type="search"
+                  className="input user-management__actions__search"
+                  placeholder="zoek naar gebruikers..."
+                  onChange={this.searchUser}
+                />
+                )
+              }
+              <button type="button" className="button">Gebruiker toevoegen</button>
+            </div>
             { users.length > 0
               ? (
                 <table className="user-management__users">

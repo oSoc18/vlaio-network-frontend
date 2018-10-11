@@ -140,6 +140,6 @@ h3 {
   width: 100%;
   background-image: url(../img/page-background.svg);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
 }
