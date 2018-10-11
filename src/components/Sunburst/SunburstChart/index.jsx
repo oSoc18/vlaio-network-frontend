@@ -16,17 +16,31 @@ class SunburstChart extends Component {
     unizo: '#fdbf6f'
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    console.log(props.data)
     this.state = {
-      data: vlaioData,
+      data: props.data,
       selected: false,
       hoveredCell: false,
-      path: '',
-      height: 0,
-      width: 0
+      path: ''
     };
-    this.refreshStyle(false, this.state.data);
+  }
+
+  static get defaultProps() {
+    return {
+      height: 0,
+      width: 0,
+      data: {}
+    };
+  }
+
+  static get propTypes() {
+    return {
+      height: PropTypes.number,
+      width: PropTypes.number,
+      data: PropTypes.object
+    };
   }
 
   // gets the path to the selected node in the json
@@ -36,7 +50,7 @@ class SunburstChart extends Component {
     }
 
     return [(node.data && node.data.name) || node.name].concat(this.getKeyPath(node.parent));
-  }
+  };
 
   // injects style inside the data json
   refreshStyle = (selectedPath, node) => {
@@ -47,10 +61,10 @@ class SunburstChart extends Component {
     // inserts node information the first time the data is loaded
     if (node.color === undefined) {
       node.color = this.colorMap[node.name.toLowerCase()];
-      node.label = node.name;
-      node.labelStyle = {
-        fontSize: '14px'
-      };
+      // node.label = node.name;
+      // node.labelStyle = {
+      //   fontSize: '14px'
+      // };
     }
 
     // changes opacity depending on the selected node
@@ -60,7 +74,7 @@ class SunburstChart extends Component {
     else node.style.fillOpacity = 1;
 
     return node;
-  }
+  };
 
   // updates the path selection on the chart
   updateChart = (selected, data, keyPath) => {
@@ -81,41 +95,24 @@ class SunburstChart extends Component {
     });
 
     return data;
-  }
+  };
 
-  static get defaultProps() {
-    return {
-      height: 0,
-      width: 0,
-      data: {}
-    }
-  }
-
-  static get propTypes() {
-    return {
-      height: PropTypes.number,
-      width: PropTypes.number,
-      data: PropTypes.string
-    };
-  }
-
-    render() {
-    const { data, selected, path } = this.state;
-
+  render() {
+    const { selected, path, data } = this.state;
     return (
       <div className="sunburst-wrapper">
         <span className="sunburst__path">{path}</span>
         <Sunburst
           className="sunburst"
           hideRootNode
-          data={this.props.data}
+          data={data}
           height={this.props.height}
           width={this.props.width}
           onValueClick={() => this.setState({ selected: !selected })}
           onValueMouseOver={(node) => {
             if (selected) return;
             this.setState({
-              data: this.updateChart(true, vlaioData, this.getKeyPath(node)),
+              data: this.updateChart(true, data, this.getKeyPath(node)),
               path: node ? this.getKeyPath(node).reverse().join(' > ') : '',
               hoveredCell: (node.x && node.y ? node : false)
             });
@@ -124,7 +121,7 @@ class SunburstChart extends Component {
             if (selected) return;
             this.setState({
               path: '',
-              data: this.refreshStyle(false, vlaioData),
+              data: this.refreshStyle(false, data),
               hoveredCell: false
             });
           }}
