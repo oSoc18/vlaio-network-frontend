@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Sunburst } from 'react-vis';
+import PropTypes from 'prop-types';
 // tmp data
 import vlaioData from './data';
 
-import '../../assets/styles/sunburst.css';
+import '../../../assets/styles/sunburst.css';
 
 class SunburstChart extends Component {
   colorMap = {
@@ -21,7 +22,9 @@ class SunburstChart extends Component {
       data: vlaioData,
       selected: false,
       hoveredCell: false,
-      path: ''
+      path: '',
+      height: 0,
+      width: 0
     };
     this.refreshStyle(false, this.state.data);
   }
@@ -80,7 +83,23 @@ class SunburstChart extends Component {
     return data;
   }
 
-  render() {
+  static get defaultProps() {
+    return {
+      height: 0,
+      width: 0,
+      data: {}
+    }
+  }
+
+  static get propTypes() {
+    return {
+      height: PropTypes.number,
+      width: PropTypes.number,
+      data: PropTypes.string
+    };
+  }
+
+    render() {
     const { data, selected, path } = this.state;
 
     return (
@@ -89,9 +108,9 @@ class SunburstChart extends Component {
         <Sunburst
           className="sunburst"
           hideRootNode
-          data={data}
-          height={700}
-          width={700}
+          data={this.props.data}
+          height={this.props.height}
+          width={this.props.width}
           onValueClick={() => this.setState({ selected: !selected })}
           onValueMouseOver={(node) => {
             if (selected) return;
