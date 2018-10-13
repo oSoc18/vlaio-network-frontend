@@ -15,7 +15,7 @@
 .input {
   outline: 0;
   border: 1px solid #B0B0B0;
-  background-color: inherit;
+  background-color: #fff;
   height: 4rem;
   padding: 0 1rem;
 }
