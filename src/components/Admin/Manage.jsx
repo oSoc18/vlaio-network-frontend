@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { api } from '../../constants';
 import UserEntry from './UserEntry';
 import User from '../../models/User';
@@ -65,7 +67,10 @@ class Manage extends Component {
                 />
                 )
               }
-              <button type="button" className="button">Gebruiker toevoegen</button>
+              <button type="button" className="button user-management__actions__add-user">
+                <i><FontAwesomeIcon icon={faPlus} /></i>
+                Gebruiker toevoegen
+              </button>
             </div>
             { users.length > 0
               ? (
