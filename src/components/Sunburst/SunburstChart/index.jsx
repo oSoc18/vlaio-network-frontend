@@ -13,8 +13,8 @@ class SunburstChart extends Component {
     nsz: '#1f78b4',
     ugent: '#b2df8a',
     kuleuven: '#33a02c',
-    voka: '#e31a1c' ,
-    //unizo: '#fdbf6f'
+    voka: '#e31a1c',
+    unizo: '#fdbf6f'
   };
 
   constructor(props) {
