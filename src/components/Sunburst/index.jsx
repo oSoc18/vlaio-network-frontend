@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {api} from '../../constants';
+import React, { Component } from 'react';
+import { api } from '../../constants';
 import SunburstChart from './SunburstChart';
 
 class Sunburst extends Component {
@@ -9,7 +9,7 @@ class Sunburst extends Component {
 
   componentDidMount() {
     api.sunburst.get().then((response) => {
-      this.setState({sunburstData: response});
+      this.setState({ sunburstData: response });
     }).catch(e => console.error(e));
   }
 
