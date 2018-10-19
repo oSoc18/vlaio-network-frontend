@@ -29,6 +29,22 @@ class Manage extends Component {
     api.user.setRole(user.id, role).then(() => {});
   }
 
+  addUser = () => {
+    api.user.create({
+      first_name: 'John',
+      last_name: 'Smith',
+      email: 'john@smith.com',
+      role: 'user'
+    }).then((user) => {
+      this.setState((prevState) => {
+        prevState.users.push(user);
+        return { users: [...prevState.users, user] };
+      });
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+
   deleteUser = (id) => {
     api.user.delete(id).then(() => {
       this.setState((prevState) => {
@@ -45,6 +61,7 @@ class Manage extends Component {
   render() {
     const { users, searchQuery } = this.state;
     const { currentUser } = this.props;
+    console.log(currentUser);
     return (
       <div className="main-layout">
         <Header user={currentUser} />
@@ -62,7 +79,7 @@ class Manage extends Component {
                 />
                 )
               }
-              <button type="button" className="button user-management__actions__add-user">
+              <button type="button" onClick={this.addUser} className="button user-management__actions__add-user">
                 <i><FontAwesomeIcon icon={faPlus} /></i>
                 Gebruiker toevoegen
               </button>
