@@ -15,13 +15,11 @@ class Login extends Component {
     e.preventDefault();
 
     const { username, password } = this.state;
-    api.auth.login(username, password).then((res) => {
+    api.user.login(username, password).then((res) => {
       if (!res.token) throw new Error('Email of wachtwoord incorrect');
       cookies.set('auth', res.token);
-      cookies.set('user', {
-        firstName: res.first_name,
-        lastName: res.last_name
-      });
+      delete res.token;
+      cookies.set('user', res);
       window.location.href = '/';
     }).catch(() => {
 
