@@ -17,7 +17,10 @@ class API {
       headers: this.headers
     };
     if (body) options.body = JSON.stringify(body);
-    if (authRequired) options.headers.append('Authorization', `Token ${cookies.get('auth')}`);
+
+    if (authRequired && !options.headers.get('Authorization')) {
+      options.headers.append('Authorization', `Token ${cookies.get('auth')}`);
+    }
     return options;
   }
 }

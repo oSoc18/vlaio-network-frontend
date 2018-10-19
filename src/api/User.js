@@ -4,25 +4,25 @@ class UserAPI extends API {
   constructor(url) {
     super(url);
     this.endpoint = `${this.BASE_URL}/user`;
-    this.tmpurl = 'http://localhost:8000/user';
   }
 
   login(username, password) {
-    return fetch(`${this.tmpurl}/login/`, this.getOptions('POST', false, { username, password }))
+    return fetch(`${this.endpoint}/login/`, this.getOptions('POST', false, { username, password }))
       .then(r => r.json());
   }
 
   get() {
-    return fetch(`${this.tmpurl}/`, this.getOptions('GET', true))
-      .then(r => r.json());
+    return fetch(`${this.endpoint}/`, this.getOptions('GET', true))
+      .then(r => r.json())
+      .catch(err => console.error(err));
   }
 
   create(user) {
-    return fetch(`${this.tmpurl}/`, this.getOptions('POST', true, user)).then(r => r.json());
+    return fetch(`${this.endpoint}/`, this.getOptions('POST', true, user)).then(r => r.json());
   }
 
   update(userId, toUpdate) {
-    return fetch(`${this.tmpurl}/${userId}`, this.getOptions('PATCH', true, toUpdate)).then(r => r.json());
+    return fetch(`${this.endpoint}/${userId}`, this.getOptions('PATCH', true, toUpdate));
   }
 
   setRole(userId, role) {
@@ -30,7 +30,7 @@ class UserAPI extends API {
   }
 
   delete(id) {
-    return fetch(`${this.tmpurl}/${id}`, this.getOptions('DELETE', true));
+    return fetch(`${this.endpoint}/${id}`, this.getOptions('DELETE', true));
   }
 }
 
