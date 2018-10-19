@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { api } from '../../constants';
-import UserEntry from './UserEntry';
+import UserTable from './UserTable';
 import User from '../../models/User';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -45,11 +45,6 @@ class Manage extends Component {
   render() {
     const { users, searchQuery } = this.state;
     const { currentUser } = this.props;
-    const roleWeighing = {
-      pending: 1,
-      admin: 2,
-      user: 3
-    };
     return (
       <div className="main-layout">
         <Header user={currentUser} />
@@ -74,39 +69,13 @@ class Manage extends Component {
             </div>
             { users.length > 0
               ? (
-                <table className="user-management__users">
-                  <thead>
-                    <tr>
-                      <th>Voornaam</th>
-                      <th>Naam</th>
-                      <th>Email</th>
-                      <th className="user-management__users__role">Rol</th>
-                      <th>&nbsp;</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    { users
-                      .filter(user => (
-                        user.id !== currentUser.id
-                        && (user.firstName.toLowerCase().includes(searchQuery)
-                        || user.email.toLowerCase().includes(searchQuery)
-                        || user.lastName.toLowerCase().includes(searchQuery)
-                        || user.role.toLowerCase().includes(searchQuery))
-                      ))
-                      .sort((u1, u2) => (
-                        roleWeighing[u1.role] - roleWeighing[u2.role] || u1.lastName > u2.lastName
-                      ))
-                      .map(user => (
-                        <UserEntry
-                          key={user.id}
-                          changeUserRole={this.changeUserRole}
-                          deleteUser={this.deleteUser}
-                          user={user}
-                        />
-                      ))
-                    }
-                  </tbody>
-                </table>
+                <UserTable
+                  users={users}
+                  currentUser={currentUser}
+                  searchQuery={searchQuery}
+                  changeUserRole={this.changeUserRole}
+                  deleteUser={this.deleteUser}
+                />
               ) : (
                 <p>Er zijn nog geen gebruikers om weer te geven</p>
               )
