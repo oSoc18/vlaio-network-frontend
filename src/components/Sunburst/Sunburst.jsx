@@ -32,22 +32,6 @@ class SunburstChart extends Component {
     this.refreshStyle(false, props.data);
   }
 
-  static get defaultProps() {
-    return {
-      height: 0,
-      width: 0,
-      data: {}
-    };
-  }
-
-  static get propTypes() {
-    return {
-      height: PropTypes.number,
-      width: PropTypes.number,
-      data: PropTypes.object
-    };
-  }
-
   // gets the path to the selected node in the json
   getKeyPath = (node) => {
     if (!node.parent) {
@@ -112,6 +96,7 @@ class SunburstChart extends Component {
       selected, path, data, hoveredCell, hoveredValue
     } = this.state;
 
+    const { height, width } = this.props;
     return (
       <div className="sunburst-wrapper">
         <div>
@@ -120,8 +105,8 @@ class SunburstChart extends Component {
             className="sunburst"
             hideRootNode
             data={data}
-            height={this.props.height}
-            width={this.props.width}
+            height={height}
+            width={width}
             onValueClick={() => this.setState(prevstate => ({ selected: !prevstate.selected }))}
             onValueMouseOver={(node) => {
               if (selected) return;
@@ -147,5 +132,10 @@ class SunburstChart extends Component {
     );
   }
 }
+
+SunburstChart.propTypes = {
+  height: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired
+};
 
 export default SunburstChart;
