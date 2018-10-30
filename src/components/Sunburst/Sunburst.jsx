@@ -3,7 +3,7 @@ import { Sunburst } from 'react-vis';
 import PropTypes from 'prop-types';
 import chroma from 'chroma-js';
 
-import '../../../assets/styles/sunburst.css';
+import '../../assets/styles/sunburst.css';
 
 class SunburstChart extends Component {
   colorMap = {
@@ -65,7 +65,7 @@ class SunburstChart extends Component {
 
     // inserts node information the first time the data is loaded
     if (node.color === undefined) {
-      let colours = this.state.colours;
+      const { colours } = this.state;
       if (colours[node.name.toLowerCase()] === undefined) {
         colours[node.name.toLowerCase()] = chroma.scale(['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#e31a1c', '#fdbf6f'])(Math.random()).hex(); //'#'+((1<<24)*Math.random()|0).toString(16);
         localStorage.setItem('colorMap', JSON.stringify(colours));
@@ -78,7 +78,7 @@ class SunburstChart extends Component {
     }
 
     // changes opacity depending on the selected node
-    node.style = {stroke: '#fff'};
+    node.style = { stroke: '#fff' };
 
     if (selectedPath === true) node.style.fillOpacity = 0.2;
     else node.style.fillOpacity = 1;

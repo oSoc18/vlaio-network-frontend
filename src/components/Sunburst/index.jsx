@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { api } from '../../constants';
-import SunburstChart from './SunburstChart';
+import SunburstChart from './Sunburst';
 
 class Sunburst extends Component {
   state = {
