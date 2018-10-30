@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Sunburst } from 'react-vis';
 import PropTypes from 'prop-types';
 import chroma from 'chroma-js';
-// tmp data
-import vlaioData from './data';
 
 import '../../../assets/styles/sunburst.css';
 
@@ -110,7 +108,10 @@ class SunburstChart extends Component {
   };
 
   render() {
-    const { selected, path, data, hoveredCell, hoveredValue } = this.state;
+    const {
+      selected, path, data, hoveredCell, hoveredValue
+    } = this.state;
+
     return (
       <div className="sunburst-wrapper">
         <div>
@@ -121,7 +122,7 @@ class SunburstChart extends Component {
             data={data}
             height={this.props.height}
             width={this.props.width}
-            onValueClick={() => this.setState({selected: !selected})}
+            onValueClick={() => this.setState(prevstate => ({ selected: !prevstate.selected }))}
             onValueMouseOver={(node) => {
               if (selected) return;
               this.setState({

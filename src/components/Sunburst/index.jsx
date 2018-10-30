@@ -4,7 +4,7 @@ import SunburstChart from './SunburstChart';
 
 class Sunburst extends Component {
   state = {
-    sunburstData: [],
+    sunburstData: []
   };
 
   componentDidMount() {
