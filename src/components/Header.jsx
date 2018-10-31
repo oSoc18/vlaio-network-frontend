@@ -1,10 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import User from '../models/User';
 
 import '../assets/styles/header.css';
 
 const img = require('./../assets/img/logo-vlaanderen.png');
 
-const Header = () => (
+const capitalizeFirst = name => name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+
+const Header = ({ user }) => (
   <header className="vlaio-header">
     <div className="vlaio-header__top">
       <div className="vlaio-header__top__logo">
@@ -20,12 +24,19 @@ const Header = () => (
     </div>
     <div className="vlaio-header__bottom">
       <div>Ondersteund door Agentschap Innoveren &amp; Ondernemen</div>
-      <div>Welkom, VOORNAAM NAAM</div>
+      { user
+        && <div>Welkom, {capitalizeFirst(user.firstName)} {capitalizeFirst(user.lastName)}</div>
+      }
     </div>
-    {/* <Link to="/index"><div className="demo-button">Algemeen overzicht</div></Link>
-    <Link to="/sunburst"><div className="demo-button">Netwerk interacties</div></Link>
-    Vlaio Header */}
   </header>
 );
+
+Header.defaultProps = {
+  user: null
+};
+
+Header.propTypes = {
+  user: PropTypes.instanceOf(User)
+};
 
 export default Header;
