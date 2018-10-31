@@ -83,7 +83,7 @@ class Manage extends Component {
                 Gebruiker toevoegen
               </button>
             </div>
-            { users.length > 0
+            { users.length > 0 && !users.find(user => user.id === currentUser.id)
               ? (
                 <UserTable
                   users={users}
