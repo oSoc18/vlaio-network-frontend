@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
+import Modal from 'react-modal';
 import { api } from '../../constants';
+import IconButton from '../UI/IconButton';
 import UserTable from './UserTable';
 import User from '../../models/User';
 import Header from '../Header';
@@ -10,11 +12,14 @@ import Footer from '../Footer';
 
 import '../../assets/styles/user-management.css';
 
+Modal.setAppElement('#root');
 
 class Manage extends Component {
   state = {
     users: [],
-    searchQuery: ''
+    searchQuery: '',
+    userModalShown: false,
+    userBeingModified: null
   };
 
   componentDidMount() {
@@ -24,12 +29,17 @@ class Manage extends Component {
     });
   }
 
+  closeUserModal = () => {
+    this.setState({ userModalShown: false });
+  }
+
   changeUserRole = (e, user) => {
     const role = e.currentTarget.value;
     api.user.setRole(user.id, role).then(() => {});
   }
 
   addUser = () => {
+    this.setState({ userModalShown: true });
     api.user.create({
       first_name: 'John',
       last_name: 'Smith',
@@ -59,13 +69,24 @@ class Manage extends Component {
   }
 
   render() {
-    const { users, searchQuery } = this.state;
+    const {
+      users, searchQuery, userModalShown, userBeingModified
+    } = this.state;
+
     const { currentUser } = this.props;
     return (
       <div className="main-layout">
         <Header user={currentUser} />
         <div className="page-alternative">
           <main className="user-management">
+            <Modal
+              isOpen={userModalShown}
+              onRequestClose={this.closeUserModal}
+              className="modal"
+              overlayClassName="modal-overlay"
+            >
+              <IconButton className="modal__close" icon={faTimes} onClick={this.closeUserModal} />
+            </Modal>
             <h2 className="user-management__title">Gebruikersbeheer</h2>
             <div className="user-management__actions">
               { users.length > 0
