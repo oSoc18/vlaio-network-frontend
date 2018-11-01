@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const IconButton = ({
-  icon, tabIndex, onClick, className
+  icon, onClick, className, tabIndex
 }) => {
   const onKeyDown = (e) => {
     if (e.keyCode === 13) onClick();
@@ -25,13 +25,14 @@ const IconButton = ({
 };
 
 IconButton.defaultProps = {
-  className: ''
+  className: '',
+  tabIndex: 0
 };
 
 IconButton.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   icon: PropTypes.object.isRequired,
-  tabIndex: PropTypes.number.isRequired,
+  tabIndex: PropTypes.number,
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string
 };
