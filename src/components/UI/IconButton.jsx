@@ -24,12 +24,16 @@ const IconButton = ({
   );
 };
 
+IconButton.defaultProps = {
+  className: ''
+};
+
 IconButton.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   icon: PropTypes.object.isRequired,
   tabIndex: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
-  className: PropTypes.string.isRequired
+  className: PropTypes.string
 };
 
 export default IconButton;
