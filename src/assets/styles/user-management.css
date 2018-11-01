@@ -37,6 +37,20 @@
   padding-right: 1.5rem;
 }
 
+.user-management__modal h2 {
+  margin-top: 0;
+}
+
+.user-management__user-form label {
+  display: block;
+}
+
+.user-management__user-form input {
+  display: block;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
 .user-management__users select {
   width: 100%;
 }

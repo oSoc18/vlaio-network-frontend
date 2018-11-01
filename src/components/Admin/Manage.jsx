@@ -43,17 +43,19 @@ class Manage extends Component {
     api.user.setRole(user.id, role).then(() => {});
   }
 
-  addUser = () => {
-    this.setState({ userModalShown: true });
+  addUser = (user) => {
     api.user.create({
-      first_name: 'John',
-      last_name: 'Smith',
-      email: 'john@smith.com',
-      role: 'user'
-    }).then((user) => {
+      first_name: user.firstName,
+      last_name: user.lastName,
+      email: user.email
+    }).then((newUser) => {
       this.setState((prevState) => {
-        prevState.users.push(user);
-        return { users: [...prevState.users, user] };
+        prevState.users.push(new User(newUser));
+        return {
+          users: [...prevState.users],
+          userModalShown: false,
+          userBeingModified: null
+        };
       });
     }).catch((err) => {
       console.error(err);
@@ -104,7 +106,7 @@ class Manage extends Component {
             <Modal
               isOpen={userModalShown}
               onRequestClose={this.closeUserModal}
-              className="modal"
+              className="modal user-management__modal"
               overlayClassName="modal-overlay"
             >
               <IconButton
@@ -113,9 +115,10 @@ class Manage extends Component {
                 onClick={this.closeUserModal}
                 tabIndex={0}
               />
-              <UserForm user={userBeingModified} />
+              <h2>Gebruiker toevoegen</h2>
+              <UserForm submit={this.addUser} user={userBeingModified} />
             </Modal>
-            { users.length > 0 && !users.find(user => user.id === currentUser.id)
+            { users.length > 0 || (users.length === 1 && users[0].id === currentUser.id)
               ? (
                 <UserTable
                   users={users}
