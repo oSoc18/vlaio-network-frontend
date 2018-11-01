@@ -124,6 +124,7 @@ class Manage extends Component {
                   users={users}
                   currentUser={currentUser}
                   searchQuery={searchQuery}
+                  selectUser={this.openUserModal}
                   changeUserRole={this.changeUserRole}
                   deleteUser={this.deleteUser}
                 />

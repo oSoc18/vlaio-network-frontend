@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import User from '../../models/User';
 import IconButton from '../UI/IconButton';
 
 const UserTable = ({
-  users, searchQuery, changeUserRole, deleteUser, currentUser
+  users, searchQuery, changeUserRole, deleteUser, currentUser, selectUser
 }) => {
   const roleWeighing = {
     pending: 1,
@@ -36,7 +36,7 @@ const UserTable = ({
             roleWeighing[u1.role] - roleWeighing[u2.role] || u1.lastName > u2.lastName
           ))
           .map(user => (
-            <tr key={user.id}>
+            <tr key={user.id} onClick={() => selectUser(user)}>
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
               <td>{user.email}</td>
@@ -56,7 +56,8 @@ const UserTable = ({
                 }
               </td>
               <td className="user-management__users__actions">
-                <IconButton icon={faTrash} tabIndex={0} onClick={() => { deleteUser(user.id); }} />
+                <IconButton icon={faUserEdit} onClick={() => { selectUser(user); }} />
+                <IconButton icon={faTrash} onClick={() => { deleteUser(user.id); }} />
               </td>
             </tr>
           ))
@@ -70,6 +71,7 @@ UserTable.propTypes = {
   users: PropTypes.arrayOf(PropTypes.instanceOf(User)).isRequired,
   currentUser: PropTypes.instanceOf(User).isRequired,
   changeUserRole: PropTypes.func.isRequired,
+  selectUser: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
   searchQuery: PropTypes.string.isRequired
 };

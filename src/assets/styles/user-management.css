@@ -56,5 +56,6 @@
 }
 
 .user-management__users .user-management__users__actions {
-  text-align: right;
+  display: flex;
+  justify-content: space-evenly;
 }

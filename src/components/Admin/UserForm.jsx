@@ -9,6 +9,13 @@ class UserForm extends Component {
     lastName: ''
   };
 
+  static getDerivedStateFromProps(props, state) {
+    if (props.user && props.user.email !== state.email) {
+      return { ...props.user };
+    }
+    return { ...state };
+  }
+
   handleChange = (e) => {
     this.setState({ [e.currentTarget.name]: e.target.value });
   }
