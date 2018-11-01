@@ -6,6 +6,7 @@ import Modal from 'react-modal';
 import { api } from '../../constants';
 import IconButton from '../UI/IconButton';
 import UserTable from './UserTable';
+import UserForm from './UserForm';
 import User from '../../models/User';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -27,6 +28,10 @@ class Manage extends Component {
       const users = allUsers.map(user => new User(user)) || [];
       this.setState({ users });
     });
+  }
+
+  openUserModal = (user) => {
+    this.setState({ userModalShown: true, userBeingModified: user || null });
   }
 
   closeUserModal = () => {
@@ -79,14 +84,6 @@ class Manage extends Component {
         <Header user={currentUser} />
         <div className="page-alternative">
           <main className="user-management">
-            <Modal
-              isOpen={userModalShown}
-              onRequestClose={this.closeUserModal}
-              className="modal"
-              overlayClassName="modal-overlay"
-            >
-              <IconButton className="modal__close" icon={faTimes} onClick={this.closeUserModal} />
-            </Modal>
             <h2 className="user-management__title">Gebruikersbeheer</h2>
             <div className="user-management__actions">
               { users.length > 0
@@ -99,11 +96,25 @@ class Manage extends Component {
                 />
                 )
               }
-              <button type="button" onClick={this.addUser} className="button user-management__actions__add-user">
+              <button type="button" onClick={() => this.openUserModal()} className="button user-management__actions__add-user">
                 <i><FontAwesomeIcon icon={faPlus} /></i>
                 Gebruiker toevoegen
               </button>
             </div>
+            <Modal
+              isOpen={userModalShown}
+              onRequestClose={this.closeUserModal}
+              className="modal"
+              overlayClassName="modal-overlay"
+            >
+              <IconButton
+                className="modal__close"
+                icon={faTimes}
+                onClick={this.closeUserModal}
+                tabIndex={0}
+              />
+              <UserForm user={userBeingModified} />
+            </Modal>
             { users.length > 0 && !users.find(user => user.id === currentUser.id)
               ? (
                 <UserTable
