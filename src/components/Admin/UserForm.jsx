@@ -24,7 +24,11 @@ class UserForm extends Component {
     e.preventDefault();
 
     const { email, firstName, lastName } = this.state;
-    this.props.submit({ email, firstName, lastName });
+    const { user } = this.props;
+
+    const newUser = { email, firstName, lastName };
+    if (!user) this.props.addUser(newUser);
+    else this.props.updateUser(user.id, newUser);
   }
 
   render() {
@@ -45,7 +49,7 @@ class UserForm extends Component {
           Naam
           <input type="text" id="last-name" name="lastName" className="input" value={lastName} onChange={this.handleChange} />
         </label>
-        <input type="submit" className="button" value="Toevoegen" />
+        <input type="submit" className="button" value={user ? 'Bewerken' : 'Toevoegen'} />
       </form>
     );
   }
@@ -57,7 +61,8 @@ UserForm.defaultProps = {
 
 UserForm.propTypes = {
   user: PropTypes.instanceOf(User),
-  submit: PropTypes.func.isRequired
+  addUser: PropTypes.func.isRequired,
+  updateUser: PropTypes.func.isRequired
 };
 
 export default UserForm;

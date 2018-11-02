@@ -36,7 +36,7 @@ const UserTable = ({
             roleWeighing[u1.role] - roleWeighing[u2.role] || u1.lastName > u2.lastName
           ))
           .map(user => (
-            <tr key={user.id} onClick={() => selectUser(user)}>
+            <tr key={user.id}>
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
               <td>{user.email}</td>

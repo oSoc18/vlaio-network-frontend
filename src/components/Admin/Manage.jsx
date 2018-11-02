@@ -62,11 +62,35 @@ class Manage extends Component {
     });
   }
 
+  updateUser = (userId, user) => {
+    api.user.update({
+      first_name: user.firstName,
+      last_name: user.lastName,
+      email: user.email,
+      id: userId
+    }).then(() => {
+      this.setState((prevState) => {
+        const users = [...prevState.users];
+        const userIndex = users.findIndex(usr => usr.id === user.id);
+        console.log(userIndex);
+        users[userIndex] = new User(user);
+        return {
+          users,
+          userModalShown: false,
+          userBeingModified: null
+        };
+      });
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+
   deleteUser = (id) => {
     api.user.delete(id).then(() => {
       this.setState((prevState) => {
-        const { users } = prevState;
-        return { users: users.splice(users.findIndex(i => i.id === id), 1) };
+        const users = [...prevState.users];
+        users.splice(users.findIndex(user => user.id === id), 1);
+        return { users };
       });
     });
   }
@@ -116,7 +140,11 @@ class Manage extends Component {
                 tabIndex={0}
               />
               <h2>Gebruiker toevoegen</h2>
-              <UserForm submit={this.addUser} user={userBeingModified} />
+              <UserForm
+                addUser={this.addUser}
+                updateUser={this.updateUser}
+                user={userBeingModified}
+              />
             </Modal>
             { users.length > 0 || (users.length === 1 && users[0].id === currentUser.id)
               ? (
