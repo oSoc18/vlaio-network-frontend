@@ -1,12 +1,8 @@
 import React from 'react';
 import CheckBoxGroup from './UI/Checkboxgroup';
 import TimeBetween from './UI/TimeBetween';
+import TimeBetweenDates from './UI/TimeBetweenDates';
 import '../assets/styles/sidebar.css';
-
-/**
- *    TODO: get sidenav based on the type of shown visualisation
- *    (overview, network of interactions,recommendations)
- */
 
 let selected = ['Begeleiden', 'Community', 'Informeren', 'Netwerken', 'Sensibilisering', 'Subsidie', 'Tools'];
 
@@ -46,6 +42,11 @@ const Sidebar = () => (
       <fieldset>
         <legend className="main-legend">Interval tussen interacties</legend>
         <TimeBetween />
+      </fieldset>
+
+      <fieldset>
+        <legend className="main-legend">Datum van interactie</legend>
+        <TimeBetweenDates />
       </fieldset>
     </div>
   </div>

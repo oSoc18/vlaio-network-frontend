@@ -1,0 +1,12 @@
+.sunburst-wrapper {
+  width: 100%;
+}
+
+.sunburst {
+
+}
+
+.sunburst__path {
+  display: block;
+  min-height: 2rem;
+}

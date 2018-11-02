@@ -1,0 +1,19 @@
+.tab {
+  display: inline-block;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #000000;
+  background-color: #D0D0D0;
+  height: 4.5rem;
+  line-height: 4.5rem;
+  min-width: 20.0rem;
+  margin: 0 1rem 0 1rem;
+  border-radius: 1.3rem 1.3rem 0 0;
+  z-index: 2;
+}
+
+.tab.selected {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 4px 2px #B0B0B0;
+}

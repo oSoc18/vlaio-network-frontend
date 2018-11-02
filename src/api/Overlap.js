@@ -7,7 +7,7 @@ class OverlapAPI extends API {
   }
 
   get() {
-    return fetch(this.endpoint, { headers: this.headers }).then(r => r.json());
+    return fetch(this.endpoint, this.getOptions('GET', true)).then(r => r.json());
   }
 }
 
