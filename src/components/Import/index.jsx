@@ -7,9 +7,9 @@ const Import = () => (
     <div>
       <div className="import__progress">
         <ol>
-          <li>upload</li>
-          <li>controle</li>
-          <li>import</li>
+          <li className="active"><span>upload</span></li>
+          <li><span>controle</span></li>
+          <li><span>import</span></li>
         </ol>
       </div>
       <div className="import__details">
