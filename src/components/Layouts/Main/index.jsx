@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SideBar from './SideBar';
-import Header from './Header';
-import Footer from './Footer';
-import MainLayoutTabs from './MainLayoutTabs';
-import User from '../models/User';
+import Tabs from './Tabs';
+import SideBar from '../../SideBar';
+import Header from '../../Header';
+import Footer from '../../Footer';
+import User from '../../../models/User';
 
 const MainLayout = ({ component: Component, currentUser, ...rest }) => (
   <div className="main-layout">
     <Header user={currentUser} />
-    <MainLayoutTabs {...rest} />
+    <Tabs {...rest} />
     <div className="main-content">
       <SideBar />
       <Component {...rest} />

@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { cookies } from './constants';
 import User from './models/User';
 import PrivateRoute from './components/PrivateRoute';
-import MainLayout from './components/MainLayout';
+import MainLayout from './components/Layouts/Main';
 import Overview from './components/Overview';
 import SunburstChart from './components/SunburstChart';
 import Companies from './components/Companies';
