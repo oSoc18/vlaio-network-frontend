@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import { cookies } from './constants';
 import User from './models/User';
+
 import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
+
 import MainLayout from './components/Layouts/Main';
+import AlternativeLayout from './components/Layouts/Alternative';
+
 import Overview from './components/Overview';
 import SunburstChart from './components/SunburstChart';
 import Companies from './components/Companies';
@@ -47,11 +52,11 @@ class App extends Component {
           <PrivateRoute path="/interacties" component={SunburstChart} layout={MainLayout} currentUser={user} />
           <PrivateRoute path="/bedrijven" component={Companies} layout={MainLayout} currentUser={user} />
           <PrivateRoute path="/beheer-data" component={Import} currentUser={user} />
-          <Route path="/login" component={Login} />
+          <PublicRoute path="/login" component={Login} />
           { user && user.isAdmin
             && <PrivateRoute path="/admin" component={Manage} currentUser={user} />
           }
-          <Route component={NotFound} />
+          <PublicRoute component={NotFound} />
         </Switch>
       </BrowserRouter>
     );
