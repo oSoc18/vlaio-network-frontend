@@ -10,6 +10,7 @@ import Companies from './components/Companies';
 import NotFound from './components/404';
 import Login from './components/Auth/Login';
 import Manage from './components/Admin/Manage';
+import Import from './components/Import';
 
 import 'normalize.css';
 import './assets/styles/index.css';
@@ -45,6 +46,7 @@ class App extends Component {
           <PrivateRoute exact path="/:path(|index|home|overlap)" component={Overview} layout={MainLayout} currentUser={user} />
           <PrivateRoute path="/interacties" component={SunburstChart} layout={MainLayout} currentUser={user} />
           <PrivateRoute path="/bedrijven" component={Companies} layout={MainLayout} currentUser={user} />
+          <PrivateRoute path="/beheer-data" component={Import} currentUser={user} />
           <Route path="/login" component={Login} />
           { user && user.isAdmin
             && <PrivateRoute path="/admin" component={Manage} currentUser={user} />
