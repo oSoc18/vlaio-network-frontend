@@ -9,10 +9,20 @@ class Upload extends React.Component {
   }
 
   onDrop = (acc, rejected) => {
-
+    const withoutDoubles = this.deleteDoubles(this.state.files, acc);
     this.setState(prevState => ({
-      files: [...prevState.files, ...acc]
+      files: [...prevState.files, ...withoutDoubles]
     }));
+  }
+
+  deleteDoubles = (original, toCheck) => {
+    const withoutDoubles = [];
+    for (let i = 0; i < toCheck.length; i += 1) {
+      if (original.indexOf(toCheck[i]) < 0) {
+        withoutDoubles.push(toCheck[i]);
+      }
+    }
+    return withoutDoubles;
   }
 
   onCancel = () => {
@@ -22,10 +32,10 @@ class Upload extends React.Component {
   }
 
   deleteFile = (file) => {
-    const fileCopy = [...this.state.files];
+    const fileCopy = this.state.files;
     const index = fileCopy.indexOf(file);
     fileCopy.splice(index, 1);
-    this.setState((prevState) => { prevState.files.splice(index, 1); });
+    this.setState(prevState => ({ files: prevState.files.splice(index, 1) }));
   }
 
   render() {
