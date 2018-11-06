@@ -28,6 +28,7 @@ class Upload extends React.Component {
     this.setState({ files: fileCopy });
   }
 
+  // multipart time https://stackoverflow.com/questions/41610811/react-js-how-to-send-a-multipart-form-data-to-server
   render() {
     return (
       <div className="flex-container">
