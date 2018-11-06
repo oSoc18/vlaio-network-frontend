@@ -5,24 +5,14 @@ import Dropzone from 'react-dropzone';
 class Upload extends React.Component {
   constructor() {
     super();
-    this.state = { files: [] };
+    this.state = { files: [], rejected: [] };
   }
 
   onDrop = (acc, rejected) => {
-    const withoutDoubles = this.deleteDoubles(this.state.files, acc);
     this.setState(prevState => ({
-      files: [...prevState.files, ...withoutDoubles]
+      files: Array.from(new Set([...prevState.files, ...acc])),
+      rejected
     }));
-  }
-
-  deleteDoubles = (original, toCheck) => {
-    const withoutDoubles = [];
-    for (let i = 0; i < toCheck.length; i += 1) {
-      if (original.indexOf(toCheck[i]) < 0) {
-        withoutDoubles.push(toCheck[i]);
-      }
-    }
-    return withoutDoubles;
   }
 
   onCancel = () => {
@@ -32,14 +22,13 @@ class Upload extends React.Component {
   }
 
   deleteFile = (file) => {
-    const fileCopy = this.state.files;
+    const fileCopy = [...this.state.files];
     const index = fileCopy.indexOf(file);
     fileCopy.splice(index, 1);
-    this.setState(prevState => ({ files: prevState.files.splice(index, 1) }));
+    this.setState({ files: fileCopy });
   }
 
   render() {
-    console.log(this.state.files);
     return (
       <div className="flex-container">
         <form method="post" encType="multipart/form-data">
@@ -49,6 +38,10 @@ class Upload extends React.Component {
             onFileDialogCancel={() => this.onCancel()}
           >
             <p>Sleep hier de xlsx-bestanden of klik hier om bestanden te selecteren. </p>
+            <ul>{this.state.rejected.map(
+              (f, i) => (<li key={i.toString()}>`{f.name} is geen xlsx-bestand.`</li>)
+            )}
+            </ul>
           </Dropzone><button className="button" type="button" onClick={this.props.startUpload}>Importeer data</button>
         </form>
         <ul>
