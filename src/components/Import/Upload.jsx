@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 
-class Upload extends React.Component  {
-
+class Upload extends React.Component {
   constructor() {
     super();
     this.state = { files: [] };
@@ -11,9 +10,9 @@ class Upload extends React.Component  {
 
   onDrop = (acc, rejected) => {
 
-    this.setState({
-      files: acc
-    });
+    this.setState(prevState => ({
+      files: [...prevState.files, ...acc]
+    }));
   }
 
   onCancel = () => {
@@ -27,10 +26,10 @@ class Upload extends React.Component  {
     const index = fileCopy.indexOf(file);
     fileCopy.splice(index, 1);
     this.setState((prevState) => { prevState.files.splice(index, 1); });
-    console.log(fileCopy);
   }
 
   render() {
+    console.log(this.state.files);
     return (
       <div className="flex-container">
         <form method="post" encType="multipart/form-data">
@@ -43,9 +42,9 @@ class Upload extends React.Component  {
           </Dropzone><button className="button" type="button" onClick={this.props.startUpload}>Importeer data</button>
         </form>
         <ul>
-          {this.state.files.map(f => (
-            <li key={f.name}>
-              {f.name } - <button type="button" onClick={(() => this.deleteFile(f))}>Verwijder bestand</button>
+          {this.state.files.map((f, i) => (
+            <li key={i.toString()}>
+              <span>{f.name}</span> - <button type="button" onClick={(() => this.deleteFile(f))}>Verwijder bestand</button>
             </li>
           ))}
         </ul>
