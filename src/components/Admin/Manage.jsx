@@ -8,8 +8,6 @@ import IconButton from '../UI/IconButton';
 import UserTable from './UserTable';
 import UserForm from './UserForm';
 import User from '../../models/User';
-import Header from '../Header';
-import Footer from '../Footer';
 
 import '../../assets/styles/user-management.css';
 
@@ -106,64 +104,58 @@ class Manage extends Component {
 
     const { currentUser } = this.props;
     return (
-      <div className="main-layout">
-        <Header user={currentUser} />
-        <div className="page-alternative">
-          <main className="user-management">
-            <h2 className="user-management__title">Gebruikersbeheer</h2>
-            <div className="user-management__actions">
-              { users.length > 0
-                && (
-                <input
-                  type="search"
-                  className="input user-management__actions__search"
-                  placeholder="zoek naar gebruikers..."
-                  onChange={this.searchUser}
-                />
-                )
-              }
-              <button type="button" onClick={() => this.openUserModal()} className="button user-management__actions__add-user">
-                <i><FontAwesomeIcon icon={faPlus} /></i>
-                Gebruiker toevoegen
-              </button>
-            </div>
-            <Modal
-              isOpen={userModalShown}
-              onRequestClose={this.closeUserModal}
-              className="modal user-management__modal"
-              overlayClassName="modal-overlay"
-            >
-              <IconButton
-                className="modal__close"
-                icon={faTimes}
-                onClick={this.closeUserModal}
-                tabIndex={0}
-              />
-              <h2>Gebruiker toevoegen</h2>
-              <UserForm
-                addUser={this.addUser}
-                updateUser={this.updateUser}
-                user={userBeingModified}
-              />
-            </Modal>
-            { users.length > 0 || (users.length === 1 && users[0].id === currentUser.id)
-              ? (
-                <UserTable
-                  users={users}
-                  currentUser={currentUser}
-                  searchQuery={searchQuery}
-                  selectUser={this.openUserModal}
-                  changeUserRole={this.changeUserRole}
-                  deleteUser={this.deleteUser}
-                />
-              ) : (
-                <p>Er zijn nog geen gebruikers om weer te geven</p>
-              )
-            }
-          </main>
+      <main className="user-management">
+        <h2 className="user-management__title">Gebruikersbeheer</h2>
+        <div className="user-management__actions">
+          { users.length > 0
+            && (
+            <input
+              type="search"
+              className="input user-management__actions__search"
+              placeholder="zoek naar gebruikers..."
+              onChange={this.searchUser}
+            />
+            )
+          }
+          <button type="button" onClick={() => this.openUserModal()} className="button user-management__actions__add-user">
+            <i><FontAwesomeIcon icon={faPlus} /></i>
+            Gebruiker toevoegen
+          </button>
         </div>
-        <Footer />
-      </div>
+        <Modal
+          isOpen={userModalShown}
+          onRequestClose={this.closeUserModal}
+          className="modal user-management__modal"
+          overlayClassName="modal-overlay"
+        >
+          <IconButton
+            className="modal__close"
+            icon={faTimes}
+            onClick={this.closeUserModal}
+            tabIndex={0}
+          />
+          <h2>Gebruiker toevoegen</h2>
+          <UserForm
+            addUser={this.addUser}
+            updateUser={this.updateUser}
+            user={userBeingModified}
+          />
+        </Modal>
+        { users.length > 0 || (users.length === 1 && users[0].id === currentUser.id)
+          ? (
+            <UserTable
+              users={users}
+              currentUser={currentUser}
+              searchQuery={searchQuery}
+              selectUser={this.openUserModal}
+              changeUserRole={this.changeUserRole}
+              deleteUser={this.deleteUser}
+            />
+          ) : (
+            <p>Er zijn nog geen gebruikers om weer te geven</p>
+          )
+        }
+      </main>
     );
   }
 }

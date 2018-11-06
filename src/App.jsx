@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import { cookies } from './constants';
 import User from './models/User';
+
 import PrivateRoute from './components/PrivateRoute';
-import MainLayout from './components/MainLayout';
+import PublicRoute from './components/PublicRoute';
+
+import MainLayout from './components/Layouts/Main';
+import AlternativeLayout from './components/Layouts/Alternative';
+
 import Overview from './components/Overview';
 import SunburstChart from './components/SunburstChart';
 import Companies from './components/Companies';
 import NotFound from './components/404';
 import Login from './components/Auth/Login';
 import Manage from './components/Admin/Manage';
+import Import from './components/Import';
 
 import 'normalize.css';
 import './assets/styles/index.css';
@@ -45,11 +51,12 @@ class App extends Component {
           <PrivateRoute exact path="/:path(|index|home|overlap)" component={Overview} layout={MainLayout} currentUser={user} />
           <PrivateRoute path="/interacties" component={SunburstChart} layout={MainLayout} currentUser={user} />
           <PrivateRoute path="/bedrijven" component={Companies} layout={MainLayout} currentUser={user} />
-          <Route path="/login" component={Login} />
+          <PrivateRoute path="/beheer-data" component={Import} layout={AlternativeLayout} currentUser={user} />
+          <PublicRoute path="/login" layout={AlternativeLayout} component={Login} />
           { user && user.isAdmin
-            && <PrivateRoute path="/admin" component={Manage} currentUser={user} />
+            && <PrivateRoute path="/admin" layout={AlternativeLayout} component={Manage} currentUser={user} />
           }
-          <Route component={NotFound} />
+          <PublicRoute component={NotFound} />
         </Switch>
       </BrowserRouter>
     );
