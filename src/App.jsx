@@ -51,7 +51,7 @@ class App extends Component {
           <PrivateRoute exact path="/:path(|index|home|overlap)" component={Overview} layout={MainLayout} currentUser={user} />
           <PrivateRoute path="/interacties" component={SunburstChart} layout={MainLayout} currentUser={user} />
           <PrivateRoute path="/bedrijven" component={Companies} layout={MainLayout} currentUser={user} />
-          <PrivateRoute path="/beheer-data" component={Import} layout={AlternativeLayout} currentUser={user} />
+          <PublicRoute path="/beheer-data" component={Import} layout={AlternativeLayout} currentUser={user} />
           <PublicRoute path="/login" layout={AlternativeLayout} component={Login} />
           { user && user.isAdmin
             && <PrivateRoute path="/admin" layout={AlternativeLayout} component={Manage} currentUser={user} />
