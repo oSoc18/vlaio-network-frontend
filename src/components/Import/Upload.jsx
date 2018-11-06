@@ -22,7 +22,7 @@ class Upload extends React.Component {
   }
 
   deleteFile = (file) => {
-    const fileCopy = [...this.state.files];
+    const fileCopy = [...this.state.files]; // fix this later
     const index = fileCopy.indexOf(file);
     fileCopy.splice(index, 1);
     this.setState({ files: fileCopy });
