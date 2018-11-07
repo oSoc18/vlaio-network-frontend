@@ -9,14 +9,11 @@ class APIMulti {
 
   getOptions(method, authRequired = false, body = null) {
     const options = {
-      method: method.toUpperCase(),
-      headers: this.headers
+      method: method.toUpperCase()
     };
     if (body) options.body = JSON.stringify(body);
 
-    if (authRequired && !options.headers.get('Authorization')) {
-      options.headers.append('Authorization', `Token ${cookies.get('auth')}`);
-    }
+
     return options;
   }
 }

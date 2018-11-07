@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
+import UploadFiles from '../../api/UploadFiles';
+import { api } from '../../constants';
 
 class Upload extends React.Component {
   constructor() {
@@ -13,6 +15,9 @@ class Upload extends React.Component {
       files: Array.from(new Set([...prevState.files, ...acc])),
       rejected
     }));
+    api.uploading.create(this.state.files).then((response) => {
+      alert(response);
+    }).catch(e => console.error(e));
   }
 
   onCancel = () => {

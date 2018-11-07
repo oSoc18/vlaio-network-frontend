@@ -1,6 +1,6 @@
-import API from './API';
+import APIMulti from './APIMulti';
 
-class OverlapAPI extends API {
+class UploadFiles extends APIMulti {
   constructor(url) {
     super(url);
     this.endpoint = `${this.BASE_URL}/upload`;
@@ -11,4 +11,4 @@ class OverlapAPI extends API {
   }
 }
 
-export default OverlapAPI;
+export default UploadFiles;
