@@ -6,16 +6,16 @@ class APIMulti {
   constructor(url) {
     this.BASE_URL = url;
     this.headers = new Headers({
-      Accept: 'application/json',
-      'content-type': 'multipart/form-data'
+
+      Accept: 'application/json'
+
     });
   }
 
   getOptions(method, authRequired = false, body = null) {
     const options = {
       method: method.toUpperCase(),
-      headers: this.headers,
-      accessControlAllowMethods: 'GET, PUT, POST, PATCH, DELETE'
+      headers: this.headers
     };
     const formdata = new FormData();
     if (body) {
@@ -23,7 +23,7 @@ class APIMulti {
       body.forEach((element) => {
         formdata.append(element.name, element);
       });
-      options.content = formdata;
+      options.data = formdata;
       for (var pair of formdata.entries()) {
         console.log(pair[0]+ ', ' + pair[1]);
     }

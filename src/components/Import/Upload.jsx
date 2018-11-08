@@ -16,6 +16,7 @@ class Upload extends React.Component {
       rejected
     }));
     api.uploading.create(this.state.files).then((response) => {
+      console.log(response);
 
     }).catch(e => console.error(e));
   }
