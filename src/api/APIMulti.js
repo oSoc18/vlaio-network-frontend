@@ -21,9 +21,9 @@ class APIMulti {
     if (body) {
       console.log(body);
       body.forEach((element) => {
-        formdata.append(element.name, element);
+        formdata.append('file', element);
       });
-      options.data = formdata;
+      options.body = formdata;
       for (var pair of formdata.entries()) {
         console.log(pair[0]+ ', ' + pair[1]);
     }
