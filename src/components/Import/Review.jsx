@@ -1,44 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-React.Fragment;
 
-function parseMessage(response) {
+const parseMessage = (response) => {
   let errors = null;
+  let warnings = null;
 
-  if (response.errors && response.errors > 0) {
+
+  if (response.errors && response.errors.length > 0) {
+    alert("infunction");
     errors = response.errors.map(element => <li>{element} </li>);
-  } else {
-    errors = <li>Geen fouten gevonden</li>;
+    errors = <React.Fragment><h1>Fouten</h1><ul>{errors}</ul></React.Fragment>;
   }
-  if (response.warnings && response.warnings > 0) {
-      errors = response.warnings.map(element => <li>{element} </li>);
-    } else {
-      errors = <li>Geen opmerkingen</li>;
-    }
+  if (response.warnings && response.warnings.length > 0) {
+    warnings = response.warnings.map(element => <li>{element} </li>);
+    warnings = <React.Fragment><h1>Opmerkingen</h1><ul>{warnings}</ul></React.Fragment>;
+  }
 
-  return (
-
-    <div>
-      {(response.errors || response.errors > 0) ? (
-      <>
-        <h1>Fouten</h1>
-        <ul>
-          { errors }
-        </ul>
-      </>) : null }
-
-
-      <h1>Opmerkingen</h1>
-
-
-    </div>
-  );
-}
+  return <React.Fragment>{errors}{warnings}</React.Fragment>;
+};
 
 const Success = ({ stepBack, startImport, errorMessage }) => (
   <div>
     <h1>Controleer de data</h1>
-    <p>{parseMessage(errorMessage)}</p>
+    <div>{parseMessage(errorMessage)}</div>
     <button className="button" type="button" onClick={stepBack}>Terug</button>
     <button className="button" type="button" onClick={startImport}>Importeren</button>
   </div>
@@ -47,11 +31,8 @@ const Success = ({ stepBack, startImport, errorMessage }) => (
 Success.propTypes = {
   stepBack: PropTypes.func.isRequired,
   startImport: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.instanceOf(Object).isRequired
 };
 
-Success.defaultProps = {
-  errorMessage: 'Loading'
-};
 
 export default Success;

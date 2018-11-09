@@ -9,7 +9,7 @@ import '../../assets/styles/import.css';
 class Import extends Component {
   state = {
     step: 1,
-    message: 'loading'
+    message: {}
   };
 
   restart = () => this.setState({ step: 1 });
@@ -21,11 +21,10 @@ class Import extends Component {
   startUpload = (files) => {
     // upload files
     api.uploading.create(files).then((response) => {
-      this.setState({ message: response.json() });
-      alert(response);
+      this.setState({ message: response });
     }).catch(e => console.error(e));
     this.stepForward();
-    // save files!
+    this.files = files; // keep them in case the user wants to go back
   };
 
   startImport = () => {
