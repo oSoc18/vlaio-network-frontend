@@ -12,7 +12,10 @@ class Import extends Component {
     message: {}
   };
 
-  restart = () => this.setState({ step: 1 });
+  restart = () => {
+    this.setState({ step: 1 });
+    this.files = [];
+  }
 
   stepBack = () => this.setState(prevState => ({ step: prevState.step - 1 }));
 
@@ -28,7 +31,13 @@ class Import extends Component {
   };
 
   startImport = () => {
-    // do request and show loader
+    const { message } = this.state;
+
+    if (message.upload_id) {
+      api.applyUpload.confirm(message.upload_id).then((response) => {
+        console.log(response);
+      }).catch(e => console.error(e));
+    }
     this.stepForward();
   }
 
@@ -54,7 +63,7 @@ class Import extends Component {
           />
           ) }
 
-          { step === 3 && <Success restart={this.restart} /> }
+          { step === 3 && <Success restart={this.restart} files={this.files} /> }
         </div>
       </main>
     );

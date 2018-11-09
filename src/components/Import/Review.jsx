@@ -7,19 +7,18 @@ const parseMessage = (response) => {
 
 
   if (response.errors && response.errors.length > 0) {
-    alert("infunction");
     errors = response.errors.map(element => <li>{element} </li>);
     errors = <React.Fragment><h1>Fouten</h1><ul>{errors}</ul></React.Fragment>;
   }
   if (response.warnings && response.warnings.length > 0) {
-    warnings = response.warnings.map(element => <li>{element} </li>);
+    warnings = response.warnings.map(element => <li>{element}</li>);
     warnings = <React.Fragment><h1>Opmerkingen</h1><ul>{warnings}</ul></React.Fragment>;
   }
 
   return <React.Fragment>{errors}{warnings}</React.Fragment>;
 };
 
-const Success = ({ stepBack, startImport, errorMessage }) => (
+const Success = ({ stepBack, startImport, errorMessage, confirmImport }) => (
   <div>
     <h1>Controleer de data</h1>
     <div>{parseMessage(errorMessage)}</div>
