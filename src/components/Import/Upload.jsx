@@ -36,30 +36,35 @@ class Upload extends React.Component {
 
   // multipart time https://stackoverflow.com/questions/41610811/react-js-how-to-send-a-multipart-form-data-to-server
   render() {
+    console.log(this.state.files);
     return (
-      <div className="flex-container">
-        <form method="post" encType="multipart/form-data">
-          <Dropzone
-            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" // only accept xlsx-files
-            onDrop={(files, rejected) => this.onDrop(files, rejected)}
-            onFileDialogCancel={() => this.onCancel()}
-          >
-            <p>Sleep hier de xlsx-bestanden of klik hier om bestanden te selecteren. </p>
-            <ul>{this.state.rejected.map(
-              (f, i) => (<li key={i.toString()}>`{f.name} is geen xlsx-bestand.`</li>)
-            )}
-            </ul>
-          </Dropzone>
-          <button className="button" type="button" onClick={() => this.onSubmit()}>Importeer data</button>
-        </form>
-        <ul>
-          {this.state.files.map((f, i) => (
-            <li key={i.toString()}>
-              <span>{f.name}</span> - <button type="button" onClick={(() => this.deleteFile(f))}>Verwijder bestand</button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <React.Fragment>
+        <h1>Upload bestanden</h1>
+        <p>Selecteer één bestand om te uploaden.</p>
+        <div className="flex-container">
+          <form method="post" encType="multipart/form-data">
+            <Dropzone
+              accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" // only accept xlsx-files
+              onDrop={(files, rejected) => this.onDrop(files, rejected)}
+              onFileDialogCancel={() => this.onCancel()}
+            >
+              <p>Sleep hier de xlsx-bestanden of klik hier om bestanden te selecteren. </p>
+              <ul>{this.state.rejected.map(
+                (f, i) => (<li key={i.toString()}>`{f.name} is geen xlsx-bestand.`</li>)
+              )}
+              </ul>
+            </Dropzone>
+            <button className="button" type="button" disabled={!this.state.files || this.state.files.length === 0} onClick={() => this.onSubmit()}>Importeer bestand</button>
+          </form>
+          <ul>
+            {this.state.files.map((f, i) => (
+              <li key={i.toString()}>
+                <span>{f.name}</span> - <button type="button" onClick={(() => this.deleteFile(f))}>Verwijder bestand</button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </React.Fragment>
     );
   }
 }

@@ -14,7 +14,7 @@ class Import extends Component {
 
   restart = () => {
     this.setState({ step: 1 });
-    this.files = [];
+    this.files = {};
   }
 
   stepBack = () => this.setState(prevState => ({ step: prevState.step - 1 }));
@@ -35,8 +35,9 @@ class Import extends Component {
 
     if (message.upload_id) {
       api.applyUpload.confirm(message.upload_id).then((response) => {
-        console.log(response);
-      }).catch(e => console.error(e));
+        alert(response);
+        this.state.responseCode = response.status;
+      }).catch(e => console.error("error" + e));
     }
     this.stepForward();
   }
@@ -63,7 +64,14 @@ class Import extends Component {
           />
           ) }
 
-          { step === 3 && <Success restart={this.restart} files={this.files} /> }
+          { step === 3
+          && (
+          <Success
+            restart={this.restart}
+            files={this.files}
+            importingDone={this.state.importingDone}
+          />
+          ) }
         </div>
       </main>
     );
