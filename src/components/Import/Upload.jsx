@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
-import UploadFiles from '../../api/UploadFiles';
-import { api } from '../../constants';
+
 
 class Upload extends React.Component {
   constructor() {
@@ -15,10 +14,6 @@ class Upload extends React.Component {
       files: Array.from(new Set([...prevState.files, ...acc])),
       rejected
     }));
-    api.uploading.create(this.state.files).then((response) => {
-      console.log(response);
-
-    }).catch(e => console.error(e));
   }
 
   onCancel = () => {
@@ -27,11 +22,16 @@ class Upload extends React.Component {
     });
   }
 
+
   deleteFile = (file) => {
     const fileCopy = [...this.state.files]; // fix this later
     const index = fileCopy.indexOf(file);
     fileCopy.splice(index, 1);
     this.setState({ files: fileCopy });
+  }
+
+  onSubmit = () => {
+    this.props.startUpload(this.state.files);
   }
 
   // multipart time https://stackoverflow.com/questions/41610811/react-js-how-to-send-a-multipart-form-data-to-server
@@ -49,7 +49,8 @@ class Upload extends React.Component {
               (f, i) => (<li key={i.toString()}>`{f.name} is geen xlsx-bestand.`</li>)
             )}
             </ul>
-          </Dropzone><button className="button" type="button" onClick={this.props.startUpload}>Importeer data</button>
+          </Dropzone>
+          <button className="button" type="button" onClick={() => this.onSubmit()}>Importeer data</button>
         </form>
         <ul>
           {this.state.files.map((f, i) => (

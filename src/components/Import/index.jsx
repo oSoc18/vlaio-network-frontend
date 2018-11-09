@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import Upload from './Upload';
 import Review from './Review';
 import Success from './Success';
+import { api } from '../../constants';
 
 import '../../assets/styles/import.css';
 
 class Import extends Component {
   state = {
-    step: 1
+    step: 1,
+    message: 'loading'
   };
 
   restart = () => this.setState({ step: 1 });
@@ -16,8 +18,14 @@ class Import extends Component {
 
   stepForward = () => this.setState(prevState => ({ step: prevState.step + 1 }));
 
-  startUpload = () => {
+  startUpload = (files) => {
+    // upload files
+    api.uploading.create(files).then((response) => {
+      this.setState({ message: response.json() });
+      alert(response);
+    }).catch(e => console.error(e));
     this.stepForward();
+    // save files!
   };
 
   startImport = () => {
@@ -39,7 +47,14 @@ class Import extends Component {
         </div>
         <div className="import__details">
           { step === 1 && <Upload startUpload={this.startUpload} /> }
-          { step === 2 && <Review stepBack={this.stepBack} startImport={this.startImport} /> }
+          { step === 2 && (
+          <Review
+            stepBack={this.stepBack}
+            startImport={this.startImport}
+            errorMessage={this.state.message}
+          />
+          ) }
+
           { step === 3 && <Success restart={this.restart} /> }
         </div>
       </main>
