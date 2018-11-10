@@ -32,6 +32,7 @@ class SunburstChart extends Component {
       localStorage.setItem('colorMap', JSON.stringify(this.colorMap));
     }
     this.state.colours = JSON.parse(localStorage.getItem('colorMap'));
+    this.state.fullPath.push(this.state.data.name);
     this.refreshStyle(false, props.data);
   }
 
@@ -101,33 +102,12 @@ class SunburstChart extends Component {
 
   zoomIn = (path, zoomedData) => {
     let zoomed = zoomedData;
-    console.log("azeaze")
-    console.log(path)
-    path.forEach((node) => {
-      const index = zoomed.children.findIndex(child => child.name === node);
+    path.forEach((crumb) => {
+      const index = zoomed.children.findIndex(child => child.name === crumb);
       zoomed = zoomed.children[index];
-      console.log(node)
-      console.log(zoomed);
     });
-    if (zoomed === undefined){
-      return this.state.data;
-    }
     return zoomed;
-
   };
-
-
-  // zoomOut = () => {
-  //   const {fullPath, path, data} = this.state;
-  //   console.log(fullPath);
-  //   console.log(data);
-  //   console.log(this.zoomIn(fullPath, data));
-  //   // this.setState({
-  //   //   zoomedData: this.zoomIn(fullPath, data),
-  //   //   fullPath: fullPath.slice(0, -1),
-  //   //   zoomed: fullPath === path
-  //   // });
-  // };
 
   render() {
     const {
@@ -144,28 +124,25 @@ class SunburstChart extends Component {
           height={height}
           width={width}
           onValueClick={(node) => {
-            if (node.parent !== null) {
+            if(node.parent!==null) {
               this.setState({
-                fullPath: fullPath.concat(this.getKeyPath(node).reverse().slice(0, -1)),
+                fullPath: fullPath.concat(path),
                 zoomed: true,
-                zoomedData: this.zoomIn(this.getKeyPath(node).reverse(), zoomedData)
+                zoomedData: this.zoomIn(path, zoomedData)
               });
-            } else {
-              // console.log(fullPath);
-              // console.log(path);
-              // console.log(data);
-              // console.log(this.zoomIn(fullPath, data));
+            }
+            else {
               this.setState({
-                zoomedData: this.zoomIn(fullPath, data),
                 fullPath: fullPath.slice(0, -1),
-                zoomed: fullPath.slice(0,-1).length !== 0
+                zoomed: fullPath.slice(0, -1).length !== 1,
+                zoomedData: this.zoomIn(fullPath.slice(1, fullPath.length - 1), data)
               });
             }
           }}
           onValueMouseOver={(node) => {
             this.setState({
               zoomedData: this.updateChart(true, zoomedData, this.getKeyPath(node)),
-              path: node ? this.getKeyPath(node).reverse() : '',
+              path: node ? this.getKeyPath(node).slice(0, -1).reverse() : '',
               hoveredCell: (node.x && node.y ? node : false),
               hoveredValue: node.size
             });
@@ -181,14 +158,12 @@ class SunburstChart extends Component {
         />
         <div className="info__container">
           <div className="sunburstinfo__container">
-            <span className="sunburst__name">{hoveredCell.name}</span>
+            <span className="sunburst__name">{hoveredCell ? hoveredCell.name : zoomedData.name}</span>
             <hr />
-            <span
-              className="sunburst__path">{(fullPath.length !== 0) ? `${fullPath.join(' > ')} > ` : ''}{path.join(' > ')}</span>
+            <span className="sunburst__path">{fullPath.join(' > ')} &gt; {path.join(' > ')}</span>
             <br />
-            <span>{hoveredValue !== null ? `aantal: ${hoveredValue}` : ''}</span>
+            <span>aantal: {hoveredValue !== null ? `${hoveredValue}` : ''}</span>
           </div>
-          {/*<input type="button" value="Uitzoomen" onClick={this.zoomOut()} />*/}
         </div>
       </div>
     );
