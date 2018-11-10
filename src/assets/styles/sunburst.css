@@ -1,12 +1,29 @@
 .sunburst-wrapper {
   width: 100%;
+  display: flex;
 }
 
 .sunburst {
+}
 
+.sunburstinfo__container {
+  display: block;
+  color: white;
+  background-color: #0A317C;
+  height: 15rem;
+  width: 30rem;
+  padding: 1rem;
+}
+
+.sunburst__name{
+  margin: 1rem;
 }
 
 .sunburst__path {
   display: block;
   min-height: 2rem;
+}
+
+.info__container{
+  margin: auto;
 }
