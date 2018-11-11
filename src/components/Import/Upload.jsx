@@ -45,22 +45,34 @@ class Upload extends React.Component {
 
   // multipart time https://stackoverflow.com/questions/41610811/react-js-how-to-send-a-multipart-form-data-to-server
   render() {
-    const dropzone = (
-      <Dropzone
-        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" // only accept xlsx-files
-        onDrop={(files, rejected) => this.onDrop(files, rejected)}
-        onFileDialogCancel={() => this.onCancel()}
-        multiple={false} // server only supports one file at the moment
-        style={{
-          width: '100%',
-          border: 'solid black 1px',
-          borderStyle: 'dashed',
-          borderRadius: '10px'
-        }}
-      >
-        <p>Sleep hier het xlsx-bestand of klik hier om een bestand te selecteren. </p>
-        {this.errorMessages(this.state.rejected)}
-      </Dropzone>);
+    const dropzone = (this.state.files.length > 0) ? (this.state.files.map((f, i) => (
+      <ul>
+        <li key={i.toString()}>
+          <span>{f.name}</span> - <button type="button" onClick={(() => this.deleteFile(f))}>Verwijder bestand</button>
+        </li>
+      </ul>
+    )))
+      :
+      (
+        <Dropzone
+          accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" // only accept xlsx-files
+          onDrop={(files, rejected) => this.onDrop(files, rejected)}
+          onFileDialogCancel={() => this.onCancel()}
+          multiple={false} // server only supports one file at the moment
+          style={{
+            width: '100%',
+            border: 'solid black 1px',
+            borderStyle: 'dashed',
+            borderRadius: '10px'
+          }}
+        >
+          <p className="import__dropzone-content">Sleep hier het xlsx-bestand</p>
+          <p>of</p>
+          <button className="import__select-buton button__secondary" type="button">
+          klik hier om een bestand te selecteren.
+          </button>
+          {this.errorMessages(this.state.rejected)}
+        </Dropzone>);
 
     return (
       <React.Fragment>
@@ -69,15 +81,8 @@ class Upload extends React.Component {
         <div className="flex-container">
           <form className="import__form" method="post" encType="multipart/form-data">
             {dropzone}
-            <button className="button" type="button" disabled={!this.state.files || this.state.files.length === 0} onClick={() => this.onSubmit()}>Importeer bestand</button>
+            <button className="button import__next" type="button" disabled={!this.state.files || this.state.files.length === 0} onClick={() => this.onSubmit()}>Importeer bestand</button>
           </form>
-          <ul>
-            {this.state.files.map((f, i) => (
-              <li key={i.toString()}>
-                <span>{f.name}</span> - <button type="button" onClick={(() => this.deleteFile(f))}>Verwijder bestand</button>
-              </li>
-            ))}
-          </ul>
         </div>
       </React.Fragment>
     );
