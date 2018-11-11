@@ -89,6 +89,13 @@
   padding: 4rem;
 }
 
+.import__details  button:disabled,
+.import__details  button[disabled]
+ {
+  background-color: #dddddd;
+  color: #696969;
+  border: 0;
+ }
 .flex-container {
   display: flex;
   flex-wrap: nowrap;

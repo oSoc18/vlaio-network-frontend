@@ -36,7 +36,6 @@ class Upload extends React.Component {
 
   // multipart time https://stackoverflow.com/questions/41610811/react-js-how-to-send-a-multipart-form-data-to-server
   render() {
-    console.log(this.state.files);
     return (
       <React.Fragment>
         <h1>Upload bestanden</h1>
@@ -47,10 +46,16 @@ class Upload extends React.Component {
               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" // only accept xlsx-files
               onDrop={(files, rejected) => this.onDrop(files, rejected)}
               onFileDialogCancel={() => this.onCancel()}
+              multiple={false} // server only supports one file at the moment
             >
-              <p>Sleep hier de xlsx-bestanden of klik hier om bestanden te selecteren. </p>
+              <p>Sleep hier het xlsx-bestand of klik hier om een bestand te selecteren. </p>
               <ul>{this.state.rejected.map(
-                (f, i) => (<li key={i.toString()}>`{f.name} is geen xlsx-bestand.`</li>)
+                (f, i) => {
+                  if (f.length === 1) return (<li key={i.toString()}>`{f.name} is geen xlsx-bestand.`</li>);
+                  if (f.length > 1) return (<li>Importeer slechts één bestand per keer.</li>);
+                  return null;
+                }x
+
               )}
               </ul>
             </Dropzone>
