@@ -33,7 +33,7 @@ const Success = ({
     <h1>Controleer de data</h1>
     <div>{parseMessage(errorMessage)}</div>
     <button className="button" type="button" onClick={stepBack}>Terug</button>
-    <button className="button" type="button" onClick={startImport}>Importeren</button>
+    <button disabled={!errorMessage.warnings} className="button" type="button" onClick={startImport}>Importeren</button>
   </div>
 );
 
