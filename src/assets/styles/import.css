@@ -96,6 +96,15 @@
   color: #696969;
   border: 0;
  }
+
+ .import__form, .import__form div{
+  width: 100%;
+ }
+
+ .import__warning {
+   color: #ee0000;
+ }
+
 .flex-container {
   display: flex;
   flex-wrap: nowrap;

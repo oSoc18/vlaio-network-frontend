@@ -34,31 +34,41 @@ class Upload extends React.Component {
     this.props.startUpload(this.state.files);
   }
 
+  errorMessages = (rejected) => {
+    switch (rejected.length) {
+      case 0: break;
+      case 1: return <p className="import_error"><em>{rejected[0].name}</em> is geen geldig xlsx-bestand </p>;
+      default: return <p className="import_error">Upload slechts één besetand per import.</p>;
+    }
+    return null;
+  }
+
   // multipart time https://stackoverflow.com/questions/41610811/react-js-how-to-send-a-multipart-form-data-to-server
   render() {
+    const dropzone = (
+      <Dropzone
+        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" // only accept xlsx-files
+        onDrop={(files, rejected) => this.onDrop(files, rejected)}
+        onFileDialogCancel={() => this.onCancel()}
+        multiple={false} // server only supports one file at the moment
+        style={{
+          width: '100%',
+          border: 'solid black 1px',
+          borderStyle: 'dashed',
+          borderRadius: '10px'
+        }}
+      >
+        <p>Sleep hier het xlsx-bestand of klik hier om een bestand te selecteren. </p>
+        {this.errorMessages(this.state.rejected)}
+      </Dropzone>);
+
     return (
       <React.Fragment>
         <h1>Upload bestanden</h1>
         <p>Selecteer één bestand om te uploaden.</p>
         <div className="flex-container">
-          <form method="post" encType="multipart/form-data">
-            <Dropzone
-              accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" // only accept xlsx-files
-              onDrop={(files, rejected) => this.onDrop(files, rejected)}
-              onFileDialogCancel={() => this.onCancel()}
-              multiple={false} // server only supports one file at the moment
-            >
-              <p>Sleep hier het xlsx-bestand of klik hier om een bestand te selecteren. </p>
-              <ul>{this.state.rejected.map(
-                (f, i) => {
-                  if (f.length === 1) return (<li key={i.toString()}>`{f.name} is geen xlsx-bestand.`</li>);
-                  if (f.length > 1) return (<li>Importeer slechts één bestand per keer.</li>);
-                  return null;
-                }
-
-              )}
-              </ul>
-            </Dropzone>
+          <form className="import__form" method="post" encType="multipart/form-data">
+            {dropzone}
             <button className="button" type="button" disabled={!this.state.files || this.state.files.length === 0} onClick={() => this.onSubmit()}>Importeer bestand</button>
           </form>
           <ul>
