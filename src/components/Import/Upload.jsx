@@ -47,7 +47,7 @@ class Upload extends React.Component {
   render() {
     const dropzone = (this.state.files.length > 0) ? (this.state.files.map((f, i) => (
       <ul>
-        <li key={i.toString()}>
+        <li className="import__files" key={i.toString()}>
           <span>{f.name}</span> - <button type="button" onClick={(() => this.deleteFile(f))}>Verwijder bestand</button>
         </li>
       </ul>
@@ -76,7 +76,7 @@ class Upload extends React.Component {
 
     return (
       <React.Fragment>
-        <h1>Upload bestanden</h1>
+        <h1>Upload nieuw xlsx-bestand</h1>
         <p>Selecteer één bestand om te uploaden.</p>
         <div className="flex-container">
           <form className="import__form" method="post" encType="multipart/form-data">

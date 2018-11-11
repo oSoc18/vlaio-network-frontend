@@ -125,6 +125,9 @@
   width: 100%;
  }
 
+ .import__files {
+   list-style: none;
+ }
  .import__warning {
    color: #ee0000;
  }
