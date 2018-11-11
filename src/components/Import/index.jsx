@@ -15,8 +15,19 @@ class Import extends Component {
     responseCode: NO_CODE
   };
 
+  constructor(props) {
+    super(props);
+    this.files = {};
+  }
+
   restart = () => {
-    this.setState({ step: 1 });
+    this.setState(
+      {
+        step: 1,
+        message: {},
+        responseCode: NO_CODE
+      }
+    );
     this.files = {};
   }
 
@@ -63,6 +74,7 @@ class Import extends Component {
             stepBack={this.stepBack}
             startImport={this.startImport}
             errorMessage={this.state.message}
+            files={this.files}
           />
           ) }
 

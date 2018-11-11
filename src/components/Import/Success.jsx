@@ -1,21 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import loading from '../../assets/img/loading.gif';
-import responseMessage from './errors';
+import ResponseMessage from './errors';
 
 const generateList = listFiles => listFiles.map(el => <li>{el.name}</li>);
 const generateContent = (done, files, restart) => {
-  if (done >= 200 && done < 300) {
+  if (done >= 200 && done < 300) { // success?
     return (
       <React.Fragment>
         <h1>Succes!</h1>
-        <p>Deze bestanden zijn succesvol geïmporteerd:</p>
+        <p>Dit bestand is succesvol geïmporteerd:</p>
         {generateList(files)}
-        <button className="button" type="button" onClick={restart}>Nieuwe import beginnen</button>
+        <button className="button import__next" type="button" onClick={restart}>Nieuwe import beginnen</button>
       </React.Fragment>);
   }
-  if (done > 0) { // if there is a responseCode
-    return (<responseMessage responseCode={done} />);
+  if (done > 0) { // if there is a responseCode, and it's not a good one...
+    return (
+      <React.Fragment>
+        <h1>Er is iets misgelopen...</h1>
+        <ResponseMessage responseCode={done} />
+        <button className="button import__next" type="button" onClick={restart}>
+          Nieuwe import beginnen
+        </button>
+      </React.Fragment>);
   }
   return (
     <React.Fragment>
@@ -32,7 +39,9 @@ const Success = ({ restart, files, importingDone }) => (
 );
 
 Success.propTypes = {
-  restart: PropTypes.func.isRequired
+  restart: PropTypes.func.isRequired,
+  files: PropTypes.arrayOf(Object).isRequired,
+  importingDone: PropTypes.number.isRequired
 };
 
 export default Success;
