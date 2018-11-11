@@ -8,7 +8,7 @@ class ApplyUpload extends API {
 
   confirm(id) {
     return fetch(`${this.endpoint}/${id}`, this.getOptions('GET', true))
-      .then(r => r.json());
+      .then(r => r);
   }
 }
 

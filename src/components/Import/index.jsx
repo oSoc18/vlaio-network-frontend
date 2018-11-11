@@ -6,10 +6,13 @@ import { api } from '../../constants';
 
 import '../../assets/styles/import.css';
 
+const NO_CODE = -1;
+
 class Import extends Component {
   state = {
     step: 1,
-    message: {}
+    message: {},
+    responseCode: NO_CODE
   };
 
   restart = () => {
@@ -35,8 +38,7 @@ class Import extends Component {
 
     if (message.upload_id) {
       api.applyUpload.confirm(message.upload_id).then((response) => {
-        alert(response);
-        this.state.responseCode = response.status;
+        this.setState({ responseCode: response.status });
       }).catch(e => console.error("error" + e));
     }
     this.stepForward();
@@ -69,7 +71,7 @@ class Import extends Component {
           <Success
             restart={this.restart}
             files={this.files}
-            importingDone={this.state.importingDone}
+            importingDone={this.state.responseCode}
           />
           ) }
         </div>

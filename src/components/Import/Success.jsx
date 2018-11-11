@@ -14,7 +14,7 @@ const generateContent = (done, files, restart) => {
         <button className="button" type="button" onClick={restart}>Nieuwe import beginnen</button>
       </React.Fragment>);
   }
-  if (done > 0) {
+  if (done > 0) { // if there is a responseCode
     return (<responseMessage responseCode={done} />);
   }
   return (

@@ -19,14 +19,10 @@ class APIMulti {
     };
     const formdata = new FormData();
     if (body) {
-      console.log(body);
       body.forEach((element) => {
         formdata.append('file', element);
       });
       options.body = formdata;
-      for (var pair of formdata.entries()) {
-        console.log(pair[0]+ ', ' + pair[1]);
-    }
     }
     if (authRequired && !options.headers.get('Authorization')) {
       options.headers.append('Authorization', `Token ${cookies.get('auth')}`);
