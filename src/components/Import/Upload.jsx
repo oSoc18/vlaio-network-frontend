@@ -54,7 +54,7 @@ class Upload extends React.Component {
                   if (f.length === 1) return (<li key={i.toString()}>`{f.name} is geen xlsx-bestand.`</li>);
                   if (f.length > 1) return (<li>Importeer slechts één bestand per keer.</li>);
                   return null;
-                }x
+                }
 
               )}
               </ul>
