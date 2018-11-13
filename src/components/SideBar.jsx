@@ -2,13 +2,8 @@ import React from 'react';
 import CheckBoxGroup from './UI/Checkboxgroup';
 import TimeBetween from './UI/TimeBetween';
 import TimeBetweenDates from './UI/TimeBetweenDates';
+
 import '../assets/styles/sidebar.css';
-
-let selected = ['Begeleiden', 'Community', 'Informeren', 'Netwerken', 'Sensibilisering', 'Subsidie', 'Tools'];
-
-const printChanges = (changes) => {
-  selected = changes;
-};
 
 /**
  * This will probably be the most similar existing example
@@ -17,39 +12,47 @@ const printChanges = (changes) => {
  * But these headers would be a better choice
  * https://www.vlaio.be/nl/begeleiding-advies/coaching-en-advies
  */
-const Sidebar = () => (
-  <div className="side-nav">
-    <div>
-      <fieldset>
-        <legend className="main-legend">Type interactie</legend>
-        <CheckBoxGroup
-          options={['Begeleiden', 'Community', 'Informeren', 'Netwerken', 'Sensibilisering', 'Subsidie', 'Tools']}
-          selected={selected}
-          changeSelection={printChanges}
-        />
-      </fieldset>
+const Sidebar = () => {
+  let selected = ['Begeleiden', 'Community', 'Informeren', 'Netwerken', 'Sensibilisering', 'Subsidie', 'Tools'];
 
-      {/* <fieldset>
-        <legend className="main-legend">Type bedrijf</legend>
-        <CheckBoxGroup
-          options={['Financiering', 'Financiële moeilijkheden', 'Innovatie', 'Internationalisatie',
-            'Prestart', 'Start', 'Startup/Scaleup', 'Student']}
-          selected={selected}
-          changeSelection={printChanges}
-        />
-      </fieldset> */}
+  const printChanges = (changes) => {
+    selected = changes;
+  };
 
-      <fieldset>
-        <legend className="main-legend">Interval tussen interacties</legend>
-        <TimeBetween />
-      </fieldset>
+  return (
+    <div className="side-nav">
+      <div>
+        <fieldset>
+          <legend className="main-legend">Type interactie</legend>
+          <CheckBoxGroup
+            options={['Begeleiden', 'Community', 'Informeren', 'Netwerken', 'Sensibilisering', 'Subsidie', 'Tools']}
+            selected={selected}
+            changeSelection={printChanges}
+          />
+        </fieldset>
 
-      <fieldset>
-        <legend className="main-legend">Datum van interactie</legend>
-        <TimeBetweenDates />
-      </fieldset>
+        {/* <fieldset>
+          <legend className="main-legend">Type bedrijf</legend>
+          <CheckBoxGroup
+            options={['Financiering', 'Financiële moeilijkheden', 'Innovatie',
+            'Internationalisatie', 'Prestart', 'Start', 'Startup/Scaleup', 'Student']}
+            selected={selected}
+            changeSelection={printChanges}
+          />
+        </fieldset> */}
+
+        <fieldset>
+          <legend className="main-legend">Interval tussen interacties</legend>
+          <TimeBetween />
+        </fieldset>
+
+        <fieldset>
+          <legend className="main-legend">Datum van interactie</legend>
+          <TimeBetweenDates />
+        </fieldset>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Sidebar;
