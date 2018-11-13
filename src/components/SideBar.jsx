@@ -22,7 +22,7 @@ class Sidebar extends Component {
         limit: 5,
         start: null,
         end: null,
-        interval: null
+        timeframe: null
       }
     };
   }
@@ -40,6 +40,10 @@ class Sidebar extends Component {
   updateDateInterval = (start, end) => {
     this.applyFilters({ start, end });
   };
+
+  updateWeekInterval = (weeks) => {
+    this.applyFilters({ timeframe: weeks });
+  }
 
   render() {
     const { typesOfInteraction } = this.props;
@@ -66,7 +70,7 @@ class Sidebar extends Component {
 
           <fieldset>
             <legend className="main-legend">Interval tussen interacties</legend>
-            <TimeBetween />
+            <TimeBetween onValueChange={this.updateWeekInterval} />
           </fieldset>
 
           <fieldset>
