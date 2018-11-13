@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { api } from '../../constants';
 import UpSetPlot from './UpSet';
 import Overlap from '../../models/Overlap';
@@ -7,17 +8,22 @@ import '../../assets/styles/overview.css';
 
 class Overview extends Component {
   state = {
-    overlaps: [],
-    filters: {
-      limit: 5,
-      start: null,
-      end: null,
-      interval: null
-    }
+    overlaps: []
   };
 
   componentDidMount() {
-    const { filters } = this.state;
+    const { activeFilters } = this.props;
+    this.fetchOverlaps(activeFilters);
+  }
+
+  componentDidUpdate(prevProps) {
+    const newActiveFilters = this.props.activeFilters;
+    if (JSON.stringify(prevProps.activeFilters) !== JSON.stringify(newActiveFilters)) {
+      this.fetchOverlaps(newActiveFilters);
+    }
+  }
+
+  fetchOverlaps = (filters) => {
     api.overlap.get(filters).then((response) => {
       const overlaps = response.map(o => new Overlap(o)) || [];
       this.setState({ overlaps });
@@ -26,6 +32,7 @@ class Overview extends Component {
 
   render() {
     const { overlaps } = this.state;
+
     return (
       <div className="overview">
         { (overlaps.length === 0) ? (
@@ -44,5 +51,21 @@ class Overview extends Component {
     );
   }
 }
+
+Overview.defaultProps = {
+  activeFilters: {
+    limit: 5
+  }
+};
+
+Overview.propTypes = {
+  activeFilters: PropTypes.shape({
+    limit: PropTypes.number,
+    types: PropTypes.string,
+    start: PropTypes.instanceOf(Date),
+    end: PropTypes.instanceOf(Date),
+    interval: PropTypes.number
+  })
+};
 
 export default Overview;

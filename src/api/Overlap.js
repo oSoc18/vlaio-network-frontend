@@ -10,7 +10,7 @@ class OverlapAPI extends API {
     const queryString = (filters)
       ? Object.keys(filters).reduce((string, filter) => {
         /* eslint-disable no-param-reassign */
-        if (!filters[filter]) return string;
+        if (filters[filter] === null) return string;
         string ? string += '&' : string += '?';
         string += `${filter}=${encodeURIComponent(filters[filter])}`;
         return string;
