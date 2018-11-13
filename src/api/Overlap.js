@@ -7,13 +7,15 @@ class OverlapAPI extends API {
   }
 
   get(filters) {
-    const queryString = Object.keys(filters).reduce((string, filter) => {
-      /* eslint-disable no-param-reassign */
-      if (!filters[filter]) return string;
-      string ? string += '&' : string += '?';
-      string += `${filter}=${encodeURIComponent(filters[filter])}`;
-      return string;
-    }, '');
+    const queryString = (filters)
+      ? Object.keys(filters).reduce((string, filter) => {
+        /* eslint-disable no-param-reassign */
+        if (!filters[filter]) return string;
+        string ? string += '&' : string += '?';
+        string += `${filter}=${encodeURIComponent(filters[filter])}`;
+        return string;
+      }, '')
+      : '';
     return fetch(`${this.endpoint}${queryString}`, this.getOptions('GET', true)).then(r => r.json());
   }
 }
