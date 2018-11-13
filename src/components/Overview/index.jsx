@@ -61,7 +61,7 @@ Overview.defaultProps = {
 Overview.propTypes = {
   activeFilters: PropTypes.shape({
     limit: PropTypes.number,
-    types: PropTypes.string,
+    type: PropTypes.string,
     start: PropTypes.string,
     end: PropTypes.string,
     interval: PropTypes.number

@@ -12,7 +12,7 @@ class OverlapAPI extends API {
         /* eslint-disable no-param-reassign */
         if (filters[filter] === null) return string;
         string ? string += '&' : string += '?';
-        string += `${filter}=${encodeURIComponent(filters[filter])}`;
+        string += `${filter}=${filters[filter]}`;
         return string;
       }, '')
       : '';

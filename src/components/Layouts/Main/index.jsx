@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { api } from '../../../constants';
 import Tabs from './Tabs';
 import SideBar from '../../SideBar';
 import Header from '../../Header';
@@ -8,8 +9,15 @@ import User from '../../../models/User';
 
 class MainLayout extends Component {
   state = {
-    activeFilters: null
+    activeFilters: null,
+    typesOfInteraction: []
   };
+
+  componentDidMount() {
+    api.interaction.getTypes().then((types) => {
+      this.setState({ typesOfInteraction: types });
+    });
+  }
 
   applyFilters = (filters) => {
     this.setState({ activeFilters: filters });
@@ -17,13 +25,15 @@ class MainLayout extends Component {
 
   render() {
     const { component: Comp, currentUser, ...rest } = this.props;
-    const { activeFilters } = this.state;
+    const { activeFilters, typesOfInteraction } = this.state;
     return (
       <div className="main-layout">
         <Header user={currentUser || undefined} />
         <Tabs {...rest} />
         <div className="main-content">
-          <SideBar applyFilters={this.applyFilters} />
+          { typesOfInteraction.length > 0
+            && <SideBar typesOfInteraction={typesOfInteraction} applyFilters={this.applyFilters} />
+          }
           <Comp activeFilters={activeFilters || undefined} {...rest} />
         </div>
         <Footer />

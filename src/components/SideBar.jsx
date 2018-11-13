@@ -14,16 +14,17 @@ import '../assets/styles/sidebar.css';
  * https://www.vlaio.be/nl/begeleiding-advies/coaching-en-advies
  */
 class Sidebar extends Component {
-  typesOfInteraction = ['Begeleiden', 'Community', 'Informeren', 'Netwerken', 'Sensibilisering', 'Subsidie', 'Tools'];
-
-  state = {
-    activeFilters: {
-      types: this.typesOfInteraction.toString().toLowerCase(),
-      limit: 5,
-      start: null,
-      end: null,
-      interval: null
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeFilters: {
+        type: props.typesOfInteraction.toString(),
+        limit: 5,
+        start: null,
+        end: null,
+        interval: null
+      }
+    };
   }
 
   applyFilters = (newFilter) => {
@@ -33,7 +34,7 @@ class Sidebar extends Component {
   }
 
   updateActiveTypes = (newTypes) => {
-    this.applyFilters({ types: newTypes.toString().toLowerCase() });
+    this.applyFilters({ type: newTypes.toString().toLowerCase() });
   }
 
   updateDateInterval = (start, end) => {
@@ -41,13 +42,14 @@ class Sidebar extends Component {
   };
 
   render() {
+    const { typesOfInteraction } = this.props;
     return (
       <div className="side-nav">
         <div>
           <fieldset>
             <legend className="main-legend">Type interactie</legend>
             <CheckBoxGroup
-              options={this.typesOfInteraction}
+              options={typesOfInteraction}
               changeSelection={this.updateActiveTypes}
             />
           </fieldset>
@@ -78,7 +80,8 @@ class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
-  applyFilters: PropTypes.func.isRequired
+  applyFilters: PropTypes.func.isRequired,
+  typesOfInteraction: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default Sidebar;
