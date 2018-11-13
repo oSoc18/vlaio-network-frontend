@@ -27,3 +27,26 @@
 .info__container{
   margin: auto;
 }
+
+.type_button_container{
+  display: inline-block;
+  margin: 0 1rem;
+}
+
+.type_button{
+  background: white;
+  color: #0A317C;
+  padding: 2rem 3rem;
+  border: 1px solid #0A317C;
+}
+
+.type_button:hover{
+  cursor: pointer;
+}
+
+.type_button.selected{
+  background: #0A317C;
+  color: white;
+  padding: 2rem 3rem;
+  border: none;
+}

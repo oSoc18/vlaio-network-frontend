@@ -17,6 +17,17 @@ class SunburstChart extends Component {
 
   constructor(props) {
     super(props);
+    this.refreshSunburst(props);
+  }
+
+  componentWillReceiveProps(nextProps){
+    if (nextProps.data === this.state.data){
+      return;
+    }
+    this.refreshSunburst(nextProps);
+  }
+
+  refreshSunburst = (props) => {
     this.state = {
       data: props.data,
       zoomedData: props.data,
@@ -34,7 +45,7 @@ class SunburstChart extends Component {
     this.state.colours = JSON.parse(localStorage.getItem('colorMap'));
     this.state.fullPath.push(this.state.data.name);
     this.refreshStyle(false, props.data);
-  }
+  };
 
   // gets the path to the selected node in the json
   getKeyPath = (node) => {
@@ -53,7 +64,6 @@ class SunburstChart extends Component {
     if (node.children) {
       node.children.map(child => this.refreshStyle(selectedPath, child));
     }
-
     // inserts node information the first time the data is loaded
     if (node.color === undefined) {
       const {colours} = this.state;
@@ -80,14 +90,12 @@ class SunburstChart extends Component {
   // updates the path selection on the chart
   updateChart = (selected, data, keyPath) => {
     this.refreshStyle(selected, data);
-
-    const path = keyPath.reverse();
-
+    const reversedPath = keyPath.slice(0,-1).reverse();
     let tempData = data;
     tempData.style = {
       fillOpacity: 1
     };
-    keyPath.forEach((crumb) => {
+    reversedPath.forEach((crumb) => {
       tempData.children.forEach((node) => {
         if (node.name !== crumb) return;
         tempData = node;
@@ -114,7 +122,6 @@ class SunburstChart extends Component {
       selected, zoomed, fullPath, path, data, zoomedData, hoveredCell, hoveredValue
     } = this.state;
     const {height, width} = this.props;
-
     return (
       <div className="sunburst-wrapper">
         <Sunburst
@@ -124,7 +131,7 @@ class SunburstChart extends Component {
           height={height}
           width={width}
           onValueClick={(node) => {
-            if(node.parent!==null) {
+            if (node.parent !== null) {
               this.setState({
                 fullPath: fullPath.concat(path),
                 zoomed: true,

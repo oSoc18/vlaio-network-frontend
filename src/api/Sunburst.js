@@ -6,8 +6,8 @@ class SunburstAPI extends API {
     this.endpoint = `${this.BASE_URL}/view/`;
   }
 
-  get() {
-    return fetch(this.endpoint, this.getOptions('GET', true)).then(r => r.json());
+  get(type) {
+    return fetch(`${this.endpoint}?criteria=${type}`, this.getOptions('GET', true)).then(r => r.json());
   }
 }
 
