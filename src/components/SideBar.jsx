@@ -13,20 +13,18 @@ import '../assets/styles/sidebar.css';
  * https://www.vlaio.be/nl/begeleiding-advies/coaching-en-advies
  */
 const Sidebar = () => {
-  let selected = ['Begeleiden', 'Community', 'Informeren', 'Netwerken', 'Sensibilisering', 'Subsidie', 'Tools'];
+  const typesOfInteraction = ['Begeleiden', 'Community', 'Informeren', 'Netwerken', 'Sensibilisering', 'Subsidie', 'Tools'];
 
-  const printChanges = (changes) => {
-    selected = changes;
+  const printChanges = (selected) => {
+    console.log(selected);
   };
-
   return (
     <div className="side-nav">
       <div>
         <fieldset>
           <legend className="main-legend">Type interactie</legend>
           <CheckBoxGroup
-            options={['Begeleiden', 'Community', 'Informeren', 'Netwerken', 'Sensibilisering', 'Subsidie', 'Tools']}
-            selected={selected}
+            options={typesOfInteraction}
             changeSelection={printChanges}
           />
         </fieldset>
