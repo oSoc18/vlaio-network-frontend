@@ -18,7 +18,7 @@ class Sidebar extends Component {
 
   state = {
     activeFilters: {
-      types: this.typesOfInteraction,
+      types: this.typesOfInteraction.toString().toLowerCase(),
       limit: 5,
       start: null,
       end: null,
@@ -26,11 +26,19 @@ class Sidebar extends Component {
     }
   }
 
-  updateActiveTypes = (newTypes) => {
+  applyFilters = (newFilter) => {
     const { applyFilters } = this.props;
     const { activeFilters } = this.state;
-    applyFilters({ ...activeFilters, types: newTypes.toString().toLowerCase() });
+    applyFilters({ ...activeFilters, ...newFilter });
   }
+
+  updateActiveTypes = (newTypes) => {
+    this.applyFilters({ types: newTypes.toString().toLowerCase() });
+  }
+
+  updateDateInterval = (start, end) => {
+    this.applyFilters({ start, end });
+  };
 
   render() {
     return (
@@ -61,7 +69,7 @@ class Sidebar extends Component {
 
           <fieldset>
             <legend className="main-legend">Datum van interactie</legend>
-            <TimeBetweenDates />
+            <TimeBetweenDates onValueChange={this.updateDateInterval} />
           </fieldset>
         </div>
       </div>

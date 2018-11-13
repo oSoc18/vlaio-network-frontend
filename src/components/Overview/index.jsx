@@ -62,8 +62,8 @@ Overview.propTypes = {
   activeFilters: PropTypes.shape({
     limit: PropTypes.number,
     types: PropTypes.string,
-    start: PropTypes.instanceOf(Date),
-    end: PropTypes.instanceOf(Date),
+    start: PropTypes.string,
+    end: PropTypes.string,
     interval: PropTypes.number
   })
 };
