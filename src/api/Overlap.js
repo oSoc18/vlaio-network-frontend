@@ -6,8 +6,15 @@ class OverlapAPI extends API {
     this.endpoint = `${this.BASE_URL}/overlap/`;
   }
 
-  get() {
-    return fetch(this.endpoint, this.getOptions('GET', true)).then(r => r.json());
+  get(filters) {
+    const queryString = Object.keys(filters).reduce((string, filter) => {
+      /* eslint-disable no-param-reassign */
+      if (!filters[filter]) return string;
+      string ? string += '&' : string += '?';
+      string += `${filter}=${encodeURIComponent(filters[filter])}`;
+      return string;
+    }, '');
+    return fetch(`${this.endpoint}${queryString}`, this.getOptions('GET', true)).then(r => r.json());
   }
 }
 
