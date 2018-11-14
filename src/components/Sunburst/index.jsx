@@ -9,7 +9,7 @@ class Sunburst extends Component {
     super();
     this.state = {
       sunburstData: [],
-      sunburstType: 'partner'
+      currentType: 'partner'
     };
   }
 
@@ -24,36 +24,34 @@ class Sunburst extends Component {
   };
 
   changeType(type) {
-    if (type === this.state.sunburstType) {
-      return;
-    }
-    if (type === 'partner') {
-      this.setState({
-        sunburstType: 'partner'
-      });
-      document.getElementById('partnerButton').classList.add('selected');
-      document.getElementById('interactionButton').classList.remove('selected');
-    } else if (type === 'interaction') {
-      this.setState({
-        sunburstType: 'interaction'
-      });
-      document.getElementById('partnerButton').classList.remove('selected');
-      document.getElementById('interactionButton').classList.add('selected');
-    }
+    this.setState({ currentType: type });
     this.getData((type));
   }
 
   render() {
-    const { sunburstData } = this.state;
+    const { sunburstData, currentType } = this.state;
     return (
       <div className="sunburst">
         <div>
           <div className="type_button_container">
-            <button id="partnerButton" type="button" className="type_button selected" onClick={() => { this.changeType('partner'); }}>Partners
+            <button
+              id="partnerButton"
+              type="button"
+              className={`type_button${currentType === 'partner' ? ' selected' : ''}`}
+              onClick={() => { this.changeType('partner'); }}
+            >
+              Partners
             </button>
           </div>
           <div className="type_button_container">
-            <button id="interactionButton" type="button" className="type_button" onClick={() => { this.changeType('interaction'); }}>Interactions</button>
+            <button
+              id="interactionButton"
+              type="button"
+              className={`type_button${currentType === 'interaction' ? ' selected' : ''}`}
+              onClick={() => { this.changeType('interaction'); }}
+            >
+              Interactions
+            </button>
           </div>
         </div>
         <div>

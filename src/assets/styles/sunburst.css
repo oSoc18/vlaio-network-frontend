@@ -4,7 +4,7 @@
 }
 
 .sunburst {
-  margin: auto;
+  margin: 0 auto;
 }
 
 .sunburstinfo__container {
@@ -37,8 +37,9 @@
 .type_button{
   background: white;
   color: #0A317C;
-  padding: 2rem 3rem;
+  padding: 1rem 0;
   border: 1px solid #0A317C;
+  width: 14rem;
 }
 
 .type_button:hover{
@@ -47,7 +48,5 @@
 
 .type_button.selected{
   background: #0A317C;
-  color: white;
-  padding: 2rem 3rem;
-  border: none;
+  color: #fff;
 }
