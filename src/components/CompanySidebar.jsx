@@ -5,17 +5,31 @@ import Company from '../models/Company';
 import '../assets/styles/sidebar.css';
 
 class CompanySidebar extends Component {
-  groupAlphabetically = companies => companies.reduce((collection, company) => {
-    const letter = company.name.trim().charAt(0);
-    if (!collection[letter]) collection[letter] = [];
-    collection[letter].push(company);
-    return collection;
-  }, {});
+  state = {
+    searchQuery: ''
+  }
 
-  renderCompany = company => <li>{company.name}</li>;
+  groupCompaniesAlphabetically = () => {
+    const { searchQuery } = this.state;
+    const { companies } = this.props;
+    return companies
+      .filter(company => company.name.toLowerCase().includes(searchQuery))
+      .reduce((collection, company) => {
+        const letter = company.name.trim().charAt(0);
+        if (!collection[letter]) collection[letter] = [];
+        collection[letter].push(company);
+        return collection;
+      }, {});
+  }
+
+  search = (e) => {
+    this.setState({ searchQuery: e.currentTarget.value });
+  }
+
+  renderCompany = company => <li key={company.id}>{company.name}</li>;
 
   renderGroup = (group, companies) => (
-    <div className="company-list__companies__collection">
+    <div key={group} className="company-list__companies__collection">
       <header>{group}</header>
       <ul>
         {companies[group].map(this.renderCompany)}
@@ -24,21 +38,22 @@ class CompanySidebar extends Component {
   );
 
   render() {
-    const alphabeticalCompanies = this.groupAlphabetically(this.props.companies);
+    const { searchQuery } = this.state;
+    const groupedCompanies = this.groupCompaniesAlphabetically();
     return (
       <div className="side-nav side-nav--companies">
         <fieldset>
           <legend className="main-legend">Zoeken naar bedrijven</legend>
-          <input type="search" className="input" />
+          <input type="search" className="input" value={searchQuery} onChange={this.search} />
         </fieldset>
 
         <fieldset className="company-list">
           <legend className="main-legend">Bedrijven</legend>
           <div className="company-list__companies">
             {
-              Object.keys(alphabeticalCompanies)
+              Object.keys(groupedCompanies)
                 .sort()
-                .map(letter => this.renderGroup(letter, alphabeticalCompanies))
+                .map(group => this.renderGroup(group, groupedCompanies))
             }
           </div>
         </fieldset>
