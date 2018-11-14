@@ -130,6 +130,11 @@ h3 {
   justify-content: space-between;
 }
 
+.side-nav {
+  /* - header height - tab height - tab padding - footer height */
+  height: calc(100vh - 10rem - 1.5rem - 5.6rem - 8rem);
+}
+
 .page-alternative {
   display: flex;
   justify-content: center;
