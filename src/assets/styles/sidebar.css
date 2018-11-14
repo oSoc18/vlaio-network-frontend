@@ -2,6 +2,8 @@
   width: 35rem;
   z-index: 1;
   overflow-x: hidden;
+  overflow-y: hidden;
+  color: #FFFFFF;
   background-color: #0A317C;
   padding-top: 5rem;
   padding-left: 2rem;
@@ -12,8 +14,7 @@
   color: #FFFFFF;
 }
 
-.side-nav h1{
-  color: #FFFFFF;
+.side-nav h1 {
   font-weight: 300;
   font-size: 4.8rem;
 }
@@ -37,3 +38,42 @@
   /*border-bottom: 1px solid #FFFFFF;*/
 }
 
+.side-nav--companies .input {
+  width: 90%;
+}
+
+.company-list {
+  height: 80%;
+}
+
+.company-list .main-legend {
+  margin-bottom: 1.5rem;
+}
+
+.company-list__companies {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.company-list__companies header {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.company-list__companies__collection {
+  margin-bottom: 1.5rem;
+}
+
+.company-list__companies__collection ul {
+  padding-left: 2rem;
+}
+
+.company-list__companies__collection li {
+  font-size: 1.3rem;
+  padding: 0.4rem 0;
+  list-style-type: none;
+}
+
+.company-list__companies__collection li button:hover {
+  font-weight: bold;
+}
