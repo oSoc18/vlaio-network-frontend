@@ -12,6 +12,16 @@
   background-color: #69A473;
 }
 
+.button--seamless {
+  color: #fff;
+  cursor: pointer;
+  background-color: inherit;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
 
 .input {
   outline: 0;
