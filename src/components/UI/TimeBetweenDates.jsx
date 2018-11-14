@@ -15,6 +15,7 @@ class TimeBetweenDates extends Component {
       startDate: moment([2016]),
       endDate: moment()
     };
+    this.communicateChanges(this.state.startDate, this.state.endDate);
   }
 
   handleChangeStart = (date) => {
@@ -46,9 +47,7 @@ class TimeBetweenDates extends Component {
   }
 
   communicateChanges(start, end) {
-    if (this.props.onValueChange) {
-      this.props.onValueChange(start, end);
-    }
+    this.props.onValueChange(start.toISOString(), end.toISOString());
   }
 
   render() {

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import User from '../models/User';
 
-const PrivateRoute = ({ layout: Layout, component: Component, currentUser }, ...rest) => {
+const PublicRoute = ({ layout: Layout, component: Component, currentUser }, ...rest) => {
   const Content = Layout || Component;
   return (
     <Route
@@ -11,19 +11,19 @@ const PrivateRoute = ({ layout: Layout, component: Component, currentUser }, ...
       render={routeProps => (
         currentUser
           ? <Content component={Component} currentUser={currentUser} {...routeProps} />
-          : <Redirect to="/login" />
+          : <Content component={Component} {...routeProps} />
       )}
     />
   );
 };
 
-PrivateRoute.defaultProps = {
+PublicRoute.defaultProps = {
   currentUser: null
 };
 
-PrivateRoute.propTypes = {
+PublicRoute.propTypes = {
   currentUser: PropTypes.oneOfType([PropTypes.instanceOf(User), PropTypes.object]),
   component: PropTypes.func.isRequired
 };
 
-export default PrivateRoute;
+export default PublicRoute;
