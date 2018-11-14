@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Sunburst} from 'react-vis';
+import React, { Component } from 'react';
+import { Sunburst } from 'react-vis';
 import PropTypes from 'prop-types';
 import chroma from 'chroma-js';
 
@@ -63,9 +63,9 @@ class SunburstChart extends Component {
     }
     // inserts node information the first time the data is loaded
     if (node.color === undefined) {
-      const {colours} = this.state;
+      const { colours } = this.state;
       if (colours[node.name.toLowerCase()] === undefined) {
-        colours[node.name.toLowerCase()] = chroma.scale(['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#e31a1c', '#fdbf6f'])(Math.random()).hex(); //'#'+((1<<24)*Math.random()|0).toString(16);
+        colours[node.name.toLowerCase()] = chroma.scale(['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#e31a1c', '#fdbf6f'])(Math.random()).hex(); // '#'+((1<<24)*Math.random()|0).toString(16);
         localStorage.setItem('colorMap', JSON.stringify(colours));
       }
       node.color = colours[node.name.toLowerCase()];
@@ -76,7 +76,7 @@ class SunburstChart extends Component {
     }
 
     // changes opacity depending on the selected node
-    node.style = {stroke: '#fff'};
+    node.style = { stroke: '#fff' };
 
     if (selectedPath === true) node.style.fillOpacity = 0.2;
     else node.style.fillOpacity = 1;
@@ -87,7 +87,7 @@ class SunburstChart extends Component {
   // updates the path selection on the chart
   updateChart = (selected, data, keyPath) => {
     this.refreshStyle(selected, data);
-    const reversedPath = keyPath.slice(0,-1).reverse();
+    const reversedPath = keyPath.slice(0, -1).reverse();
     let tempData = data;
     tempData.style = {
       fillOpacity: 1
@@ -118,7 +118,7 @@ class SunburstChart extends Component {
     const {
       selected, zoomed, fullPath, path, data, zoomedData, hoveredCell, hoveredValue
     } = this.state;
-    const {height, width} = this.props;
+    const { height, width } = this.props;
     return (
       <div className="sunburst-wrapper">
         <Sunburst
@@ -134,8 +134,7 @@ class SunburstChart extends Component {
                 zoomed: true,
                 zoomedData: this.zoomIn(path, zoomedData)
               });
-            }
-            else {
+            } else {
               this.setState({
                 fullPath: fullPath.slice(0, -1),
                 zoomed: fullPath.slice(0, -1).length !== 1,

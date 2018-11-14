@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
-import {api} from '../../constants';
+import React, { Component } from 'react';
+import { api } from '../../constants';
 import SunburstChart from './Sunburst';
 
 import '../../assets/styles/sunburst.css';
 
 class Sunburst extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       sunburstData: [],
