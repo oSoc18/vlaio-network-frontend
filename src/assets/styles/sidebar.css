@@ -46,8 +46,30 @@
   height: 80%;
 }
 
+.company-list .main-legend {
+  margin-bottom: 1.5rem;
+}
+
 .company-list__companies {
   overflow-y: scroll;
   height: 100%;
 }
 
+.company-list__companies header {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.company-list__companies__collection {
+  margin-bottom: 1.5rem;
+}
+
+.company-list__companies__collection ul {
+  padding-left: 2rem;
+}
+
+.company-list__companies__collection li {
+  font-size: 1.3rem;
+  padding: 0.4rem 0;
+  list-style-type: none;
+}
