@@ -1,22 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { api } from '../../../constants';
 import Tabs from './Tabs';
 import SideBar from '../../SideBar';
 import Header from '../../Header';
 import Footer from '../../Footer';
 import User from '../../../models/User';
 
-const MainLayout = ({ component: Component, currentUser, ...rest }) => (
-  <div className="main-layout">
-    <Header user={currentUser} />
-    <Tabs {...rest} />
-    <div className="main-content">
-      <SideBar />
-      <Component {...rest} />
-    </div>
-    <Footer />
-  </div>
-);
+class MainLayout extends Component {
+  state = {
+    activeFilters: null,
+    typesOfInteraction: []
+  };
+
+  componentDidMount() {
+    api.interaction.getTypes().then((types) => {
+      this.setState({ typesOfInteraction: types });
+    });
+  }
+
+  applyFilters = (filters) => {
+    this.setState({ activeFilters: filters });
+  }
+
+  render() {
+    const { component: Comp, currentUser, ...rest } = this.props;
+    const { activeFilters, typesOfInteraction } = this.state;
+    return (
+      <div className="main-layout">
+        <Header user={currentUser || undefined} />
+        <Tabs {...rest} />
+        <div className="main-content">
+          { typesOfInteraction.length > 0
+            && <SideBar typesOfInteraction={typesOfInteraction} applyFilters={this.applyFilters} />
+          }
+          <Comp activeFilters={activeFilters || undefined} {...rest} />
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+}
 
 MainLayout.propTypes = {
   component: PropTypes.func.isRequired,
