@@ -46,7 +46,7 @@ class Sunburst extends Component {
   render() {
     const { sunburstData } = this.state;
     return (
-      <div>
+      <div className="sunburst">
         <div>
           <div className="type_button_container">
             <button id="partnerButton" type="button" className="type_button selected" onClick={() => { this.changeType('partner'); }}>Partners

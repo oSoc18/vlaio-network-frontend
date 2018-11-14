@@ -125,7 +125,7 @@ class SunburstChart extends Component {
     return (
       <div className="sunburst-wrapper">
         <Sunburst
-          className="sunburst"
+          className="sunburstChart"
           hideRootNode={!zoomed}
           data={zoomedData}
           height={height}
