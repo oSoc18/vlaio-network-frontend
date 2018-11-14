@@ -11,6 +11,7 @@ import Company from '../../../models/Company';
 
 class MainLayout extends Component {
   state = {
+    activeCompany: null,
     activeFilters: null,
     typesOfInteraction: [],
     companies: []
@@ -30,9 +31,15 @@ class MainLayout extends Component {
     this.setState({ activeFilters: filters });
   }
 
+  selectCompany = (company) => {
+    this.setState({ activeCompany: company });
+  }
+
   render() {
     const { component: Comp, currentUser, ...rest } = this.props;
-    const { activeFilters, typesOfInteraction, companies } = this.state;
+    const {
+      activeFilters, typesOfInteraction, companies, activeCompany
+    } = this.state;
 
     return (
       <div className="main-layout">
@@ -41,12 +48,13 @@ class MainLayout extends Component {
         <div className="main-content">
           { typesOfInteraction.length > 0
             && (rest.location.pathname === '/bedrijven')
-            ? <CompanySidebar companies={companies} />
+            ? <CompanySidebar selectCompany={this.selectCompany} companies={companies} />
             : <SideBar typesOfInteraction={typesOfInteraction} applyFilters={this.applyFilters} />
           }
           <Comp
             companies={companies || undefined}
             activeFilters={activeFilters || undefined}
+            activeCompany={activeCompany || undefined}
             {...rest}
           />
         </div>

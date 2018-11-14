@@ -26,7 +26,16 @@ class CompanySidebar extends Component {
     this.setState({ searchQuery: e.currentTarget.value });
   }
 
-  renderCompany = company => <li key={company.id}>{company.name}</li>;
+  renderCompany = (company) => {
+    const { selectCompany } = this.props;
+    return (
+      <li key={company.id}>
+        <button type="button" className="button--seamless" onClick={() => selectCompany(company)}>
+          {company.name}
+        </button>
+      </li>
+    );
+  };
 
   renderGroup = (group, companies) => (
     <div key={group} className="company-list__companies__collection">
@@ -67,7 +76,8 @@ CompanySidebar.defaultProps = {
 };
 
 CompanySidebar.propTypes = {
-  companies: PropTypes.arrayOf(PropTypes.instanceOf(Company))
+  companies: PropTypes.arrayOf(PropTypes.instanceOf(Company)),
+  selectCompany: PropTypes.func.isRequired
 };
 
 export default CompanySidebar;
