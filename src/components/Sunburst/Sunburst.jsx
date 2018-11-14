@@ -20,11 +20,8 @@ class SunburstChart extends Component {
     this.refreshSunburst(props);
   }
 
-  componentWillReceiveProps(nextProps){
-    if (nextProps.data === this.state.data){
-      return;
-    }
-    this.refreshSunburst(nextProps);
+  componentDidUpdate(prevProps) {
+    if (prevProps.data !== this.state.data) this.refreshSunburst(prevProps);
   }
 
   refreshSunburst = (props) => {
