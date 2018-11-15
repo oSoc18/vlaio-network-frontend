@@ -19,30 +19,32 @@ class Overview extends Component {
 
   componentDidUpdate(prevProps) {
     const newActiveFilters = this.props.activeFilters;
-    if ((JSON.stringify(prevProps.activeFilters) !== JSON.stringify(newActiveFilters)
-      && this.props.activeFilters.type)) {
+    if ((JSON.stringify(prevProps.activeFilters) !== JSON.stringify(newActiveFilters))
+      && newActiveFilters) {
       this.fetchOverlaps(newActiveFilters);
     }
   }
 
   fetchOverlaps = (filters) => {
+    if (!filters.type) delete filters.type;
     api.overlap.get(filters).then((response) => {
       const overlaps = response.map(o => new Overlap(o)) || [];
-      // this.setState({ overlaps });
+      this.setState({ overlaps });
     }).catch(e => console.error(e));
   }
 
   render() {
     const { overlaps } = this.state;
     const { resetFilters } = this.props;
+
     return (
       <div className="overview">
         { (overlaps.length === 0) ? (
           <EmptyState
-            message="Er is geen overlap om weer te geven voor uw geselecteerde filters"
+            message="Er is geen overlap gekend voor uw geselecteerde filters."
             cta={(
               <Fragment>
-                Kies nieuwe filters in de zijbalk of&nbsp;
+                Kies er nieuwe in de zijbalk of&nbsp;
                 <button type="button" className="link" onClick={resetFilters}>
                   reset de huidige filters
                 </button>
