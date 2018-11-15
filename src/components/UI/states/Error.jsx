@@ -18,12 +18,13 @@ const ErrorState = ({ message, graphic, cta }) => (
 );
 
 ErrorState.defaultProps = {
-  graphic: defaultGraphic
+  graphic: defaultGraphic,
+  cta: <span />
 };
 
 ErrorState.propTypes = {
   message: PropTypes.string.isRequired,
-  cta: PropTypes.node.isRequired,
+  cta: PropTypes.node,
   graphic: PropTypes.string
 };
 

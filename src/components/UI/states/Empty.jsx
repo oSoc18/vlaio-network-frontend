@@ -18,12 +18,13 @@ const EmptyState = ({ message, graphic, cta }) => (
 );
 
 EmptyState.defaultProps = {
-  graphic: defaultGraphic
+  graphic: defaultGraphic,
+  cta: <span />
 };
 
 EmptyState.propTypes = {
   message: PropTypes.string.isRequired,
-  cta: PropTypes.node.isRequired,
+  cta: PropTypes.node,
   graphic: PropTypes.string
 };
 
