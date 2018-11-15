@@ -18,7 +18,8 @@ class Overview extends Component {
 
   componentDidUpdate(prevProps) {
     const newActiveFilters = this.props.activeFilters;
-    if (JSON.stringify(prevProps.activeFilters) !== JSON.stringify(newActiveFilters)) {
+    if ((JSON.stringify(prevProps.activeFilters) !== JSON.stringify(newActiveFilters)
+      && this.props.activeFilters.type)) {
       this.fetchOverlaps(newActiveFilters);
     }
   }
