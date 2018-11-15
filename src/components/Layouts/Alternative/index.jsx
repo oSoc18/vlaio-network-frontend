@@ -8,7 +8,7 @@ const AlternativeLayout = ({ component: Component, currentUser, ...rest }) => (
   <div className="main-layout">
     <Header user={currentUser} />
     <div className="page-alternative">
-      <Component {...rest} />
+      <Component currentUser={currentUser} {...rest} />
     </div>
     <Footer />
   </div>
