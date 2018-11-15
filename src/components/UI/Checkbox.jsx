@@ -4,10 +4,6 @@ import PropTypes from 'prop-types';
 import '../../assets/styles/UI/checkbox.css';
 
 const Checkbox = ({ name, checked, checkBoxChanged }) => {
-  const handleChange = () => {
-    checkBoxChanged(name);
-  };
-
   const escapedName = escape(name);
   const semanticName = name.charAt(0).toUpperCase() + name.slice(1);
   return (
@@ -17,7 +13,7 @@ const Checkbox = ({ name, checked, checkBoxChanged }) => {
         id={escapedName}
         type="checkbox"
         defaultChecked={checked}
-        onChange={handleChange}
+        onChange={checkBoxChanged}
       />
       <span className="checkmark-vlaio" />
     </label>);

@@ -6,39 +6,36 @@ class CheckBoxGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: this.props.options
+      checkboxes: props.options.reduce((boxes, option) => {
+        boxes[option] = true;
+        return boxes;
+      }, {})
     };
   }
 
-  check = (checkbox) => {
-    this.setState(prevState => ({
-      selected: [...prevState.selected, checkbox]
-    }), this.communicateChanges);
-  }
-
-  uncheck = (checkbox) => {
-    this.setState(prevState => ({
-      selected: prevState.selected.filter(check => check !== checkbox)
-    }), this.communicateChanges);
-  }
-
   handleChangedCheckbox = (checkbox) => {
-    this.state.selected.includes(checkbox) ? this.uncheck(checkbox) : this.check(checkbox);
+    this.setState((prevState) => {
+      const prevChecked = prevState.checkboxes[checkbox];
+      return { checkboxes: { ...prevState.checkboxes, [checkbox]: !prevChecked } };
+    }, () => this.communicateChanges());
   }
 
   communicateChanges() {
-    if (this.props.changeSelection) {
-      this.props.changeSelection(this.state.selected);
-    }
+    const { checkboxes } = this.state;
+    const { changeSelection } = this.props;
+    const selected = Object.keys(checkboxes).filter(checkbox => checkboxes[checkbox]);
+    changeSelection(selected);
   }
 
   render() {
+    const { checkboxes } = this.state;
     return (
       <div>
-        {this.props.options.map(option => (
+        {Object.keys(checkboxes).map(option => (
           <Checkbox
             key={option}
-            checkBoxChanged={this.handleChangedCheckbox}
+            checkBoxChanged={() => this.handleChangedCheckbox(option)}
+            checked={checkboxes[option]}
             name={option}
           />
         ))}
