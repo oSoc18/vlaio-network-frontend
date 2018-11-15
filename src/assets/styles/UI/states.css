@@ -1,0 +1,13 @@
+.state {
+  width: 50%;
+  margin: 10rem auto;
+  text-align: center;
+}
+
+.state__graphic {
+  max-width: 50%;
+}
+
+.state__message {
+  font-size: 1.8rem;
+}
