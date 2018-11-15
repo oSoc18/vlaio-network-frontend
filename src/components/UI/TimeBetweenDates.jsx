@@ -18,6 +18,10 @@ class TimeBetweenDates extends Component {
     this.communicateChanges(this.state.startDate, this.state.endDate);
   }
 
+  reset = () => {
+    this.setState({ startDate: moment([2016]), endDate: moment() });
+  }
+
   handleChangeStart = (date) => {
     // check if start < end, if not, set start === end
     if (!date.isBefore(this.state.endDate)) {

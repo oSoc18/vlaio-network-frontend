@@ -12,7 +12,7 @@ const Checkbox = ({ name, checked, checkBoxChanged }) => {
       <input
         id={escapedName}
         type="checkbox"
-        defaultChecked={checked}
+        checked={checked}
         onChange={checkBoxChanged}
       />
       <span className="checkmark-vlaio" />

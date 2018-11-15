@@ -13,6 +13,13 @@ class CheckBoxGroup extends Component {
     };
   }
 
+  reset = () => {
+    this.setState((prevState) => {
+      const { checkboxes } = prevState;
+      Object.keys(checkboxes).forEach((c) => { checkboxes[c] = true; });
+    });
+  }
+
   handleChangedCheckbox = (checkbox) => {
     this.setState((prevState) => {
       const prevChecked = prevState.checkboxes[checkbox];
