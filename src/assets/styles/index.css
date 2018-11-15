@@ -132,6 +132,10 @@ h3 {
 
 .side-nav {
   /* - header height - tab height - tab padding - footer height */
+  min-height: calc(100vh - 10rem - 1.5rem - 5.6rem - 8rem);
+}
+
+.side-nav--companies {
   height: calc(100vh - 10rem - 1.5rem - 5.6rem - 8rem);
 }
 
