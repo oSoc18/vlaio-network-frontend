@@ -19,14 +19,13 @@ const Header = ({ user }) => (
         <h2>Agentschap innoveren &amp; ondernemen</h2>
       </div>
       <div className="vlaio-header__top__contact">
-        <div>Contacteer ons</div>
+        { user
+          && <div>Welkom, {capitalizeFirst(user.firstName)} {capitalizeFirst(user.lastName)}</div>
+        }
       </div>
     </div>
     <div className="vlaio-header__bottom">
       <div>Ondersteund door Agentschap Innoveren &amp; Ondernemen</div>
-      { user
-        && <div>Welkom, {capitalizeFirst(user.firstName)} {capitalizeFirst(user.lastName)}</div>
-      }
     </div>
   </header>
 );
