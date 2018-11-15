@@ -14,15 +14,16 @@ class Checkbox extends Component {
       checked: !prevState.checked
     }));
 
-    // communicate the change to parent
     this.props.checkBoxChanged(this.props.name);
   }
 
   render() {
-    const escapedName = escape(this.props.name);
+    const { name } = this.props;
+    const escapedName = escape(name);
+    const semanticName = name.charAt(0).toUpperCase() + name.slice(1);
     return (
-      <label onClick={this.handleChange} className="checkboxLine" htmlFor={escapedName}>
-        {this.props.name}
+      <label className="checkboxLine" htmlFor={escapedName}>
+        {semanticName}
         <input
           id={escapedName}
           type="checkbox"

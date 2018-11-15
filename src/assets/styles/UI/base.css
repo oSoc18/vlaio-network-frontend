@@ -12,6 +12,7 @@
   background-color: #69A473;
 }
 
+
 .button__secondary {
   color: #fff;
   background-color: #002776;
@@ -22,6 +23,16 @@
 .button__secondary:hover, .button__secondary:active {
   cursor: pointer;
   background-color: #022E87;
+}
+
+.button--seamless {
+  color: #fff;
+  cursor: pointer;
+  background-color: inherit;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
 }
 
 

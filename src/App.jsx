@@ -10,7 +10,7 @@ import MainLayout from './components/Layouts/Main';
 import AlternativeLayout from './components/Layouts/Alternative';
 
 import Overview from './components/Overview';
-import SunburstChart from './components/SunburstChart';
+import Sunburst from './components/Sunburst';
 import Companies from './components/Companies';
 import NotFound from './components/404';
 import Login from './components/Auth/Login';
@@ -49,7 +49,7 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <PrivateRoute exact path="/:path(|index|home|overlap)" component={Overview} layout={MainLayout} currentUser={user} />
-          <PrivateRoute path="/interacties" component={SunburstChart} layout={MainLayout} currentUser={user} />
+          <PrivateRoute path="/interacties" component={Sunburst} layout={MainLayout} currentUser={user} />
           <PrivateRoute path="/bedrijven" component={Companies} layout={MainLayout} currentUser={user} />
           <PrivateRoute path="/beheer-data" component={Import} layout={AlternativeLayout} currentUser={user} />
           <PublicRoute path="/login" layout={AlternativeLayout} component={Login} />

@@ -5,19 +5,25 @@ import Checkbox from './Checkbox';
 class CheckBoxGroup extends Component {
   constructor(props) {
     super(props);
-    this.state = { selected: this.props.selected };
+    this.state = {
+      selected: this.props.options
+    };
+  }
+
+  check = (checkbox) => {
+    this.setState(prevState => ({
+      selected: [...prevState.selected, checkbox]
+    }), this.communicateChanges);
+  }
+
+  uncheck = (checkbox) => {
+    this.setState(prevState => ({
+      selected: prevState.selected.filter(check => check !== checkbox)
+    }), this.communicateChanges);
   }
 
   handleChangedCheckbox = (checkbox) => {
-    if (this.state.selected.includes(checkbox)) {
-      this.setState(prevState => ({ // option deselected -> remove from list
-        selected: prevState.selected.filter(check => check !== checkbox)
-      }), this.communicateChanges);
-    } else {
-      this.setState(prevState => ({ // option selected -> add to list
-        selected: [...prevState.selected, checkbox]
-      }), this.communicateChanges);
-    }
+    this.state.selected.includes(checkbox) ? this.uncheck(checkbox) : this.check(checkbox);
   }
 
   communicateChanges() {
@@ -43,7 +49,6 @@ class CheckBoxGroup extends Component {
 
 CheckBoxGroup.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
-  selected: PropTypes.arrayOf(PropTypes.string).isRequired,
   changeSelection: PropTypes.func
 };
 
