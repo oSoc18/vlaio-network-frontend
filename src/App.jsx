@@ -32,10 +32,13 @@ class App extends Component {
   }
 
   authStateChanged = (cookie) => {
-    if (cookie.name === 'user') {
-      const user = JSON.parse(cookie.value);
-      this.setState({ user: user ? new User(user) : null });
+    if (!cookie || cookie.name !== 'user') return;
+    if (!cookie.value) {
+      this.setState({ user: null });
+      return;
     }
+    const user = JSON.parse(cookie.value);
+    this.setState({ user: user ? new User(user) : null });
   }
 
   doLogout = () => {

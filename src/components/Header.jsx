@@ -27,9 +27,9 @@ const Header = ({ user }) => (
     </div>
     <nav className="vlaio-header__bottom">
       <ul>
-        <li><Link to="/">Visualisaties</Link></li>
         { user && (
           <Fragment>
+            <li><Link to="/">Visualisaties</Link></li>
             { user.isAdmin && (
               <Fragment>
                 <li><Link to="/beheer-data">Databeheer</Link></li>
