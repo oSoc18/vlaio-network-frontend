@@ -80,7 +80,14 @@ class Upload extends React.Component {
 
     return (
       <React.Fragment>
-        <h1>Upload nieuw xlsx-bestand</h1>
+        <h1>Upload een nieuw xlsx-bestand</h1>
+        <h2>De spreadsheets dienen:</h2>
+        <ul>
+          <li>in xlsx-formaat opgeslagen te worden</li>
+          <li>het formaat van de templates (hieronder beschikbaar) te volgen</li>
+          <li>de velden "VAT", "Source", "Type" en "Date" te bevatten</li>
+        </ul>
+        <button type="button">Download voorbeeldtemplate</button>
         <p>Selecteer één bestand om te uploaden.</p>
         <div className="flex-container">
           <form className="import__form" method="post" encType="multipart/form-data">
