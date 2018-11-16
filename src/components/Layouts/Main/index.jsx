@@ -31,6 +31,10 @@ class MainLayout extends Component {
     this.setState({ activeFilters: filters });
   }
 
+  resetFilters = () => {
+    if (this.sidebar) this.sidebar.resetFilters();
+  }
+
   selectCompany = (company) => {
     this.setState({ activeCompany: company });
   }
@@ -49,12 +53,19 @@ class MainLayout extends Component {
           { typesOfInteraction.length > 0
             && (rest.location.pathname === '/bedrijven')
             ? <CompanySidebar selectCompany={this.selectCompany} companies={companies} />
-            : <SideBar typesOfInteraction={typesOfInteraction} applyFilters={this.applyFilters} />
+            : (
+              <SideBar
+                ref={(c) => { this.sidebar = c; }}
+                typesOfInteraction={typesOfInteraction}
+                applyFilters={this.applyFilters}
+              />
+            )
           }
           <Comp
             companies={companies || undefined}
             activeFilters={activeFilters || undefined}
             activeCompany={activeCompany || undefined}
+            resetFilters={this.resetFilters}
             {...rest}
           />
         </div>

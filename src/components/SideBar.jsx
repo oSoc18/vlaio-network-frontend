@@ -16,21 +16,34 @@ import '../assets/styles/sidebar.css';
 class Sidebar extends Component {
   constructor(props) {
     super(props);
+    this.defaultFilters = {
+      type: props.typesOfInteraction.toString(),
+      limit: 5,
+      start: null,
+      end: null,
+      timeframe: null
+    };
     this.state = {
-      activeFilters: {
-        type: props.typesOfInteraction.toString(),
-        limit: 5,
-        start: null,
-        end: null,
-        timeframe: null
-      }
+      activeFilters: { ...this.defaultFilters }
     };
   }
 
-  applyFilters = (newFilter) => {
+  applyFilters = async (newFilter = null) => {
     const { applyFilters } = this.props;
+    if (newFilter === null) {
+      await this.setState({ activeFilters: { ...this.defaultFilters } });
+      this.typeFilters.reset();
+      this.intervalFilter.reset();
+      this.dateFilter.reset();
+      applyFilters(this.defaultFilters);
+    }
+
     const { activeFilters } = this.state;
     applyFilters({ ...activeFilters, ...newFilter });
+  }
+
+  resetFilters = () => {
+    this.applyFilters(null);
   }
 
   updateActiveTypes = (newTypes) => {
@@ -47,15 +60,19 @@ class Sidebar extends Component {
 
   render() {
     const { typesOfInteraction } = this.props;
+
     return (
       <div className="side-nav">
         <div>
           <fieldset>
             <legend className="main-legend">Type interactie</legend>
-            <CheckBoxGroup
-              options={typesOfInteraction}
-              changeSelection={this.updateActiveTypes}
-            />
+            { typesOfInteraction.length > 0 && (
+              <CheckBoxGroup
+                options={typesOfInteraction}
+                ref={(c) => { this.typeFilters = c; }}
+                changeSelection={this.updateActiveTypes}
+              />)
+            }
           </fieldset>
 
           {/* <fieldset>
@@ -70,12 +87,18 @@ class Sidebar extends Component {
 
           <fieldset>
             <legend className="main-legend">Interval tussen interacties</legend>
-            <TimeBetween onValueChange={this.updateWeekInterval} />
+            <TimeBetween
+              onValueChange={this.updateWeekInterval}
+              ref={(c) => { this.intervalFilter = c; }}
+            />
           </fieldset>
 
           <fieldset>
             <legend className="main-legend">Datum van interactie</legend>
-            <TimeBetweenDates onValueChange={this.updateDateInterval} />
+            <TimeBetweenDates
+              onValueChange={this.updateDateInterval}
+              ref={(c) => { this.dateFilter = c; }}
+            />
           </fieldset>
         </div>
       </div>

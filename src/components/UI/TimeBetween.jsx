@@ -7,8 +7,13 @@ class TimeBetween extends Component {
     amountOfWeeks: 120
   };
 
+  reset = () => {
+    this.setState({ amountOfWeeks: 120 });
+  }
+
   onChangeValue = (value) => {
-    if (this.props.onValueChange) this.props.onValueChange(value);
+    this.setState({ amountOfWeeks: value });
+    this.props.onValueChange(value);
   }
 
   render() {
@@ -17,7 +22,7 @@ class TimeBetween extends Component {
       <NumericInput
         min={0}
         max={200}
-        defaultValue={amountOfWeeks}
+        value={amountOfWeeks}
         onChange={(value) => { this.onChangeValue(value); }}
         format={num => (num === 1 ? `${num} week` : `${num} weken`)}
       />
