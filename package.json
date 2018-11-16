@@ -15,6 +15,7 @@
     "react": "^16.5.0",
     "react-datepicker": "^1.6.0",
     "react-dom": "^16.5.0",
+    "react-download-link": "^2.2.0",
     "react-dropzone": "^7.0.1",
     "react-modal": "^3.6.1",
     "react-numeric-input": "^2.2.3",

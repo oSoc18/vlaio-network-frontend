@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
+import DownloadLink from 'react-download-link';
+import template from '../../../src/assets/files/template.xlsx'
+
 
 /**
  * The importing flow was first implemented supporting multiple files in one import.
@@ -87,7 +90,12 @@ class Upload extends React.Component {
           <li>het formaat van de templates (hieronder beschikbaar) te volgen</li>
           <li>de velden "VAT", "Source", "Type" en "Date" te bevatten</li>
         </ul>
-        <button type="button">Download voorbeeldtemplate</button>
+        <DownloadLink
+          filename="myfile.txt"
+          exportFile={() => "My cached data"}
+        >
+        Save to disk
+        </DownloadLink>
         <p>Selecteer één bestand om te uploaden.</p>
         <div className="flex-container">
           <form className="import__form" method="post" encType="multipart/form-data">
