@@ -2,26 +2,56 @@ import React, { Component } from 'react';
 import Upload from './Upload';
 import Review from './Review';
 import Success from './Success';
+import { api } from '../../constants';
 
 import '../../assets/styles/import.css';
 
+const NO_CODE = -1;
+
 class Import extends Component {
   state = {
-    step: 1
+    step: 1,
+    message: {},
+    responseCode: NO_CODE
   };
 
-  restart = () => this.setState({ step: 1 });
+  constructor(props) {
+    super(props);
+    this.files = {};
+  }
+
+  restart = () => {
+    this.setState(
+      {
+        step: 1,
+        message: {},
+        responseCode: NO_CODE
+      }
+    );
+    this.files = {};
+  }
 
   stepBack = () => this.setState(prevState => ({ step: prevState.step - 1 }));
 
   stepForward = () => this.setState(prevState => ({ step: prevState.step + 1 }));
 
-  startUpload = () => {
+  startUpload = (files) => {
+    // upload files
+    api.uploading.create(files).then((response) => {
+      this.setState({ message: response });
+    }).catch(e => console.error(e));
     this.stepForward();
+    this.files = files; // keep them in case the user wants to go back
   };
 
   startImport = () => {
-    // do request and show loader
+    const { message } = this.state;
+
+    if (message.upload_id) {
+      api.applyUpload.confirm(message.upload_id).then((response) => {
+        this.setState({ responseCode: response.status });
+      }).catch(e => console.error("error" + e));
+    }
     this.stepForward();
   }
 
@@ -39,8 +69,23 @@ class Import extends Component {
         </div>
         <div className="import__details">
           { step === 1 && <Upload startUpload={this.startUpload} /> }
-          { step === 2 && <Review stepBack={this.stepBack} startImport={this.startImport} /> }
-          { step === 3 && <Success restart={this.restart} /> }
+          { step === 2 && (
+          <Review
+            stepBack={this.stepBack}
+            startImport={this.startImport}
+            errorMessage={this.state.message}
+            files={this.files}
+          />
+          ) }
+
+          { step === 3
+          && (
+          <Success
+            restart={this.restart}
+            files={this.files}
+            importingDone={this.state.responseCode}
+          />
+          ) }
         </div>
       </main>
     );

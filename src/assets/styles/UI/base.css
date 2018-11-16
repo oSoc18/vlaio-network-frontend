@@ -12,6 +12,19 @@
   background-color: #69A473;
 }
 
+
+.button__secondary {
+  color: #fff;
+  background-color: #002776;
+  border: 1px solid #002776;
+  padding: 1rem 3rem;
+}
+
+.button__secondary:hover, .button__secondary:active {
+  cursor: pointer;
+  background-color: #022E87;
+}
+
 .button--seamless {
   color: #fff;
   cursor: pointer;
