@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { api } from '../../constants';
+import EmptyState from '../UI/states/Empty';
 import SunburstChart from './Sunburst';
 
 import '../../assets/styles/sunburst.css';
@@ -30,6 +32,8 @@ class Sunburst extends Component {
 
   render() {
     const { sunburstData, currentType } = this.state;
+    const { resetFilters } = this.props;
+
     return (
       <div className="sunburst">
         <div>
@@ -56,7 +60,17 @@ class Sunburst extends Component {
         </div>
         <div>
           {(sunburstData.length === 0) ? (
-            <p>Er is geen data om weer te geven</p>
+            <EmptyState
+              message="Er zijn geen interactiesequenties gekend voor uw geselecteerde filters."
+              cta={(
+                <Fragment>
+                  Kies er nieuwe in de zijbalk of&nbsp;
+                  <button type="button" className="link" onClick={resetFilters}>
+                    reset de huidige filters
+                  </button>
+                </Fragment>
+              )}
+            />
           ) : (
             <SunburstChart
               data={sunburstData}
@@ -70,5 +84,8 @@ class Sunburst extends Component {
   }
 }
 
+Sunburst.propTypes = {
+  resetFilters: PropTypes.func.isRequired
+};
 
 export default Sunburst;

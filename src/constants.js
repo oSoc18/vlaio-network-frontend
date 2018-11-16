@@ -15,7 +15,7 @@ export const api = {
   overlap: new OverlapAPI(API_URL),
   user: new UserAPI(API_URL),
   uploading: new UploadFiles(API_URL),
-  applyUpload: new ApplyUpload(API_URL)
+  applyUpload: new ApplyUpload(API_URL),
   sunburst: new SunburstAPI(API_URL),
   interaction: new InteractionAPI(API_URL)
 };
