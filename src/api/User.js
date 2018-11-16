@@ -21,8 +21,8 @@ class UserAPI extends API {
     return fetch(`${this.endpoint}/`, this.getOptions('POST', true, user)).then(r => r.json());
   }
 
-  update(userId, toUpdate) {
-    return fetch(`${this.endpoint}/${userId}`, this.getOptions('PATCH', true, toUpdate));
+  update(user) {
+    return fetch(`${this.endpoint}/${user.id}`, this.getOptions('PATCH', true, user));
   }
 
   setRole(userId, role) {

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { api, cookies } from '../../constants';
-import Header from '../Header';
-import Footer from '../Footer';
 
 import '../../assets/styles/login.css';
 
@@ -33,26 +31,20 @@ class Login extends Component {
   render() {
     const { password, username } = this.state;
     return (
-      <div className="main-layout">
-        <Header />
-        <div className="page-alternative">
-          <main className="login">
-            <h2 className="login__title">Inloggen</h2>
-            <form className="login__form" onSubmit={this.login}>
-              <label htmlFor="username">
-                Email
-                <input type="email" className="input" id="username" name="username" value={username} onChange={this.handleChange} />
-              </label>
-              <label htmlFor="password">
-                Wachtwoord
-                <input type="password" className="input" id="password" name="password" value={password} onChange={this.handleChange} />
-              </label>
-              <input type="submit" className="button" value="Inloggen" />
-            </form>
-          </main>
-        </div>
-        <Footer />
-      </div>
+      <main className="login">
+        <h2 className="login__title">Inloggen</h2>
+        <form className="login__form" onSubmit={this.login}>
+          <label htmlFor="username">
+            Email
+            <input type="email" className="input" id="username" name="username" value={username} onChange={this.handleChange} />
+          </label>
+          <label htmlFor="password">
+            Wachtwoord
+            <input type="password" className="input" id="password" name="password" value={password} onChange={this.handleChange} />
+          </label>
+          <input type="submit" className="button" value="Inloggen" />
+        </form>
+      </main>
     );
   }
 }

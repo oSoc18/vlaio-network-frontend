@@ -5,34 +5,44 @@ import Checkbox from './Checkbox';
 class CheckBoxGroup extends Component {
   constructor(props) {
     super(props);
-    this.state = { selected: this.props.selected };
+    this.state = {
+      checkboxes: props.options.reduce((boxes, option) => {
+        boxes[option] = true;
+        return boxes;
+      }, {})
+    };
+  }
+
+  reset = () => {
+    this.setState((prevState) => {
+      const { checkboxes } = prevState;
+      Object.keys(checkboxes).forEach((c) => { checkboxes[c] = true; });
+    });
   }
 
   handleChangedCheckbox = (checkbox) => {
-    if (this.state.selected.includes(checkbox)) {
-      this.setState(prevState => ({ // option deselected -> remove from list
-        selected: prevState.selected.filter(check => check !== checkbox)
-      }), this.communicateChanges);
-    } else {
-      this.setState(prevState => ({ // option selected -> add to list
-        selected: [...prevState.selected, checkbox]
-      }), this.communicateChanges);
-    }
+    this.setState((prevState) => {
+      const prevChecked = prevState.checkboxes[checkbox];
+      return { checkboxes: { ...prevState.checkboxes, [checkbox]: !prevChecked } };
+    }, () => this.communicateChanges());
   }
 
   communicateChanges() {
-    if (this.props.changeSelection) {
-      this.props.changeSelection(this.state.selected);
-    }
+    const { checkboxes } = this.state;
+    const { changeSelection } = this.props;
+    const selected = Object.keys(checkboxes).filter(checkbox => checkboxes[checkbox]);
+    changeSelection(selected);
   }
 
   render() {
+    const { checkboxes } = this.state;
     return (
       <div>
-        {this.props.options.map(option => (
+        {Object.keys(checkboxes).map(option => (
           <Checkbox
             key={option}
-            checkBoxChanged={this.handleChangedCheckbox}
+            checkBoxChanged={() => this.handleChangedCheckbox(option)}
+            checked={checkboxes[option]}
             name={option}
           />
         ))}
@@ -43,7 +53,6 @@ class CheckBoxGroup extends Component {
 
 CheckBoxGroup.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
-  selected: PropTypes.arrayOf(PropTypes.string).isRequired,
   changeSelection: PropTypes.func
 };
 

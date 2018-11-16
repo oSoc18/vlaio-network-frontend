@@ -1,0 +1,31 @@
+.state {
+  width: 50%;
+  margin: 15rem auto;
+  text-align: center;
+  font-family: flanders-sans;
+}
+
+.state--not-found {
+  position: absolute;
+  height: 50rem;
+  width: 100%;
+  top: calc(50% - 25rem);
+  left: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.state--not-found .state__graphic {
+  max-width: 20rem;
+  align-self: center;
+}
+
+.state__graphic {
+  max-width: 50%;
+}
+
+.state__message {
+  font-size: 1.8rem;
+}

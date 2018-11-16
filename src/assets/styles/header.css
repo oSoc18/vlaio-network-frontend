@@ -108,12 +108,23 @@
   height: 4rem;
   width: 100%;
   border-bottom: 1px solid #CBD2DA;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 0 6rem;
-  text-transform: uppercase;
+}
+
+.vlaio-header__bottom ul {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.vlaio-header__bottom li {
+  list-style-type: none;
+  margin-right: 4rem;
 }
 
 .vlaio-header__bottom div:first-of-type {

@@ -89,6 +89,14 @@ p {
   line-height: 1.6;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:visited, a:active {
+  color: inherit;
+}
+
 h1, h2, h3 {
   /*text-transform: uppercase;
   font-weight: bold;*/
@@ -130,6 +138,15 @@ h3 {
   justify-content: space-between;
 }
 
+.side-nav {
+  /* - header height - tab height - tab padding - footer height */
+  min-height: calc(100vh - 10rem - 1.5rem - 5.6rem - 8rem);
+}
+
+.side-nav--companies {
+  height: calc(100vh - 10rem - 1.5rem - 5.6rem - 8rem);
+}
+
 .page-alternative {
   display: flex;
   justify-content: center;
@@ -142,4 +159,40 @@ h3 {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: left center;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 25rem);
+  transform: translateY(-50%);
+  width: 50rem;
+  padding: 2.3rem;
+  z-index: 10;
+  outline: none;
+  border-radius: 0.3rem;
+  font-family: OpenSans;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: $text-color;
+  background-color: #fff;
+  font-family: flanders-sans;
+}
+
+.modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 2.3rem;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, .33);
 }

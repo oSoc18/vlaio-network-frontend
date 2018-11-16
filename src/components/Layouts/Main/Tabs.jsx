@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Tab from './UI/Tab';
+import Tab from '../../UI/Tab';
 
-const MainLayoutTabs = ({ location }) => {
+const Tabs = ({ location }) => {
   const section = location.pathname;
   return (
     <div className="main-layout-tabs">
@@ -19,10 +19,10 @@ const MainLayoutTabs = ({ location }) => {
   );
 };
 
-MainLayoutTabs.propTypes = {
+Tabs.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
   }).isRequired
 };
 
-export default MainLayoutTabs;
+export default Tabs;

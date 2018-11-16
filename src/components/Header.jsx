@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import User from '../models/User';
 
 import '../assets/styles/header.css';
@@ -19,15 +20,27 @@ const Header = ({ user }) => (
         <h2>Agentschap innoveren &amp; ondernemen</h2>
       </div>
       <div className="vlaio-header__top__contact">
-        <div>Contacteer ons</div>
+        { user
+          && <div>Welkom, {capitalizeFirst(user.firstName)} {capitalizeFirst(user.lastName)}</div>
+        }
       </div>
     </div>
-    <div className="vlaio-header__bottom">
-      <div>Ondersteund door Agentschap Innoveren &amp; Ondernemen</div>
-      { user
-        && <div>Welkom, {capitalizeFirst(user.firstName)} {capitalizeFirst(user.lastName)}</div>
-      }
-    </div>
+    <nav className="vlaio-header__bottom">
+      <ul>
+        { user && (
+          <Fragment>
+            <li><Link to="/">Visualisaties</Link></li>
+            { user.isAdmin && (
+              <Fragment>
+                <li><Link to="/beheer-data">Databeheer</Link></li>
+                <li><Link to="/admin">Gebruikersbeheer</Link></li>
+              </Fragment>
+            )}
+            <li><Link to="/logout">Uitloggen</Link></li>
+          </Fragment>
+        )}
+      </ul>
+    </nav>
   </header>
 );
 

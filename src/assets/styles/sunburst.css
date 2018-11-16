@@ -1,12 +1,60 @@
-.sunburst-wrapper {
+.sunburst {
+  margin: 0 auto;
   width: 100%;
+  position: relative;
 }
 
-.sunburst {
+.sunburst-wrapper {
+  margin-top: 2rem;
+}
 
+.sunburst-wrapper > div {
+  margin: 0 auto;
+}
+
+.sunburstinfo__container {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  color: white;
+  background-color: #0A317C;
+  height: 12rem;
+  width: 30rem;
+  padding: 1rem;
+}
+
+.sunburst__name{
+  margin: 1rem 0;
 }
 
 .sunburst__path {
   display: block;
   min-height: 2rem;
+}
+
+.info__container{
+  margin: auto;
+}
+
+.type_button_container{
+  display: inline-block;
+  margin: 0 1rem;
+}
+
+.type_button{
+  background: white;
+  color: #0A317C;
+  padding: 1rem 0;
+  border: 1px solid #0A317C;
+  width: 14rem;
+}
+
+.type_button:hover{
+  cursor: pointer;
+}
+
+.type_button.selected{
+  background: #0A317C;
+  color: #fff;
 }
