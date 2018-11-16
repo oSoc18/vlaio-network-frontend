@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Switch, Redirect } from 'react-router-dom';
 import { cookies } from './constants';
 import User from './models/User';
@@ -52,15 +52,14 @@ class App extends Component {
           <PrivateRoute exact path="/:path(|index|home|overlap)" component={Overview} layout={MainLayout} currentUser={user} />
           <PrivateRoute path="/interacties" component={Sunburst} layout={MainLayout} currentUser={user} />
           <PrivateRoute path="/bedrijven" component={Companies} layout={MainLayout} currentUser={user} />
+          {/* React Fragments are not supported as a child of Switch */}
           { user && user.isAdmin
-            && (
-              <Fragment>
-                <PrivateRoute path="/beheer-data" component={Import} layout={AlternativeLayout} currentUser={user} />
-                <PrivateRoute path="/admin" component={Manage} layout={AlternativeLayout} currentUser={user} />
-              </Fragment>
-            )
+            && <PrivateRoute path="/beheer-data" component={Import} layout={AlternativeLayout} currentUser={user} />
           }
-          <PublicRoute path="/login" layout={AlternativeLayout} component={Login} />
+          { user && user.isAdmin
+            && <PrivateRoute path="/admin" component={Manage} layout={AlternativeLayout} currentUser={user} />
+          }
+          <PublicRoute path="/login" layout={AlternativeLayout} currentUser={user || undefined} component={Login} />
           <PublicRoute path="/logout" component={this.doLogout} />
           <PublicRoute component={NotFound} />
         </Switch>
