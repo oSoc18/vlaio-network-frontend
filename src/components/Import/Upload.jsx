@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
+import 'font-awesome/css/font-awesome.min.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import template from '../../assets/files/template.xlsx';
 
 /**
  * The importing flow was first implemented supporting multiple files in one import.
@@ -87,7 +91,9 @@ class Upload extends React.Component {
           <li>het formaat van de templates (hieronder beschikbaar) te volgen</li>
           <li>de velden "VAT", "Source", "Type" en "Date" te bevatten</li>
         </ul>
-        <button type="button">Download voorbeeldtemplate</button>
+        <a href={template} download="template.xlsx">Download template
+          <FontAwesomeIcon icon="download" />
+        </a>
         <p>Selecteer één bestand om te uploaden.</p>
         <div className="flex-container">
           <form className="import__form" method="post" encType="multipart/form-data">
