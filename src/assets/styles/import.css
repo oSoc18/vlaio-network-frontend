@@ -135,3 +135,7 @@
   display: flex;
   flex-wrap: nowrap;
 }
+
+a[download] {
+  color: #009B48;
+}

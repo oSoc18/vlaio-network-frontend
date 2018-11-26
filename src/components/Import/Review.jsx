@@ -23,7 +23,7 @@ const parseMessage = (response, files) => {
     warnings = <React.Fragment><h3>Opmerkingen</h3><ul>Geen opmerkingen</ul></React.Fragment>;
   }
 
-  return <React.Fragment><h2>{files[0].name}:</h2>{errors}{warnings}</React.Fragment>;
+  return <React.Fragment><h2>{files[0].name}</h2>{errors}{warnings}</React.Fragment>;
 };
 
 const Success = ({
