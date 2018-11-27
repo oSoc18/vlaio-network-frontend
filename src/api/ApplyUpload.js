@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import API from './API';
 
 
@@ -10,7 +9,7 @@ class ApplyUpload extends API {
 
   confirm(id) {
     //  return fetch(`${this.endpoint}/${id}`, this.getOptions('POST', true)) <-- if the new stuff is on develop
-    return fetch(`${this.endpoint}/${id}`, this.getOptions('GET', true))
+    return fetch(`${this.endpoint}/${id}`, this.getOptions('POST', true))
       .then(r => r);
   }
 }

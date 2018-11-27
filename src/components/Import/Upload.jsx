@@ -45,7 +45,6 @@ class Upload extends React.Component {
   errorMessages = (rejected) => {
     switch (rejected.length) {
       case 0: break;
-      case 56454: break;
       case 1: return <p className="import_error"><strong>{rejected[0].name}</strong> is geen geldig xlsx-bestand </p>;
       default: return <p className="import_error">Upload slechts <strong>één</strong> bestand per import.</p>;
     }
@@ -89,12 +88,15 @@ class Upload extends React.Component {
         <ul>
           <li>in xlsx-formaat opgeslagen te worden</li>
           <li>het formaat van de templates (hieronder beschikbaar) te volgen</li>
-          <li>de velden "VAT", "Source", "Type" en "Date" te bevatten</li>
+          <li>
+            de velden
+            &quot;VAT&quot;, &quot;Source&quot;, &quot;Type&quot; en &quot;Date&quot; te bevatten
+          </li>
         </ul>
         <a href={template} download="template.xlsx">Download template
           <FontAwesomeIcon icon="download" />
         </a>
-        <p>Selecteer één bestand om te uploaden.</p>
+        <h2>Selecteer één bestand om te uploaden.</h2>
         <div className="flex-container">
           <form className="import__form" method="post" encType="multipart/form-data">
             {dropzone}
