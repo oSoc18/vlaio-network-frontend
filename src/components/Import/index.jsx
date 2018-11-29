@@ -21,17 +21,23 @@ class Import extends Component {
   }
 
   restart = () => {
-    this.setState(
-      {
-        step: 1,
-        message: {},
-        responseCode: NO_CODE
-      }
-    );
+    this.resetState();
     this.files = {};
   }
 
-  stepBack = () => this.setState(prevState => ({ step: prevState.step - 1 }));
+  resetState = () => {
+    this.setState(
+      prevState => ({
+        step: prevState.step - 1,
+        message: {},
+        responseCode: NO_CODE
+      })
+    );
+  }
+
+  stepBack = () => {
+    this.resetState();
+  }
 
   stepForward = () => this.setState(prevState => ({ step: prevState.step + 1 }));
 
@@ -50,7 +56,10 @@ class Import extends Component {
     if (message.upload_id) {
       api.applyUpload.confirm(message.upload_id).then((response) => {
         this.setState({ responseCode: response.status });
-      }).catch(e => console.error("error" + e));
+      }).catch(function b() {
+        this.setState({ responseCode: 500 }); // unhandled mistake
+        // console.error(`$(e)`);
+      });
     }
     this.stepForward();
   }
@@ -68,7 +77,7 @@ class Import extends Component {
           </ol>
         </div>
         <div className="import__details">
-          { step === 1 && <Upload startUpload={this.startUpload} /> }
+          { step === 1 && <Upload files={this.files} startUpload={this.startUpload} /> }
           { step === 2 && (
           <Review
             stepBack={this.stepBack}

@@ -17,6 +17,12 @@ class Upload extends React.Component {
     this.state = { files: [], rejected: [] };
   }
 
+  componentDidMount() {
+    if (this.props.files && this.props.files.length > 0) {
+      this.setState({ files: this.props.files });
+    }
+  }
+
   onDrop = (acc, rejected) => {
     this.setState(prevState => ({
       files: Array.from(new Set([...prevState.files, ...acc])),
@@ -109,7 +115,12 @@ class Upload extends React.Component {
 }
 
 Upload.propTypes = {
-  startUpload: PropTypes.func.isRequired
+  startUpload: PropTypes.func.isRequired,
+  files: PropTypes.arrayOf(Object)
+};
+
+Upload.defaultProps = {
+  files: []
 };
 
 export default Upload;
