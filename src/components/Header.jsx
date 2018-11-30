@@ -16,8 +16,12 @@ const Header = ({ user }) => (
         <img src={img} alt="Logo Vlaanderen" />
       </div>
       <div className="vlaio-header__top__titles">
-        <h1>Vlaanderen</h1>
-        <h2>Agentschap innoveren &amp; ondernemen</h2>
+        <h1>
+          <a href="http://vlaanderen.be" target="_blank" rel="noopener noreferrer" className="link--seamless">Vlaanderen</a>
+        </h1>
+        <h2>
+          <a href="http://vlaio.be" target="_blank" rel="noopener noreferrer" className="link--seamless">Agentschap innoveren &amp; ondernemen</a>
+        </h2>
       </div>
       <div className="vlaio-header__top__contact">
         { user

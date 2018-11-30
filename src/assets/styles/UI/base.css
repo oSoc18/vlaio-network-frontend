@@ -45,6 +45,19 @@
   margin: 0;
 }
 
+.link--seamless {
+  color: inherit;
+  cursor: pointer;
+}
+
+header .link--seamless:hover {
+  color: #009B48;
+}
+
+.link--seamless:visited, .link--seamless:active {
+  color: inherit;
+}
+
 .input {
   outline: 0;
   border: 1px solid #B0B0B0;
