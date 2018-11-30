@@ -1,22 +1,55 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Company from '../../models/Company';
 import EmptyState from '../UI/states/Empty';
+import { api } from '../../constants';
 
+import '../../assets/styles/timeline.css';
 import '../../assets/styles/companies.css';
 
-const Companies = ({ companies, activeCompany }) => {
-  if (!activeCompany) {
-    return (
-      <EmptyState
-        message="Kies een bedrijf uit de zijbalk om de informatie te tonen"
-      />
-    );
+class Companies extends Component {
+  state = {
+    timeline: null,
+    timelineLoading: false
+  };
+
+  componentDidMount() {
+    this.getTimeline();
   }
 
-  return (
-    <div className="company-details">
-      {activeCompany && (
+  componentDidUpdate(prevProps) {
+    if (prevProps.activeCompany !== this.props.activeCompany) this.getTimeline();
+  }
+
+  getTimeline = async () => {
+    await this.setState({ timelineLoading: true });
+    const { activeCompany } = this.props;
+    if (!activeCompany) return;
+    api.company.getTimeline(activeCompany.id).then((timeline) => {
+      const interactions = timeline.interaction_set;
+      this.setState({
+        timeline: interactions.sort((i1, i2) => new Date(i1.date) - new Date(i2.date)),
+        timelineLoading: false
+      });
+    });
+  }
+
+  render() {
+    const { timelineLoading, timeline } = this.state;
+    const { activeCompany } = this.props;
+
+    if (!activeCompany) {
+      return (
+        <EmptyState
+          message="Kies een bedrijf uit de zijbalk om de informatie te tonen"
+        />
+      );
+    }
+
+    if (timelineLoading) return <p />;
+
+    return (
+      <div className="company-details">
         <table>
           <thead>
             <tr>
@@ -42,10 +75,13 @@ const Companies = ({ companies, activeCompany }) => {
             </tr>
           </tbody>
         </table>
-      )}
-    </div>
-  );
-};
+        <div className="timeline">
+
+        </div>
+      </div>
+    );
+  }
+}
 
 Companies.defaultProps = {
   companies: [],
