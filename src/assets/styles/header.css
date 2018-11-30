@@ -127,6 +127,10 @@
   margin-right: 4rem;
 }
 
+.vlaio-header__bottom li a:hover {
+  color: #009B48;
+}
+
 .vlaio-header__bottom div:first-of-type {
   color: #007AC9;
 }
