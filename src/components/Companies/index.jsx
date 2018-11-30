@@ -75,9 +75,14 @@ class Companies extends Component {
             </tr>
           </tbody>
         </table>
-        <div className="timeline">
-
-        </div>
+        <ul className="timeline">
+          { timeline.map(interaction => (
+            <li key={interaction.id}>
+              <span>{new Date(interaction.date).toLocaleDateString()}</span>
+              <span>{interaction.partner} - {interaction.type}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
