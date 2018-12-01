@@ -74,10 +74,6 @@ class SunburstChart extends Component {
         localStorage.setItem('colorMap', JSON.stringify(colours));
       }
       node.color = colours[node.name.toLowerCase()];
-      // node.label = node.name;
-      // node.labelStyle = {
-      //   fontSize: '14px'
-      // };
     }
 
     // changes opacity depending on the selected node
