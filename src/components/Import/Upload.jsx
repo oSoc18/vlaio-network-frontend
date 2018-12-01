@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import 'font-awesome/css/font-awesome.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 import template from '../../assets/files/template.xlsx';
 
@@ -57,7 +58,6 @@ class Upload extends React.Component {
     return null;
   }
 
-  // multipart time https://stackoverflow.com/questions/41610811/react-js-how-to-send-a-multipart-form-data-to-server
   render() {
     const dropzone = (this.state.files.length > 0) ? (
       <ul> {this.state.files.map((f, i) => (
@@ -82,7 +82,7 @@ class Upload extends React.Component {
           <p className="import__dropzone-content">Sleep hier het xlsx-bestand</p>
           <p>of</p>
           <button className="import__select-buton button__secondary" type="button">
-          klik hier om een bestand te selecteren.
+          Klik hier om een bestand te selecteren.
           </button>
           {this.errorMessages(this.state.rejected)}
         </Dropzone>);
@@ -99,8 +99,7 @@ class Upload extends React.Component {
             &quot;VAT&quot;, &quot;Source&quot;, &quot;Type&quot; en &quot;Date&quot; te bevatten
           </li>
         </ul>
-        <a href={template} download="template.xlsx">Download template
-          <FontAwesomeIcon icon="download" />
+        <a href={template} download="template.xlsx">Download template <FontAwesomeIcon icon={faDownload} />
         </a>
         <h2>Selecteer één bestand om te uploaden.</h2>
         <div className="flex-container">
