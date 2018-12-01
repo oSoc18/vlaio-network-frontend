@@ -124,18 +124,13 @@ class SunburstChart extends Component {
     let dataToLimit = JSON.parse(JSON.stringify(data));
     if (maxDepth === 0) {
       dataToLimit.children = [];
-      console.log(dataToLimit);
       return dataToLimit;
     }
     const newMaxDepth = maxDepth - 1;
 
-    //dataToLimit.children.forEach(child => this.limitDataDepth(child, newMaxDepth));
     for (let i = 0; i < dataToLimit.children.length; i++) {
       dataToLimit.children[i] = this.limitDataDepth(dataToLimit.children[i], newMaxDepth);
     }
-
-    console.log('last');
-    console.log(dataToLimit);
     return dataToLimit;
   };
 
