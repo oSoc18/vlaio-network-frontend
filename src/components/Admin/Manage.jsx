@@ -133,7 +133,7 @@ class Manage extends Component {
             onClick={this.closeUserModal}
             tabIndex={0}
           />
-          <h2>Gebruiker toevoegen</h2>
+          <h2>{userBeingModified ? 'Gebruiker bewerken' : 'Gebruiker toevoegen' }</h2>
           <UserForm
             addUser={this.addUser}
             updateUser={this.updateUser}
