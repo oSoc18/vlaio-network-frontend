@@ -12,10 +12,15 @@ const codeLib = {
   500: internalServerError,
   401: authorityError
 };
+
+/**
+ * Gets error message based on the response code of the server
+ * param code: the status code responded by the server
+ */
 const getMessage = (code) => {
   if (codeLib[code]) return codeLib[code];
 
-  return unknownError;
+  return unknownError; // code not in dictionary? Return unknown error code message
 };
 const ResponseMessage = ({ responseCode }) => (
   <div>
