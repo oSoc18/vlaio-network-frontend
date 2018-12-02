@@ -7,6 +7,7 @@ import { api } from '../../constants';
 import '../../assets/styles/import.css';
 
 const NO_CODE = -1;
+const IMPORT_STATE = Object.freeze({ UPLOAD: 1, IMPORT: 2, SUCCESS: 3 });
 
 class Import extends Component {
   state = {
@@ -39,8 +40,14 @@ class Import extends Component {
     this.resetState();
   }
 
+  /**
+   * sets the next step of the importing process
+   */
   stepForward = () => this.setState(prevState => ({ step: prevState.step + 1 }));
 
+  /**
+   * Function called when the user clicks on the next button of the upload page (IMPORT_STATE: 1)
+   */
   startUpload = (files) => {
     // upload files
     api.uploading.create(files).then((response) => {
@@ -50,6 +57,9 @@ class Import extends Component {
     this.files = files; // keep them in case the user wants to go back
   };
 
+  /**
+   * Function called when the user clicks on the next button of the review page (IMPORT_STATE: 2)
+   */
   startImport = () => {
     const { message } = this.state;
 
@@ -57,7 +67,6 @@ class Import extends Component {
       api.applyUpload.confirm(message.upload_id).then((response) => {
         this.setState({ responseCode: response.status });
       }).catch(() => {
-        console.error('TEST');
         this.setState({ responseCode: 500 }); // unhandled mistake
       });
     }
@@ -71,14 +80,16 @@ class Import extends Component {
       <main className="import">
         <div className="import__progress">
           <ol>
-            <li className={step === 1 ? 'active' : ''}><span>upload</span></li>
-            <li className={step === 2 ? 'active' : ''}><span>controle</span></li>
-            <li className={step === 3 ? 'active' : ''}><span>import</span></li>
+            <li className={step === IMPORT_STATE.UPLOAD ? 'active' : ''}><span>upload</span></li>
+            <li className={step === IMPORT_STATE.IMPORT ? 'active' : ''}><span>controle</span></li>
+            <li className={step === IMPORT_STATE.SUCCESS ? 'active' : ''}><span>import</span></li>
           </ol>
         </div>
         <div className="import__details">
-          { step === 1 && <Upload files={this.files} startUpload={this.startUpload} /> }
-          { step === 2 && (
+          { step === IMPORT_STATE.UPLOAD && (
+          <Upload files={this.files} startUpload={this.startUpload} />
+          ) }
+          { step === IMPORT_STATE.IMPORT && (
           <Review
             stepBack={this.stepBack}
             startImport={this.startImport}
@@ -87,7 +98,7 @@ class Import extends Component {
           />
           ) }
 
-          { step === 3
+          { step === IMPORT_STATE.SUCCESS
           && (
           <Success
             restart={this.restart}

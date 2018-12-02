@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import loading from '../../assets/img/loading.gif';
 
+/**
+ * @param {JSON} response of the server
+ * @param {array} files list of uploaded files
+ * @returns {React.Component}
+ */
 const parseMessage = (response, files) => {
   let errors = null;
   let warnings = null;
@@ -26,6 +31,9 @@ const parseMessage = (response, files) => {
   return <React.Fragment><h2>{files[0].name}</h2>{errors}{warnings}</React.Fragment>;
 };
 
+/**
+ * See Proptypes specifications for parameter types
+ */
 const Success = ({
   stepBack, startImport, errorMessage, files
 }) => (

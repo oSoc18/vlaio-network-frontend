@@ -24,6 +24,11 @@ class Upload extends React.Component {
     }
   }
 
+  /**
+   * Callback from Dropzone: saving accepted and rejected files
+   * @param acc files accepted by Dropzone
+   * @param rejected files rejected by Dropzone
+   */
   onDrop = (acc, rejected) => {
     this.setState(prevState => ({
       files: Array.from(new Set([...prevState.files, ...acc])),
@@ -31,6 +36,9 @@ class Upload extends React.Component {
     }));
   }
 
+  /**
+   * on canceling in file selection screen
+   */
   onCancel = () => {
     this.setState({
       files: []
@@ -38,6 +46,10 @@ class Upload extends React.Component {
   }
 
 
+  /**
+   * Deletes a certain file from the list of to be uploaded files
+   * @param {File} selected file to be deleted
+   */
   deleteFile = (file) => {
     const fileCopy = [...this.state.files]; // fix this later
     const index = fileCopy.indexOf(file);
@@ -45,10 +57,17 @@ class Upload extends React.Component {
     this.setState({ files: fileCopy });
   }
 
+  /**
+   * onClick function starting the upload of the files
+   */
   onSubmit = () => {
     this.props.startUpload(this.state.files);
   }
 
+  /**
+   * Displays the error message based on the length of rejected
+   * @param {arrayOf(File)} rejected files that are rejected by Dropzone
+   */
   errorMessages = (rejected) => {
     switch (rejected.length) {
       case 0: break;

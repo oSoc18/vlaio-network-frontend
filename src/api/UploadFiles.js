@@ -1,20 +1,36 @@
 import APIMulti from './APIMulti';
 
-const isJsonString = (str) => {
+/**
+ *
+ * @param {str} s string that has to be checked on being in JSON
+ */
+const isJsonString = (s) => {
   try {
-    JSON.parse(str);
+    JSON.parse(s);
   } catch (e) {
     return false;
   }
   return true;
 };
 
+/**
+ * Communicates with the server's Upload endpoint
+ */
 class UploadFiles extends APIMulti {
+  /**
+   * prepares query
+   * @param {string} url of the upload endpoint
+   */
   constructor(url) {
     super(url);
     this.endpoint = `${this.BASE_URL}/upload`;
   }
 
+  /**
+   * makes the upload request to the server with the selected file(s)
+   * @param {array} files files to be uploaded (limited to 1 at the moment)
+   * @returns {JSON}
+   */
   create(files) {
     return fetch(`${this.endpoint}/`, this.getOptions('POST', true, files)).then((r) => {
       const errorMessage = {
