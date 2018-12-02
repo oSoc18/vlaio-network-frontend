@@ -45,7 +45,7 @@ class Import extends Component {
     // upload files
     api.uploading.create(files).then((response) => {
       this.setState({ message: response });
-    }).catch(e => console.error(e));
+    }).catch(e => this.setState({ message: e }));
     this.stepForward();
     this.files = files; // keep them in case the user wants to go back
   };
@@ -56,9 +56,9 @@ class Import extends Component {
     if (message.upload_id) {
       api.applyUpload.confirm(message.upload_id).then((response) => {
         this.setState({ responseCode: response.status });
-      }).catch(function b() {
+      }).catch(() => {
+        console.error('TEST');
         this.setState({ responseCode: 500 }); // unhandled mistake
-        // console.error(`$(e)`);
       });
     }
     this.stepForward();
