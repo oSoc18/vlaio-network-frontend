@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { api } from '../../constants';
 import EmptyState from '../UI/states/Empty';
 import SunburstChart from './Sunburst';
+import exportToPNG from '../../util/import-vis';
 
 import '../../assets/styles/sunburst.css';
 
@@ -21,12 +22,12 @@ class Sunburst extends Component {
 
   getData = (type) => {
     api.sunburst.get(type).then((response) => {
-      this.setState({ sunburstData: response });
+      this.setState({sunburstData: response});
     }).catch(e => console.error(e));
   };
 
   changeType(type) {
-    this.setState({ currentType: type });
+    this.setState({currentType: type});
     this.getData((type));
   }
 
@@ -42,7 +43,9 @@ class Sunburst extends Component {
               id="partnerButton"
               type="button"
               className={`type_button${currentType === 'partner' ? ' selected' : ''}`}
-              onClick={() => { this.changeType('partner'); }}
+              onClick={() => {
+                this.changeType('partner');
+              }}
             >
               Partners
             </button>
@@ -52,7 +55,9 @@ class Sunburst extends Component {
               id="interactionButton"
               type="button"
               className={`type_button${currentType === 'interaction' ? ' selected' : ''}`}
-              onClick={() => { this.changeType('interaction'); }}
+              onClick={() => {
+                this.changeType('interaction');
+              }}
             >
               Interactions
             </button>
@@ -72,11 +77,20 @@ class Sunburst extends Component {
               )}
             />
           ) : (
-            <SunburstChart
-              data={sunburstData}
-              height={700}
-              width={700}
-            />
+            <div>
+              <div>
+                <SunburstChart
+                  data={sunburstData}
+                  height={700}
+                  width={700}
+                />
+              </div>
+              <div>
+                <button type="button" className="type_button" onClick={() => exportToPNG('sunburst')}>
+                  export
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </div>
