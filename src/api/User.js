@@ -22,11 +22,11 @@ class UserAPI extends API {
   }
 
   update(user) {
-    return fetch(`${this.endpoint}/${user.id}`, this.getOptions('PATCH', true, user));
+    return fetch(`${this.endpoint}/${user.id}`, this.getOptions('PATCH', true, user)).then(r => API.parseResponse(r));
   }
 
   setRole(userId, role) {
-    return this.update(userId, { role });
+    return fetch(`${this.endpoint}/${userId}`, this.getOptions('PATCH', true, { role })).then(r => API.parseResponse(r));
   }
 
   delete(id) {
