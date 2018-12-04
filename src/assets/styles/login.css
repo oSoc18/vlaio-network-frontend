@@ -28,3 +28,7 @@
   width: 45%;
   min-width: 8rem;
 }
+
+.login__error {
+  color: #EE0000;
+}
