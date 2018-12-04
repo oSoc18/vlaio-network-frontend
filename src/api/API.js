@@ -11,6 +11,13 @@ class API {
     });
   }
 
+  static parseResponse(response) {
+    if (response.status === 403 || response.status === 401) {
+      window.location.href = 'logout';
+    }
+    return response.json();
+  }
+
   getOptions(method, authRequired = false, body = null) {
     const options = {
       method: method.toUpperCase(),

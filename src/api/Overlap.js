@@ -16,7 +16,7 @@ class OverlapAPI extends API {
         return string;
       }, '')
       : '';
-    return fetch(`${this.endpoint}${queryString}`, this.getOptions('GET', true)).then(r => r.json());
+    return fetch(`${this.endpoint}${queryString}`, this.getOptions('GET', true)).then(r => API.parseResponse(r));
   }
 }
 
