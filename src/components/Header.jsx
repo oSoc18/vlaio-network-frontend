@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import User from '../models/User';
 
 import '../assets/styles/header.css';
@@ -15,19 +16,35 @@ const Header = ({ user }) => (
         <img src={img} alt="Logo Vlaanderen" />
       </div>
       <div className="vlaio-header__top__titles">
-        <h1>Vlaanderen</h1>
-        <h2>Agentschap innoveren &amp; ondernemen</h2>
+        <h1>
+          <a href="http://vlaanderen.be" target="_blank" rel="noopener noreferrer" className="link--seamless">Vlaanderen</a>
+        </h1>
+        <h2>
+          <a href="http://vlaio.be" target="_blank" rel="noopener noreferrer" className="link--seamless">Agentschap innoveren &amp; ondernemen</a>
+        </h2>
       </div>
       <div className="vlaio-header__top__contact">
-        <div>Contacteer ons</div>
+        { user
+          && <div>Welkom, {capitalizeFirst(user.firstName)} {capitalizeFirst(user.lastName)}</div>
+        }
       </div>
     </div>
-    <div className="vlaio-header__bottom">
-      <div>Ondersteund door Agentschap Innoveren &amp; Ondernemen</div>
-      { user
-        && <div>Welkom, {capitalizeFirst(user.firstName)} {capitalizeFirst(user.lastName)}</div>
-      }
-    </div>
+    <nav className="vlaio-header__bottom">
+      <ul>
+        { user && (
+          <Fragment>
+            <li><Link to="/">Visualisaties</Link></li>
+            { user.isAdmin && (
+              <Fragment>
+                <li><Link to="/beheer-data">Databeheer</Link></li>
+                <li><Link to="/admin">Gebruikersbeheer</Link></li>
+              </Fragment>
+            )}
+            <li><Link to="/logout">Uitloggen</Link></li>
+          </Fragment>
+        )}
+      </ul>
+    </nav>
   </header>
 );
 

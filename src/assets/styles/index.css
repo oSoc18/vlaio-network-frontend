@@ -89,6 +89,14 @@ p {
   line-height: 1.6;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:visited, a:active {
+  color: inherit;
+}
+
 h1, h2, h3 {
   /*text-transform: uppercase;
   font-weight: bold;*/
@@ -132,6 +140,10 @@ h3 {
 
 .side-nav {
   /* - header height - tab height - tab padding - footer height */
+  min-height: calc(100vh - 10rem - 1.5rem - 5.6rem);
+}
+
+.side-nav--companies {
   height: calc(100vh - 10rem - 1.5rem - 5.6rem - 8rem);
 }
 

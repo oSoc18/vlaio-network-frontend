@@ -12,6 +12,19 @@
   background-color: #69A473;
 }
 
+
+.button__secondary {
+  color: #fff;
+  background-color: #002776;
+  border: 1px solid #002776;
+  padding: 1rem 3rem;
+}
+
+.button__secondary:hover, .button__secondary:active {
+  cursor: pointer;
+  background-color: #022E87;
+}
+
 .button--seamless {
   color: #fff;
   cursor: pointer;
@@ -22,6 +35,28 @@
   margin: 0;
 }
 
+.link {
+  color: #009B48;
+  cursor: pointer;
+  background-color: inherit;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+.link--seamless {
+  color: inherit;
+  cursor: pointer;
+}
+
+header .link--seamless:hover {
+  color: #009B48;
+}
+
+.link--seamless:visited, .link--seamless:active {
+  color: inherit;
+}
 
 .input {
   outline: 0;
