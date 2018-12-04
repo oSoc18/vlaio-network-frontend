@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Company from '../../models/Company';
 import EmptyState from '../UI/states/Empty';
 import { api } from '../../constants';
+import LoadingState from '../UI/states/Loading';
 
 import '../../assets/styles/timeline.css';
 import '../../assets/styles/companies.css';
@@ -46,7 +47,13 @@ class Companies extends Component {
       );
     }
 
-    if (timelineLoading) return <p />;
+    if (timelineLoading) {
+      return (
+        <div className="company-details">
+          <LoadingState />
+        </div>
+      );
+    }
 
     return (
       <div className="company-details">
