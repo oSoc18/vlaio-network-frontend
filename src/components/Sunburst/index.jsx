@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {api} from '../../constants';
 import SunburstChart from './Sunburst';
-import exportToPNG from '../../util/import-vis';
-
 import '../../assets/styles/sunburst.css';
 
 class Sunburst extends Component {
@@ -70,11 +68,6 @@ class Sunburst extends Component {
                   height={700}
                   width={700}
                 />
-              </div>
-              <div>
-                <button type="button" className="type_button" onClick={() => exportToPNG('sunburst')}>
-                  export
-                </button>
               </div>
             </div>
           )}

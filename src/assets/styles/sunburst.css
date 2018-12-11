@@ -29,6 +29,10 @@
   margin: auto;
 }
 
+.info__container div button{
+  margin: 1rem auto;
+}
+
 .type_button_container{
   display: inline-block;
   margin: 0 1rem;

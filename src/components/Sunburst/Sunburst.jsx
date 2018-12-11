@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Sunburst } from 'react-vis';
 import PropTypes from 'prop-types';
 import chroma from 'chroma-js';
+import exportToPNG from '../../util/import-vis';
+
 
 import '../../assets/styles/sunburst.css';
 
@@ -166,6 +168,11 @@ class SunburstChart extends Component {
             <span className="sunburst__path">{fullPath.join(' > ')} &gt; {path.join(' > ')}</span>
             <br />
             <span>aantal: {hoveredValue !== null ? `${hoveredValue}` : ''}</span>
+          </div>
+          <div>
+            <button type="button" className="type_button" onClick={() => exportToPNG('sunburst')}>
+              export
+            </button>
           </div>
         </div>
       </div>

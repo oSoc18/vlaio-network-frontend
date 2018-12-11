@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { api } from '../../constants';
 import UpSetPlot from './UpSet';
 import Overlap from '../../models/Overlap';
+import exportToPNG from '../../util/import-vis';
 
 import '../../assets/styles/overview.css';
 
@@ -34,19 +35,26 @@ class Overview extends Component {
     const { overlaps } = this.state;
 
     return (
-      <div className="overview">
-        { (overlaps.length === 0) ? (
-          <p>No overlaps to show. Check your internet connection.</p>
-        ) : (
-          <svg className="overview__plot" width="1000" height="940">
-            <UpSetPlot
-              overlaps={overlaps}
-              width={1000}
-              height={940}
-            />
-          </svg>
-        )
-        }
+      <div>
+        <div>
+          <button type="button" className="type_button" onClick={() => exportToPNG('sunburst')}>
+            export
+          </button>
+        </div>
+          <div className="overview">
+            { (overlaps.length === 0) ? (
+              <p>No overlaps to show. Check your internet connection.</p>
+            ) : (
+              <svg className="overview__plot" width="1000" height="940">
+                <UpSetPlot
+                  overlaps={overlaps}
+                  width={1000}
+                  height={940}
+                />
+              </svg>
+            )
+            }
+          </div>
       </div>
     );
   }
