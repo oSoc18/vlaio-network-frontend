@@ -66,12 +66,11 @@ class Manage extends Component {
       last_name: user.lastName,
       email: user.email,
       id: userId
-    }).then(() => {
+    }).then((updatedUser) => {
       this.setState((prevState) => {
         const users = [...prevState.users];
-        const userIndex = users.findIndex(usr => usr.id === user.id);
-        console.log(userIndex);
-        users[userIndex] = new User(user);
+        const userIndex = users.findIndex(usr => usr.id === userId);
+        users[userIndex] = new User(updatedUser);
         return {
           users,
           userModalShown: false,
@@ -101,8 +100,8 @@ class Manage extends Component {
     const {
       users, searchQuery, userModalShown, userBeingModified
     } = this.state;
-
     const { currentUser } = this.props;
+
     return (
       <main className="user-management">
         <h2 className="user-management__title">Gebruikersbeheer</h2>
@@ -134,14 +133,14 @@ class Manage extends Component {
             onClick={this.closeUserModal}
             tabIndex={0}
           />
-          <h2>Gebruiker toevoegen</h2>
+          <h2>{userBeingModified ? 'Gebruiker bewerken' : 'Gebruiker toevoegen' }</h2>
           <UserForm
             addUser={this.addUser}
             updateUser={this.updateUser}
             user={userBeingModified}
           />
         </Modal>
-        { users.length > 0 || (users.length === 1 && users[0].id === currentUser.id)
+        { users.length > 0 && !(users.length === 1 && users[0].id === currentUser.id)
           ? (
             <UserTable
               users={users}

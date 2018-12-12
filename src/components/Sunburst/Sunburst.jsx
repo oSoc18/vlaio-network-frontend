@@ -170,7 +170,7 @@ class SunburstChart extends Component {
             <span>aantal: {hoveredValue !== null ? `${hoveredValue}` : ''}</span>
           </div>
           <div>
-            <button type="button" className="type_button" onClick={() => exportToPNG('sunburst')}>
+            <button type="button" className="type_button export_button" onClick={() => exportToPNG('sunburst')}>
               export
             </button>
           </div>
