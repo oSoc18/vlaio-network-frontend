@@ -34,17 +34,15 @@ class UploadFiles extends APIMulti {
   create(files) {
     return fetch(`${this.endpoint}/`, this.getOptions('POST', true, files)).then((r) => {
       const errorMessage = {
-        errors: ['Het bestand voldoet niet aan het template. Indien u denkt dat het bestand '
+        errors: ['Het bestand voldoet niet aan het template of is leeg. Indien u denkt dat het bestand '
         + 'wel voldoet, geef dit door aan het ontwikkelingsteam of de verandertwoordelijke.'],
         warnings: ['Er is een fout opgetreden (zie foutmelding).']
       };
 
-      if (isJsonString(r)) {
-        r.json();
-      } else {
-        return errorMessage;
+      if (r.ok) {
+        return r.json();
       }
-      return errorMessage;
+      return errorMessage; // if Promise rejected
     });
   }
 }
