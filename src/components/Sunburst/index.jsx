@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { api } from '../../constants';
 import EmptyState from '../UI/states/Empty';
 import SunburstChart from './Sunburst';
+import LoadingState from '../UI/states/Loading';
 
 import '../../assets/styles/sunburst.css';
 
@@ -11,6 +12,7 @@ class Sunburst extends Component {
     super();
     this.state = {
       sunburstData: [],
+      sunburstIsLoading: true,
       currentType: 'partner'
     };
   }
@@ -20,8 +22,12 @@ class Sunburst extends Component {
   }
 
   getData = (type) => {
+    this.setState({ sunburstIsLoading: true });
     api.sunburst.get(type).then((response) => {
-      this.setState({ sunburstData: response });
+      this.setState({
+        sunburstData: response,
+        sunburstIsLoading: false
+      });
     }).catch(e => console.error(e));
   };
 
@@ -31,8 +37,16 @@ class Sunburst extends Component {
   }
 
   render() {
-    const { sunburstData, currentType } = this.state;
+    const { sunburstData, currentType, sunburstIsLoading } = this.state;
     const { resetFilters } = this.props;
+
+    if (sunburstIsLoading) {
+      return (
+        <div className="sunburst">
+          <LoadingState />
+        </div>
+      );
+    }
 
     return (
       <div className="sunburst">

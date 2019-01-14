@@ -17,7 +17,7 @@ class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.defaultFilters = {
-      type: props.typesOfInteraction.toString(),
+      types: props.typesOfInteraction.toString(),
       limit: 5,
       start: null,
       end: null,

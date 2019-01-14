@@ -7,7 +7,7 @@ class SunburstAPI extends API {
   }
 
   get(type) {
-    return fetch(`${this.endpoint}?criteria=${type}`, this.getOptions('GET', true)).then(r => r.json());
+    return fetch(`${this.endpoint}?criteria=${type}`, this.getOptions('GET', true)).then(r => API.parseResponse(r));
   }
 }
 

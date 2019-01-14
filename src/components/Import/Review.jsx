@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import loading from '../../assets/img/loading.gif';
 
+/**
+ * @param {JSON} response of the server
+ * @param {array} files list of uploaded files
+ * @returns {React.Component}
+ */
 const parseMessage = (response, files) => {
   let errors = null;
   let warnings = null;
@@ -23,9 +28,12 @@ const parseMessage = (response, files) => {
     warnings = <React.Fragment><h3>Opmerkingen</h3><ul>Geen opmerkingen</ul></React.Fragment>;
   }
 
-  return <React.Fragment><h2>{files[0].name}:</h2>{errors}{warnings}</React.Fragment>;
+  return <React.Fragment><h2>{files[0].name}</h2>{errors}{warnings}</React.Fragment>;
 };
 
+/**
+ * See Proptypes specifications for parameter types
+ */
 const Success = ({
   stepBack, startImport, errorMessage, files
 }) => (
@@ -33,7 +41,7 @@ const Success = ({
     <h1>Controleer de data</h1>
     <div>{parseMessage(errorMessage, files)}</div>
     <button className="button import__prev" type="button" onClick={stepBack}>Terug</button>
-    <button disabled={!errorMessage.warnings} className="button import__next" type="button" onClick={startImport}>Importeren</button>
+    <button disabled={errorMessage.errors || !errorMessage.warnings} className="button import__next" type="button" onClick={startImport}>Importeren</button>
   </div>
 );
 

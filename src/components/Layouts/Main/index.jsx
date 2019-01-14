@@ -5,7 +5,6 @@ import Tabs from './Tabs';
 import SideBar from '../../SideBar';
 import CompanySidebar from '../../CompanySidebar';
 import Header from '../../Header';
-import Footer from '../../Footer';
 import User from '../../../models/User';
 import Company from '../../../models/Company';
 
@@ -69,7 +68,6 @@ class MainLayout extends Component {
             {...rest}
           />
         </div>
-        <Footer />
       </div>
     );
   }

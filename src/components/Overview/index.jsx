@@ -4,12 +4,14 @@ import { api } from '../../constants';
 import UpSetPlot from './UpSet';
 import Overlap from '../../models/Overlap';
 import EmptyState from '../UI/states/Empty';
+import LoadingState from '../UI/states/Loading';
 
 import '../../assets/styles/overview.css';
 
 class Overview extends Component {
   state = {
-    overlaps: []
+    overlaps: [],
+    overlapsAreLoading: true
   };
 
   componentDidMount() {
@@ -26,16 +28,28 @@ class Overview extends Component {
   }
 
   fetchOverlaps = (filters) => {
+    this.setState({ overlapsAreLoading: true });
     if (!filters.type) delete filters.type;
     api.overlap.get(filters).then((response) => {
       const overlaps = response.map(o => new Overlap(o)) || [];
-      this.setState({ overlaps });
+      this.setState({
+        overlaps,
+        overlapsAreLoading: false
+      });
     }).catch(e => console.error(e));
   }
 
   render() {
-    const { overlaps } = this.state;
+    const { overlaps, overlapsAreLoading } = this.state;
     const { resetFilters } = this.props;
+
+    if (overlapsAreLoading) {
+      return (
+        <div className="overview">
+          <LoadingState />
+        </div>
+      );
+    }
 
     return (
       <div className="overview">

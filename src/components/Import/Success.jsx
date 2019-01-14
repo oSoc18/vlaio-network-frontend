@@ -32,6 +32,10 @@ const generateContent = (done, files, restart) => {
   );
 };
 
+/**
+ * Success screen of the importing process
+ * @param {*} * See Proptypese specification for param types
+ */
 const Success = ({ restart, files, importingDone }) => (
   <div>
     { generateContent(importingDone, files, restart) }

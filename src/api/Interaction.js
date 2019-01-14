@@ -7,7 +7,7 @@ class InteractionAPI extends API {
   }
 
   getTypes() {
-    return fetch(`${this.endpoint}/types/`, this.getOptions('GET', true)).then(r => r.json());
+    return fetch(`${this.endpoint}/types/`, this.getOptions('GET', true)).then(r => API.parseResponse(r));
   }
 }
 

@@ -8,25 +8,25 @@ class UserAPI extends API {
 
   login(username, password) {
     return fetch(`${this.endpoint}/login/`, this.getOptions('POST', false, { username, password }))
-      .then(r => r.json());
+      .then(r => API.parseResponse(r));
   }
 
   get() {
     return fetch(`${this.endpoint}/`, this.getOptions('GET', true))
-      .then(r => r.json())
+      .then(r => API.parseResponse(r))
       .catch(err => console.error(err));
   }
 
   create(user) {
-    return fetch(`${this.endpoint}/`, this.getOptions('POST', true, user)).then(r => r.json());
+    return fetch(`${this.endpoint}/`, this.getOptions('POST', true, user)).then(r => API.parseResponse(r));
   }
 
   update(user) {
-    return fetch(`${this.endpoint}/${user.id}`, this.getOptions('PATCH', true, user));
+    return fetch(`${this.endpoint}/${user.id}`, this.getOptions('PATCH', true, user)).then(r => API.parseResponse(r));
   }
 
   setRole(userId, role) {
-    return this.update(userId, { role });
+    return fetch(`${this.endpoint}/${userId}`, this.getOptions('PATCH', true, { role })).then(r => API.parseResponse(r));
   }
 
   delete(id) {
